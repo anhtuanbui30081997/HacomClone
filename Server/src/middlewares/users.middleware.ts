@@ -1,6 +1,10 @@
 import { body, checkSchema } from 'express-validator'
-import { AUTH_MESSAGES } from '~/constants/messages'
+import HTTP_STATUS from '~/constants/httpStatus'
+import { USER_MESSAGES } from '~/constants/messages'
 import { ErrorWithStatus } from '~/models/Errors'
+import { User } from '~/models/schemas/User.schema'
+import databaseServices from '~/services/database.service'
+import userService from '~/services/user.service'
 import { validate } from '~/utils/validation'
 
 export const RegisterValidator = validate(
@@ -8,39 +12,38 @@ export const RegisterValidator = validate(
     {
       name: {
         notEmpty: {
-          errorMessage: AUTH_MESSAGES.USER_NAME_IS_REQUIRED
+          errorMessage: USER_MESSAGES.USER_NAME_IS_REQUIRED
         },
         isString: {
-          errorMessage: AUTH_MESSAGES.USER_NAME_MUST_BE_A_STRING
+          errorMessage: USER_MESSAGES.USER_NAME_MUST_BE_A_STRING
         },
         isLength: {
           options: {
             min: 1,
             max: 100
           },
-          errorMessage: AUTH_MESSAGES.NAME_LENGTH_MUST_BE_FROM_1_TO_100_CHARACTERS
+          errorMessage: USER_MESSAGES.NAME_LENGTH_MUST_BE_FROM_1_TO_100_CHARACTERS
         },
         trim: true
       },
       email: {
         isEmail: {
-          errorMessage: AUTH_MESSAGES.EMAIL_IS_INVALID
+          errorMessage: USER_MESSAGES.EMAIL_IS_INVALID
         },
         trim: true,
         custom: {
-          options: (value, req) => {
-            console.log(value)
-            throw new ErrorWithStatus({
-              status: 400,
-              message: 'test ty thoi'
-            })
+          options: async (value, req) => {
+            const isExistEmail = await userService.checkEmailExist(value as string)
+            if (isExistEmail) {
+              throw new Error(USER_MESSAGES.EMAIL_ALREADY_EXISTS)
+            }
             return true
           }
         }
       },
       password: {
         isString: {
-          errorMessage: AUTH_MESSAGES.PASSWORD_MUST_BE_A_STRING
+          errorMessage: USER_MESSAGES.PASSWORD_MUST_BE_A_STRING
         },
         isStrongPassword: {
           options: {
@@ -50,7 +53,7 @@ export const RegisterValidator = validate(
             minUppercase: 1,
             minSymbols: 1
           },
-          errorMessage: AUTH_MESSAGES.PASSWORD_MUST_BE_STRONG
+          errorMessage: USER_MESSAGES.PASSWORD_MUST_BE_STRONG
         }
       }
     },

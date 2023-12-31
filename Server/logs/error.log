@@ -11,3 +11,16 @@
 [31merror[39m: [31m[ERROR] - Status: 422 - Message: Validation error[39m
 [31merror[39m: [31m[ERROR] - Status: 422 - Message: Validation error[39m
 [31merror[39m: [31m[ERROR] - Status: 400 - Message: test ty thoi[39m
+[31merror[39m: [31m[ERROR] - Status: 422 - Message: Validation error[39m
+[31merror[39m: [31m[ERROR] - Status: 422 - Message: Validation error[39m
+[31merror[39m: [31m[ERROR] - Status: 422 - Message: Validation error[39m
+[31merror[39m: [31m[ERROR] - Status: 422 - Message: Validation error[39m
+[31merror[39m: [31m[ERROR] - Status: 422 - Message: Validation error[39m
+[31merror[39m: [31m[ERROR] - Status: 422 - Message: Validation error[39m
+[31merror[39m: [31m[ERROR] - Status: 422 - Message: Validation error[39m
+[31merror[39m: [31mbad auth : authentication failed[39m {"code":8000,"codeName":"AtlasError","connectionGeneration":0,"ok":0}
+[31merror[39m: [31mbad auth : Authentication failed.[39m {"code":8000,"codeName":"AtlasError","connectionGeneration":0,"ok":0}
+[31merror[39m: [31mCollection hacom-dev.users already exists.[39m {"$clusterTime":{"clusterTime":{"$timestamp":"7318772195352641538"},"signature":{"hash":"BmZ9K3sCuYzVJnkAzOBtOya81ek=","keyId":{"high":1703745466,"low":5,"unsigned":false}}},"code":48,"codeName":"NamespaceExists","ok":0,"operationTime":{"$timestamp":"7318772195352641538"}}
+[31merror[39m: [31m[ERROR] - Status: 422 - Message: Validation error[39m
+[31merror[39m: [31m[ERROR] - Status: 422 - Message: Validation error[39m
+[31merror[39m: [31m[ERROR] - Status: 422 - Message: Validation error[39m

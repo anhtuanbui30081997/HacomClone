@@ -1,6 +1,8 @@
-import { Router, Request, Response, NextFunction } from 'express'
+import { Router } from 'express'
+import userController from '~/controllers/users.controller'
 import { RegisterValidator } from '~/middlewares/users.middleware'
 import { Route } from '~/models/Route'
+import { wrapRequestHandler } from '~/utils/handlers'
 
 const usersRouter = Router()
 /**
@@ -8,9 +10,7 @@ const usersRouter = Router()
  * Path: '/register'
  * Body: RegisterRequestBody
  */
-usersRouter.post('/register', RegisterValidator, (req: Request, res: Response, next: NextFunction) => {
-  return res.json('OK')
-})
+usersRouter.post('/register', RegisterValidator, wrapRequestHandler(userController.register))
 
 const userRoute: Route = {
   path: '/users',

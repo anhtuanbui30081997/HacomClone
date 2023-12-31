@@ -1,4 +1,4 @@
-export const AUTH_MESSAGES = {
+export const USER_MESSAGES = {
   USER_NAME_IS_REQUIRED: 'User name is required',
   USER_NAME_MUST_BE_A_STRING: 'User name is must be a string',
   NAME_LENGTH_MUST_BE_FROM_1_TO_100_CHARACTERS: 'User name length must be from 1 to 100 character',
@@ -7,5 +7,7 @@ export const AUTH_MESSAGES = {
   PASSWORD_MUST_BE_STRONG:
     'Password must be at least 8 characters long and contain\
   at least 1 lowercase, at least 1 uppercase, at least 1 number and at least 1 symbol',
-  VALIDATION_FORM_ERROR: 'Validation error'
+  VALIDATION_FORM_ERROR: 'Validation error',
+  EMAIL_ALREADY_EXISTS: 'Email already exists',
+  REGISTER_SUCCESSFULLY: 'Register successfully'
 } as const
