@@ -13,3 +13,11 @@ export interface RegisterRequestBody {
   name: string
   password: string
 }
+
+export interface LoginRequestBody {
+  email: string
+  password: string
+}
+export interface LogoutRequestBody {
+  refresh_token: string
+}

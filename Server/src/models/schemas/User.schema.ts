@@ -10,7 +10,7 @@ interface UserType {
 }
 
 export class User {
-  _id?: ObjectId
+  _id: ObjectId
   name: string
   email: string
   password: string
@@ -18,7 +18,7 @@ export class User {
   updated_at: Date
   constructor(user: UserType) {
     const now = new Date()
-    this._id = user._id
+    this._id = user._id || new ObjectId()
     this.name = user.name
     this.email = user.email
     this.password = user.password

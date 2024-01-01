@@ -9,5 +9,10 @@ export const USER_MESSAGES = {
   at least 1 lowercase, at least 1 uppercase, at least 1 number and at least 1 symbol',
   VALIDATION_FORM_ERROR: 'Validation error',
   EMAIL_ALREADY_EXISTS: 'Email already exists',
-  REGISTER_SUCCESSFULLY: 'Register successfully'
+  REGISTER_SUCCESSFULLY: 'Register successfully',
+  USER_OR_PASSWORD_IS_INCORRECT: 'Email or Password is incorrect',
+  LOGIN_SUCCESSFULLY: 'Login successfully',
+  LOGOUT_SUCCESSFULLY: 'Logout successfully',
+  ACCESS_TOKEN_IS_REQUIRED: 'Access token is required',
+  REFRESH_TOKEN_MUST_BE_A_STRING: 'Refresh token must be a string'
 } as const

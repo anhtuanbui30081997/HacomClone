@@ -3,7 +3,7 @@ import databaseService from './database.service'
 import { User } from '~/models/schemas/User.schema'
 import { hashPassword } from '~/utils/crypto'
 import { TokenType } from '~/constants/enums'
-import { signToken } from '~/utils/jwt'
+import { signToken, verifyToken } from '~/utils/jwt'
 import { ObjectId } from 'mongodb'
 import { RefreshToken } from '~/models/schemas/RefreshToken.schema'
 
@@ -48,6 +48,10 @@ class UserService {
     return Promise.all([this.signAccessToken(user_id), this.signRefreshToken({ user_id, exp })])
   }
 
+  private decodeRefreshToken(refresh_token: string) {
+    return verifyToken({ token: refresh_token, secretOrPublicKey: process.env.JWT_SECRET_REFRESH_TOKEN as string })
+  }
+
   async checkEmailExist(email: string) {
     const user = await databaseService.users.findOne({ email })
     return Boolean(user)
@@ -74,6 +78,52 @@ class UserService {
       access_token,
       refresh_token
     }
+  }
+
+  async login(user_id: string) {
+    const old_refresh_token = await databaseService.refreshTokens.findOne({
+      user_id: new ObjectId(user_id)
+    })
+    const { exp } = await this.decodeRefreshToken((old_refresh_token as RefreshToken).token)
+    const [access_token, refresh_token] = await this.signAccessTokenAndRefreshToken({
+      user_id,
+      exp
+    })
+    // Update new refresh_token into database
+    await databaseService.refreshTokens.findOneAndUpdate(
+      {
+        user_id: new ObjectId(user_id)
+      },
+      {
+        $set: {
+          token: refresh_token
+        },
+        $currentDate: {
+          updated_at: true
+        }
+      },
+      { returnDocument: 'after' }
+    )
+    return {
+      access_token,
+      refresh_token
+    }
+  }
+
+  async logout({ user_id, refresh_token }: { user_id: string; refresh_token: string }) {
+    // Delete refresh_token in database
+    const result = await databaseService.refreshTokens.findOneAndDelete(
+      {
+        user_id: new ObjectId(user_id),
+        token: refresh_token
+      },
+      {
+        projection: {
+          token: 0
+        }
+      }
+    )
+    return result
   }
 }
 
