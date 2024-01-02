@@ -4,7 +4,9 @@ import {
   LoginValidator,
   RegisterValidator,
   accessTokenValidator,
-  refreshTokenValidator
+  forgotPasswordRequestValidator,
+  refreshTokenValidator,
+  updatePasswordValidator
 } from '~/middlewares/users.middleware'
 import { Route } from '~/models/Route'
 import { wrapRequestHandler } from '~/utils/handlers'
@@ -35,6 +37,34 @@ usersRouter.post('/login', LoginValidator, wrapRequestHandler(userController.log
  * Body: {refresh_token: string}
  */
 usersRouter.post('/logout', accessTokenValidator, refreshTokenValidator, wrapRequestHandler(userController.logout))
+
+/**
+ * Description. Refresh access token
+ * Path: /refresh-token
+ * Method: POST
+ * Body: {refresh_token: string}
+ */
+usersRouter.post('/refresh-token', refreshTokenValidator, wrapRequestHandler(userController.refreshToken))
+
+/**
+ * Description. Refresh access token
+ * Path: /forgot-password-request
+ * Method: POST
+ * Body: {email: string}
+ */
+usersRouter.post(
+  '/forgot-password-request',
+  forgotPasswordRequestValidator,
+  wrapRequestHandler(userController.forgotTokenRequest)
+)
+
+/**
+ * Description. Refresh access token
+ * Path: /forgot-password-request
+ * Method: PUT
+ * Body: UpdatePasswordRequestBody
+ */
+usersRouter.post('/update-password', updatePasswordValidator, wrapRequestHandler(userController.updatePassword))
 
 const userRoute: Route = {
   path: '/users',

@@ -21,3 +21,16 @@ export interface LoginRequestBody {
 export interface LogoutRequestBody {
   refresh_token: string
 }
+
+export interface RefreshTokenRequestBody {
+  refresh_token: string
+}
+
+export interface ForgotPasswordRequestBody {
+  email: string
+}
+
+export interface UpdatePasswordRequestBody {
+  forgot_password_token: string
+  new_password: string
+}

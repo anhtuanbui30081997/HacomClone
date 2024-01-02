@@ -163,3 +163,58 @@ export const refreshTokenValidator = validate(
     ['body']
   )
 )
+
+export const forgotPasswordRequestValidator = validate(
+  checkSchema(
+    {
+      email: {
+        isEmail: {
+          errorMessage: USER_MESSAGES.EMAIL_IS_INVALID
+        },
+        trim: true,
+        custom: {
+          options: async (value, req) => {
+            const isExistEmail = await userService.checkEmailExist(value as string)
+            if (!isExistEmail) {
+              throw new Error(USER_MESSAGES.EMAIL_IS_NOT_REGISTERED)
+            }
+            return true
+          }
+        }
+      }
+    },
+    ['body']
+  )
+)
+
+export const updatePasswordValidator = validate(
+  checkSchema(
+    {
+      forgot_password_token: {
+        isString: {
+          errorMessage: USER_MESSAGES.FORGOT_PASSWORD_TOKEN_MUST_BE_A_STRING
+        },
+        trim: true,
+        custom: {
+          options: async (value, { req }) => {
+            try {
+              const decodeed_forgot_password_token = await verifyToken({
+                secretOrPublicKey: process.env.JWT_SECRET_FORGOT_PASSWORD_TOKEN as string,
+                token: value
+              })
+              ;(req as Request).decodeed_forgot_password_token = decodeed_forgot_password_token
+              return true
+            } catch (error) {
+              throw new ErrorWithStatus({
+                status: HTTP_STATUS.UNAUTHORIZED,
+                message: capitalize((error as JsonWebTokenError).message)
+              })
+            }
+          }
+        }
+      },
+      new_password: passwordSchema
+    },
+    ['body']
+  )
+)
