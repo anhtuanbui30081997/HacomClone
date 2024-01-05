@@ -1,30 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '../public/vite.svg'
-import './App.css'
+import { Route, Routes } from 'react-router-dom'
+import Home from './pages/Home/Home'
+import BuildPc from './pages/BuildPc/BuildPc'
+import MainLayout from './layouts/MainLayout'
+import CheckOrder from './pages/CheckOrder'
+import Cart from './pages/Cart'
+import NotFound from './pages/NotFound'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href='https://vitejs.dev' target='_blank' rel='noreferrer'>
-          <img src={viteLogo} className='logo' alt='Vite logo' />
-        </a>
-        <a href='https://react.dev' target='_blank' rel='noreferrer'>
-          <img src={reactLogo} className='logo react' alt='React logo' />
-        </a>
-      </div>
-      <h1 className='container mr-2 bg-red-500 p-4 pt-6 text-white'>Vite + React</h1>
-      <div className='card'>
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className='read-the-docs'>Click on the Vite and React logos to learn more</p>
-    </>
+    <div>
+      <Routes>
+        <Route path='/' element={<MainLayout />}>
+          <Route index element={<Home />} />
+          <Route path='buildpc' element={<BuildPc />} />
+          <Route path='check-order' element={<CheckOrder />} />
+          <Route path='cart' element={<Cart />} />
+          <Route path='*' element={<NotFound />} />
+        </Route>
+      </Routes>
+    </div>
   )
 }
 
