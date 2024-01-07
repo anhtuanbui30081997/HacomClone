@@ -1,5 +1,3 @@
-import Popover from '../Popover'
-
 type PropsType = {
   title: string
   icon: React.ReactNode

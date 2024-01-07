@@ -8,9 +8,12 @@ import {
   useFocus,
   useHover,
   useInteractions,
-  useRole
+  useRole,
+  arrow,
+  safePolygon,
+  FloatingPortal
 } from '@floating-ui/react'
-import React, { ElementType, useState } from 'react'
+import React, { ElementType, useId, useRef, useState } from 'react'
 interface Props {
   children: React.ReactNode
   renderPopover: React.ReactNode
@@ -19,7 +22,6 @@ interface Props {
   initialOpen?: boolean
   placement?: Placement
   roleType?: 'dialog' | 'tooltip'
-  icon: React.ReactNode
 }
 
 export default function Popover({
@@ -29,40 +31,41 @@ export default function Popover({
   renderPopover,
   as: Element = 'div',
   className,
-  roleType = 'tooltip',
-  icon
+  roleType = 'tooltip'
 }: Props) {
   const [isOpen, setIsOpen] = useState(initialOpen || false)
-
+  const arrowRef = useRef(null)
   const { refs, floatingStyles, context } = useFloating({
     open: isOpen,
     onOpenChange: setIsOpen,
-    middleware: [offset(6), shift(), flip()],
+    middleware: [
+      offset(0),
+      shift(),
+      flip(),
+      arrow({
+        element: arrowRef
+      })
+    ],
     placement
   })
 
-  const hover = useHover(context)
+  const hover = useHover(context, {
+    handleClose: safePolygon()
+  })
   const focus = useFocus(context)
   const role = useRole(context, { role: roleType })
   const dismiss = useDismiss(context)
   const { getReferenceProps, getFloatingProps } = useInteractions([hover, focus, role, dismiss])
-
+  const id = useId()
   return (
-    <Element
-      className={className}
-      ref={refs.setReference}
-      {...getReferenceProps({
-        onMouseEnter: () => console.log('enter'),
-        onMouseOver: () => console.log('hover'),
-        onFocus: () => console.log('focused')
-      })}
-    >
-      {icon}
+    <Element className={className} ref={refs.setReference} {...getReferenceProps()}>
       {children}
       {isOpen && (
-        <div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps}>
-          {renderPopover}
-        </div>
+        <FloatingPortal id={id}>
+          <div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()}>
+            {renderPopover}
+          </div>
+        </FloatingPortal>
       )}
     </Element>
   )

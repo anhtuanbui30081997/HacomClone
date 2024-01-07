@@ -1,3 +1,4 @@
+import { FacebookIcon, GoogleIcon, UserIcon } from 'src/assets/icon'
 import { HeaderTopItem } from '.'
 import Popover from '../Popover'
 import GrandStore from './GrandStore'
@@ -109,50 +110,36 @@ export default function Header() {
               </svg>
             }
           />
-          <HeaderTopItem
-            title='Tài khoản'
-            icon={
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                strokeWidth={1.5}
-                stroke='currentColor'
-                className='h-3 w-3'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z'
-                />
-              </svg>
-            }
-          />
           <Popover
             className='flex cursor-pointer items-center p-[10px]'
-            icon={
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                strokeWidth={1.5}
-                stroke='currentColor'
-                className='h-3 w-3'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z'
-                />
-              </svg>
-            }
             renderPopover={
-              <div className='flex flex-col'>
-                <div>Đăng nhập</div>
-                <div>Đăng ký</div>
+              <div className='flex flex-col rounded bg-white p-4 shadow-md'>
+                <div className='mb-1 w-full min-w-[206px] rounded-sm bg-yellow-400 p-2 text-center text-xs font-medium'>
+                  Đăng nhập
+                </div>
+                <div className='mb-1 w-full min-w-[206px] rounded-sm bg-yellow-400 p-2 text-center text-xs font-medium'>
+                  Đăng ký
+                </div>
+                <div className='mb-1 flex'>
+                  <div className='flex h-10 min-w-10 items-center justify-center rounded-l-sm bg-[#c5422e]'>
+                    <FacebookIcon color='white' />
+                  </div>
+                  <div className='flex h-10 w-full items-center rounded-r-sm bg-[#e44a32] p-2 text-center text-xs font-medium text-white'>
+                    Đăng nhập bằng Google
+                  </div>
+                </div>
+                <div className='mb-1 flex'>
+                  <div className='flex h-10 min-w-10 items-center justify-center rounded-l-sm bg-[#25268d]'>
+                    <FacebookIcon color='white' />
+                  </div>
+                  <div className='flex h-10 w-full items-center rounded-r-sm bg-[#4454df] p-2 text-center text-xs font-medium text-white'>
+                    Đăng nhập bằng Facebook
+                  </div>
+                </div>
               </div>
             }
           >
+            <UserIcon />
             <span className='ml-1 text-xs text-[#333e48]'>Tài khoản</span>
           </Popover>
         </div>
