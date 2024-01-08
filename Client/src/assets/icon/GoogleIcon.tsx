@@ -1,19 +1,19 @@
-interface Props {
-  color?: string
-}
+import { IconType } from 'src/types/icon.type'
 
-export default function GoogleIcon({ color }: Props) {
+export default function GoogleIcon({
+  className,
+  stroke = 'currentColor',
+  stroke_width = 1.5,
+  fill = 'none'
+}: IconType) {
   return (
     <svg
-      className='h-4 w-4'
-      width='24'
-      height='24'
+      xmlns='http://www.w3.org/2000/svg'
+      fill={fill}
       viewBox='0 0 24 24'
-      stroke-width={1.5}
-      stroke={color ? color : 'currentColor'}
-      fill='none'
-      stroke-linecap='round'
-      stroke-linejoin='round'
+      strokeWidth={stroke_width}
+      stroke={stroke}
+      className={className}
     >
       {' '}
       <path stroke='none' d='M0 0h24v24H0z' /> <path d='M17.788 5.108A9 9 0 1021 12h-8' />

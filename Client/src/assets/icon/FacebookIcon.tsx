@@ -1,16 +1,19 @@
-interface Props {
-  color?: string
-}
-export default function FacebookIcon({ color }: Props) {
+import { IconType } from 'src/types/icon.type'
+
+export default function FacebookIcon({
+  className,
+  stroke = 'currentColor',
+  stroke_width = 1.5,
+  fill = 'none'
+}: IconType) {
   return (
     <svg
-      className='h-5 w-5'
-      width='24'
-      height='24'
+      xmlns='http://www.w3.org/2000/svg'
+      fill={fill}
       viewBox='0 0 24 24'
-      stroke-width='2'
-      stroke={color ? color : 'currentColor'}
-      fill='none'
+      strokeWidth={stroke_width}
+      stroke={stroke}
+      className={className}
     >
       {' '}
       <path stroke='none' d='M0 0h24v24H0z' />{' '}

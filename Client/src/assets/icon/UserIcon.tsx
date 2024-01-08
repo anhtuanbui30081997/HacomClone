@@ -1,12 +1,14 @@
-export default function UserIcon() {
+import { IconType } from 'src/types/icon.type'
+
+export default function UserIcon({ className, stroke = 'currentColor', stroke_width = 1.5, fill = 'none' }: IconType) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      fill='none'
+      fill={fill}
       viewBox='0 0 24 24'
-      strokeWidth={1.5}
-      stroke='currentColor'
-      className='h-3 w-3'
+      strokeWidth={stroke_width}
+      stroke={stroke}
+      className={className}
     >
       <path
         strokeLinecap='round'

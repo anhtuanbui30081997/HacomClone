@@ -24,7 +24,8 @@ export default {
     extend: {
       colors: {
         white: '#fff',
-        black: '#000'
+        black: '#000',
+        overlay: 'rgba(0, 0, 0, 0.5)'
       }
     }
   },

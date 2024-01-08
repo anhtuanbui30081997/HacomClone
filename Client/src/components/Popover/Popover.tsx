@@ -11,7 +11,8 @@ import {
   useRole,
   arrow,
   safePolygon,
-  FloatingPortal
+  FloatingPortal,
+  FloatingOverlay
 } from '@floating-ui/react'
 import React, { ElementType, useId, useRef, useState } from 'react'
 interface Props {
@@ -54,7 +55,7 @@ export default function Popover({
   })
   const focus = useFocus(context)
   const role = useRole(context, { role: roleType })
-  const dismiss = useDismiss(context)
+  const dismiss = useDismiss(context, { outsidePressEvent: 'mousedown' })
   const { getReferenceProps, getFloatingProps } = useInteractions([hover, focus, role, dismiss])
   const id = useId()
   return (
@@ -62,9 +63,17 @@ export default function Popover({
       {children}
       {isOpen && (
         <FloatingPortal id={id}>
-          <div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()}>
-            {renderPopover}
-          </div>
+          {roleType === 'dialog' ? (
+            <FloatingOverlay className='bg-overlay' lockScroll>
+              <div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()}>
+                {renderPopover}
+              </div>
+            </FloatingOverlay>
+          ) : (
+            <div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()}>
+              {renderPopover}
+            </div>
+          )}
         </FloatingPortal>
       )}
     </Element>
