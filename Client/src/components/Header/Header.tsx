@@ -1,24 +1,35 @@
 import {
+  ClockIcon,
   FacebookIcon,
   GiftIcon,
   GoogleIcon,
   HelpIcon,
+  ImageIcon,
   LocationIcon,
+  MailIcon,
+  MapPinIcon,
   PhoneIcon,
   ServiceIcon,
   UserIcon
-} from 'src/assets/icon'
+} from 'src/assets/icons'
 import Popover from '../Popover'
 import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+import { AppContext } from 'src/contexts/app.context'
 
 /**
  * Internal component
  * @returns
  */
 const UserService = () => {
+  const { setIsOpenLoginDialog } = useContext(AppContext)
+
   return (
-    <div className='flex flex-col rounded-sm bg-white p-4 shadow-md'>
-      <div className='mb-1 w-full min-w-[206px] rounded-sm bg-yellow-400 p-2 text-center text-xs font-medium'>
+    <div className='flex cursor-pointer flex-col rounded-sm bg-white p-4 shadow-md'>
+      <div
+        onClick={() => setIsOpenLoginDialog(true)}
+        className='mb-1 w-full min-w-[206px] rounded-sm bg-yellow-400 p-2 text-center text-xs font-medium'
+      >
         Đăng nhập
       </div>
       <div className='mb-1 w-full min-w-[206px] rounded-sm bg-yellow-400 p-2 text-center text-xs font-medium'>
@@ -131,6 +142,90 @@ const Help = () => {
   )
 }
 
+const Showroom = () => {
+  return (
+    <div className='mt-3 w-[48%]'>
+      <div className='flex h-8 items-center'>
+        <span className='flex h-full w-8 items-center justify-center rounded-l bg-red-600 text-base font-bold text-white'>
+          1
+        </span>
+        <span className='h-full flex-1 rounded-r bg-[#243a76] px-[10px] text-[13px] font-bold uppercase leading-8 text-white'>
+          Hacom - hai bà trưng
+        </span>
+      </div>
+      <div className='flex flex-col gap-2 p-2'>
+        <div className='flex items-start'>
+          <MapPinIcon className='h-4 w-4' />
+          <p className='ml-1 text-xs font-bold capitalize text-black '>Số 131 lê thanh nghị - hai ba trưng - hà nội</p>
+        </div>
+        <div className='flex items-start'>
+          <ImageIcon className='h-4 w-4' stroke='#ed1b24' />
+          <p className='ml-1 text-xs capitalize text-[#ed1b24] '>Hình ảnh thực tế showroom</p>
+        </div>
+        <div className='flex items-start'>
+          <LocationIcon className='h-4 w-4' stroke='#ed1b24' />
+          <p className='ml-1 text-xs capitalize text-[#ed1b24] '>Xem bản đồ đường đi</p>
+        </div>
+        <div className='flex items-start'>
+          <PhoneIcon className='h-4 w-4' />
+          <p className='ml-1 text-xs capitalize text-black '>Tel: 1900 1903 (máy lẻ 25398) - (0243) 6285551</p>
+        </div>
+        <div className='flex items-start'>
+          <MailIcon className='h-4 w-4' />
+          <p className='ml-1 text-xs capitalize text-black '>Email: kdbl.haibatrung@hacom.vn</p>
+        </div>
+        <div className='flex items-start'>
+          <ClockIcon className='h-4 w-4' />
+          <p className='ml-1 text-xs capitalize text-black '>Thời gian mở cửa: Từ 8h-20h hàng ngày</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const NorthRegion = () => {
+  return (
+    // <div className='w-[100vw]'>
+    <div className='max-h-screen-90 rounded bg-white p-[25px] xl:w-[1200px] 2xl:w-[1650px]'>
+      <div className='grid grid-cols-2 gap-10 bg-white px-5'>
+        <div className='col-span-1'>
+          <p className='mx-auto my-4 w-fit rounded-full border-2 border-[#ed1b24] px-[25px] py-[10px] text-[1.1rem] font-semibold uppercase text-black'>
+            hacom hà nội
+          </p>
+          <div className='flex flex-row flex-wrap justify-between'>
+            <Showroom />
+            <Showroom />
+            <Showroom />
+            <Showroom />
+          </div>
+        </div>
+        <div className='col-span-1'>
+          <p className='mx-auto my-4 w-fit rounded-full border-2 border-[#ed1b24] px-[25px] py-[10px] text-[1.1rem] font-semibold uppercase text-black'>
+            hacom miền bắc
+          </p>
+          <div className='flex flex-row flex-wrap justify-between'>
+            <Showroom />
+            <Showroom />
+            <Showroom />
+          </div>
+        </div>
+      </div>
+    </div>
+    // </div>
+  )
+}
+
+const ShopingOnline = () => {
+  return <div className='rounded bg-white p-4 text-base capitalize text-red-600'>Not implemented</div>
+}
+
+const SouthernRegion = () => {
+  return <div className='rounded bg-white p-4 text-base capitalize text-red-600'>Not implemented</div>
+}
+
+const CenterRegion = () => {
+  return <div className='rounded bg-white p-4 text-base capitalize text-red-600'>Not implemented</div>
+}
 /**
  * Default component
  * @returns Header component
@@ -138,42 +233,42 @@ const Help = () => {
 export default function Header() {
   return (
     <div className='border-b bg-neutral-100'>
-      <div className='container mx-auto flex items-center justify-between px-[10px]'>
+      <div className='container mx-auto flex items-center justify-between'>
         {/* Header Top Left */}
         <div className='flex items-center'>
           <div className='flex items-center'>
             <PhoneIcon className='h-[11px] w-[11px]' />
-            <span className='ml-1 text-[11px]'>Gọi mua hàng:</span>
+            <span className='mx-1 text-[11px]'>Gọi mua hàng:</span>
             <span className='text-[11px] font-bold'>1900.1903</span>
           </div>
           <Popover
             className='gradient z-[9999] ml-4 flex h-[30px] items-center rounded-full px-[10px] text-white ease-in-out'
-            renderPopover={<UserService />}
-            roleType='dialog'
+            renderPopover={<ShopingOnline />}
+            overlay={true}
           >
             <PhoneIcon className='h-3 w-3' stroke='white' stroke_width={3} />
             <span className='ml-1 text-xs capitalize'>Mua hàng online</span>
           </Popover>
           <Popover
             className='gradient z-[9999] ml-4 flex h-[30px] items-center rounded-full px-[10px] text-white ease-in-out'
-            renderPopover={<UserService />}
-            roleType='dialog'
+            renderPopover={<NorthRegion />}
+            overlay={true}
           >
             <PhoneIcon className='h-3 w-3' stroke='white' stroke_width={3} />
             <span className='ml-1 text-xs capitalize'>Miền bắc</span>
           </Popover>
           <Popover
             className='gradient z-[9999] ml-4 flex h-[30px] items-center rounded-full px-[10px] text-white ease-in-out'
-            renderPopover={<UserService />}
-            roleType='dialog'
+            renderPopover={<CenterRegion />}
+            overlay={true}
           >
             <PhoneIcon className='h-3 w-3' stroke='white' stroke_width={3} />
             <span className='ml-1 text-xs capitalize'>Miền trung</span>
           </Popover>
           <Popover
             className='gradient z-[9999] ml-4 flex h-[30px] items-center rounded-full px-[10px] text-white ease-in-out'
-            renderPopover={<UserService />}
-            roleType='dialog'
+            renderPopover={<SouthernRegion />}
+            overlay={true}
           >
             <PhoneIcon className='h-3 w-3' stroke='white' stroke_width={3} />
             <span className='ml-1 text-xs capitalize'>Miền nam</span>
@@ -197,7 +292,7 @@ export default function Header() {
             <GiftIcon />
             <span className='ml-1 text-xs text-[#333e48]'>Khuyến mãi</span>
           </Popover>
-          <Popover className='flex cursor-pointer items-center p-[10px]' renderPopover={<UserService />}>
+          <Popover className='flex cursor-pointer items-center py-[10px] pl-[10px]' renderPopover={<UserService />}>
             <UserIcon className='h-3 w-3' />
             <span className='ml-1 text-xs text-[#333e48]'>Tài khoản</span>
           </Popover>

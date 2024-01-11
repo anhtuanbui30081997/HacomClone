@@ -22,7 +22,7 @@ interface Props {
   as?: ElementType
   initialOpen?: boolean
   placement?: Placement
-  roleType?: 'dialog' | 'tooltip'
+  overlay?: boolean
 }
 
 export default function Popover({
@@ -32,7 +32,7 @@ export default function Popover({
   renderPopover,
   as: Element = 'div',
   className,
-  roleType = 'tooltip'
+  overlay = false
 }: Props) {
   const [isOpen, setIsOpen] = useState(initialOpen || false)
   const arrowRef = useRef(null)
@@ -40,7 +40,7 @@ export default function Popover({
     open: isOpen,
     onOpenChange: setIsOpen,
     middleware: [
-      offset(0),
+      offset(2),
       shift(),
       flip(),
       arrow({
@@ -54,7 +54,7 @@ export default function Popover({
     handleClose: safePolygon()
   })
   const focus = useFocus(context)
-  const role = useRole(context, { role: roleType })
+  const role = useRole(context, { role: 'tooltip' })
   const dismiss = useDismiss(context, { outsidePressEvent: 'mousedown' })
   const { getReferenceProps, getFloatingProps } = useInteractions([hover, focus, role, dismiss])
   const id = useId()
@@ -63,9 +63,13 @@ export default function Popover({
       {children}
       {isOpen && (
         <FloatingPortal id={id}>
-          {roleType === 'dialog' ? (
-            <FloatingOverlay className='bg-overlay' lockScroll>
-              <div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()}>
+          {overlay ? (
+            <FloatingOverlay className='grid place-items-center bg-overlay' lockScroll>
+              <div
+                ref={refs.setFloating}
+                style={{ ...floatingStyles, left: '50%', transform: 'translate(-50%, 34.5455px)' }}
+                {...getFloatingProps()}
+              >
                 {renderPopover}
               </div>
             </FloatingOverlay>

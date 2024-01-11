@@ -2,7 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-.gradient {
+html {
+  font-family: 'Open Sans', sans-serif;
+}
+/* .gradient {
   min-height: 100%;
   background: linear-gradient(
       rgba(255, 0, 0, 1) 0%,
@@ -24,7 +27,7 @@
   to {
     background-position: 0 -200%;
   }
-}
+} */
 .gradient {
   background: repeating-linear-gradient(to right, red 0, #00f 50%, red 100%);
   background-size: 200% auto;
