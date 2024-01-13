@@ -22,7 +22,7 @@ import { AppContext } from 'src/contexts/app.context'
  * @returns
  */
 const UserService = () => {
-  const { setIsOpenLoginDialog } = useContext(AppContext)
+  const { setIsOpenLoginDialog, setIsOpenRegisterDialog } = useContext(AppContext)
 
   return (
     <div className='flex cursor-pointer flex-col rounded-sm bg-white p-4 shadow-md'>
@@ -32,7 +32,10 @@ const UserService = () => {
       >
         Đăng nhập
       </div>
-      <div className='mb-1 w-full min-w-[206px] rounded-sm bg-yellow-400 p-2 text-center text-xs font-medium'>
+      <div
+        onClick={() => setIsOpenRegisterDialog(true)}
+        className='mb-1 w-full min-w-[206px] rounded-sm bg-yellow-400 p-2 text-center text-xs font-medium'
+      >
         Đăng ký
       </div>
       <div className='mb-1 flex'>

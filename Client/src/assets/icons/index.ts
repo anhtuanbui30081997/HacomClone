@@ -11,8 +11,10 @@ import ImageIcon from './ImageIcon'
 import ClockIcon from './ClockIcon'
 import MailIcon from './MailIcon'
 import CloseIcon from './CloseIcon'
+import ChevronLeftIcon from './ChevronLeftIcon'
 
 export {
+  ChevronLeftIcon,
   CloseIcon,
   MailIcon,
   ClockIcon,

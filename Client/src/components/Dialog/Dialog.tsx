@@ -5,10 +5,10 @@ import {
   useClick,
   useDismiss,
   useFloating,
-  useId,
   useInteractions,
   useRole
 } from '@floating-ui/react'
+import { useId } from 'react'
 
 interface Props {
   children?: React.ReactNode
@@ -30,14 +30,14 @@ export default function Dialog({ children, renderDialog, className, isOpen, onOp
   })
   const role = useRole(context)
   const { getFloatingProps, getReferenceProps } = useInteractions([click, dismiss, role])
-
+  const id = useId()
   return (
     <div className={className}>
       <div ref={refs.setReference} {...getReferenceProps()}>
         {children}
       </div>
       {isOpen && (
-        <FloatingPortal>
+        <FloatingPortal id={id}>
           <FloatingOverlay className='grid place-items-center bg-overlay' lockScroll>
             <FloatingFocusManager context={context} modal={true}>
               <div ref={refs.setFloating} {...getFloatingProps()}>
