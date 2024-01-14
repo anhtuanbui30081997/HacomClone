@@ -44,8 +44,7 @@ html {
 }
 
 div::-webkit-scrollbar {
-  width: 12px;
-  height: 10px;
+  width: 5px;
 }
 
 /* Track */

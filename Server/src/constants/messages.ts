@@ -21,3 +21,9 @@ export const USER_MESSAGES = {
   REFRESH_TOKEN_MUST_BE_A_STRING: 'Refresh token must be a string',
   FORGOT_PASSWORD_TOKEN_MUST_BE_A_STRING: 'Forgot password token must be a string'
 } as const
+
+export const SHOWROOM_MESSAGES = {
+  REGION_MUST_BE_A_NUMBER: 'Region must be a number',
+  REGION_IS_INCORRECT: 'Region is incorrect',
+  GET_SHOWROOMS_SUCCESSFULLY: 'Get showrooms sucessfully'
+}

@@ -3,3 +3,10 @@ export enum TokenType {
   RefreshToken,
   ForgotPasswordToken
 }
+
+export enum RegionType {
+  Hanoi,
+  North,
+  Center,
+  South
+}

@@ -1,5 +1,6 @@
 import { Db, MongoClient, ServerApiVersion } from 'mongodb'
 import { RefreshToken } from '~/models/schemas/RefreshToken.schema'
+import { Showroom } from '~/models/schemas/Showroom.schema'
 import { User } from '~/models/schemas/User.schema'
 import Logger from '~/utils/logger'
 const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@hacom.m3onxez.mongodb.net/?retryWrites=true&w=majority`
@@ -31,6 +32,9 @@ class DatabaseService {
   }
   get refreshTokens() {
     return this.db.collection<RefreshToken>(process.env.DB_REFRESH_TOKEN_COLLECTION as string)
+  }
+  get showrooms() {
+    return this.db.collection<Showroom>(process.env.DB_SHOWROOM_COLLECTION as string)
   }
 }
 
