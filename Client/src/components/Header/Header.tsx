@@ -16,6 +16,9 @@ import Popover from '../Popover'
 import { Link } from 'react-router-dom'
 import { useContext } from 'react'
 import { AppContext } from 'src/contexts/app.context'
+import { useQuery } from '@tanstack/react-query'
+import showroomApi from 'src/apis/showroom.api'
+import { ShowroomType } from 'src/types/showroom.type'
 
 /**
  * Internal component
@@ -145,7 +148,7 @@ const Help = () => {
   )
 }
 
-const Showroom = () => {
+const Showroom = (props: ShowroomType) => {
   return (
     <div className='mt-3 w-[48%]'>
       <div className='flex h-8 items-center'>
@@ -153,13 +156,13 @@ const Showroom = () => {
           1
         </span>
         <span className='h-full flex-1 rounded-r bg-[#243a76] px-[10px] text-[13px] font-bold uppercase leading-8 text-white'>
-          Hacom - hai bà trưng
+          {`HACOM - ${props.name}`}
         </span>
       </div>
       <div className='flex flex-col gap-2 p-2'>
         <div className='flex items-start'>
           <MapPinIcon className='h-4 w-4' />
-          <p className='ml-1 text-xs font-bold capitalize text-black '>Số 131 lê thanh nghị - hai ba trưng - hà nội</p>
+          <p className='ml-1 text-xs font-bold capitalize text-black '>{props.address}</p>
         </div>
         <div className='flex items-start'>
           <ImageIcon className='h-4 w-4' stroke='#ed1b24' />
@@ -171,15 +174,15 @@ const Showroom = () => {
         </div>
         <div className='flex items-start'>
           <PhoneIcon className='h-4 w-4' />
-          <p className='ml-1 text-xs capitalize text-black '>Tel: 1900 1903 (máy lẻ 25398) - (0243) 6285551</p>
+          <p className='ml-1 text-xs capitalize text-black '>{props.address}</p>
         </div>
         <div className='flex items-start'>
           <MailIcon className='h-4 w-4' />
-          <p className='ml-1 text-xs capitalize text-black '>Email: kdbl.haibatrung@hacom.vn</p>
+          <p className='ml-1 text-xs capitalize text-black '>{props.email}</p>
         </div>
         <div className='flex items-start'>
           <ClockIcon className='h-4 w-4' />
-          <p className='ml-1 text-xs capitalize text-black '>Thời gian mở cửa: Từ 8h-20h hàng ngày</p>
+          <p className='ml-1 text-xs capitalize text-black '>{props.time}</p>
         </div>
       </div>
     </div>
@@ -187,8 +190,12 @@ const Showroom = () => {
 }
 
 const NorthRegion = () => {
+  const { data: dataHanoi } = useQuery({ queryKey: ['showroom', 0], queryFn: () => showroomApi.getShowrooms(0) })
+  const { data: dataNorth } = useQuery({ queryKey: ['showroom', 1], queryFn: () => showroomApi.getShowrooms(1) })
+  const showroomsHanoi = dataHanoi?.data.result
+  const showroomsNorth = dataNorth?.data.result
+
   return (
-    // <div className='w-[100vw]'>
     <div className='max-h-screen-90 rounded bg-white p-[25px] xl:w-[1200px] 2xl:w-[1650px]'>
       <div className='grid grid-cols-2 gap-10 bg-white px-5'>
         <div className='col-span-1'>
@@ -196,10 +203,7 @@ const NorthRegion = () => {
             hacom hà nội
           </p>
           <div className='flex flex-row flex-wrap justify-between'>
-            <Showroom />
-            <Showroom />
-            <Showroom />
-            <Showroom />
+            {showroomsHanoi?.map((showroom) => <Showroom key={showroom._id} {...showroom} />)}
           </div>
         </div>
         <div className='col-span-1'>
@@ -207,14 +211,11 @@ const NorthRegion = () => {
             hacom miền bắc
           </p>
           <div className='flex flex-row flex-wrap justify-between'>
-            <Showroom />
-            <Showroom />
-            <Showroom />
+            {showroomsNorth?.map((showroom) => <Showroom key={showroom._id} {...showroom} />)}
           </div>
         </div>
       </div>
     </div>
-    // </div>
   )
 }
 

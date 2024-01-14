@@ -5,16 +5,17 @@ import MainLayout from './layouts/MainLayout'
 import CheckOrder from './pages/CheckOrder'
 import Cart from './pages/Cart'
 import NotFound from './pages/NotFound'
+import path from './constants/path'
 
 function App() {
   return (
     <div>
       <Routes>
-        <Route path='/' element={<MainLayout />}>
+        <Route path={path.home} element={<MainLayout />}>
           <Route index element={<Home />} />
-          <Route path='buildpc' element={<BuildPc />} />
-          <Route path='check-order' element={<CheckOrder />} />
-          <Route path='cart' element={<Cart />} />
+          <Route path={path.build_pc} element={<BuildPc />} />
+          <Route path={path.check_oder} element={<CheckOrder />} />
+          <Route path={path.cart} element={<Cart />} />
           <Route path='*' element={<NotFound />} />
         </Route>
       </Routes>
