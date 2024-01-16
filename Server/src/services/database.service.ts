@@ -1,4 +1,5 @@
 import { Db, MongoClient, ServerApiVersion } from 'mongodb'
+import { OnlineSeller } from '~/models/schemas/OnlineSeller.schema'
 import { RefreshToken } from '~/models/schemas/RefreshToken.schema'
 import { Showroom } from '~/models/schemas/Showroom.schema'
 import { User } from '~/models/schemas/User.schema'
@@ -35,6 +36,9 @@ class DatabaseService {
   }
   get showrooms() {
     return this.db.collection<Showroom>(process.env.DB_SHOWROOM_COLLECTION as string)
+  }
+  get onlineSellers() {
+    return this.db.collection<OnlineSeller>(process.env.DB_ONLINE_SELLER_COLLECTION as string)
   }
 }
 

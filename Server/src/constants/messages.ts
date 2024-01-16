@@ -27,3 +27,6 @@ export const SHOWROOM_MESSAGES = {
   REGION_IS_INCORRECT: 'Region is incorrect',
   GET_SHOWROOMS_SUCCESSFULLY: 'Get showrooms sucessfully'
 }
+export const ONLINE_SELLER_MESSAGES = {
+  GET_ALL_ONLINE_SELLERS_SUCCESSFULLY: 'Get all online sellers sucessfully'
+}

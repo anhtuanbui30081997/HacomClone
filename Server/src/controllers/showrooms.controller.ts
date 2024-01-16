@@ -11,7 +11,7 @@ class ShowroomController {
     const showrooms = await showroomService.getShowroomsByRegion(Number(region) as RegionType)
     return res.status(HTTP_STATUS.OK).json({
       message: SHOWROOM_MESSAGES.GET_SHOWROOMS_SUCCESSFULLY,
-      result: showrooms
+      data: showrooms
     })
   }
 }

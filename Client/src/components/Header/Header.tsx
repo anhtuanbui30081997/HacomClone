@@ -19,6 +19,15 @@ import { AppContext } from 'src/contexts/app.context'
 import { useQuery } from '@tanstack/react-query'
 import showroomApi from 'src/apis/showroom.api'
 import { ShowroomType } from 'src/types/showroom.type'
+import onlineSellerApi from 'src/apis/onlineSeller.api'
+
+/**
+ * Internal type
+ * @returns
+ */
+interface ShowroomProps extends ShowroomType {
+  index: number
+}
 
 /**
  * Internal component
@@ -148,12 +157,12 @@ const Help = () => {
   )
 }
 
-const Showroom = (props: ShowroomType) => {
+const Showroom = (props: ShowroomProps) => {
   return (
-    <div className='mt-3 w-[48%]'>
+    <div>
       <div className='flex h-8 items-center'>
         <span className='flex h-full w-8 items-center justify-center rounded-l bg-red-600 text-base font-bold text-white'>
-          1
+          {props.index + 1}
         </span>
         <span className='h-full flex-1 rounded-r bg-[#243a76] px-[10px] text-[13px] font-bold uppercase leading-8 text-white'>
           {`HACOM - ${props.name}`}
@@ -166,11 +175,18 @@ const Showroom = (props: ShowroomType) => {
         </div>
         <div className='flex items-start'>
           <ImageIcon className='h-4 w-4' stroke='#ed1b24' />
-          <p className='ml-1 text-xs capitalize text-[#ed1b24] '>Hình ảnh thực tế showroom</p>
+          <Link
+            to={`/hinh-anh-thuc-te-showroom-${props.name.split(' ').join('-')}`}
+            className='ml-1 text-xs capitalize text-[#ed1b24] '
+          >
+            Hình ảnh thực tế showroom
+          </Link>
         </div>
         <div className='flex items-start'>
           <LocationIcon className='h-4 w-4' stroke='#ed1b24' />
-          <p className='ml-1 text-xs capitalize text-[#ed1b24] '>Xem bản đồ đường đi</p>
+          <Link to={props.map} className='ml-1 text-xs capitalize text-[#ed1b24] '>
+            Xem bản đồ đường đi
+          </Link>
         </div>
         <div className='flex items-start'>
           <PhoneIcon className='h-4 w-4' />
@@ -178,7 +194,7 @@ const Showroom = (props: ShowroomType) => {
         </div>
         <div className='flex items-start'>
           <MailIcon className='h-4 w-4' />
-          <p className='ml-1 text-xs capitalize text-black '>{props.email}</p>
+          <p className='ml-1 text-xs text-black '>{props.email}</p>
         </div>
         <div className='flex items-start'>
           <ClockIcon className='h-4 w-4' />
@@ -192,26 +208,26 @@ const Showroom = (props: ShowroomType) => {
 const NorthRegion = () => {
   const { data: dataHanoi } = useQuery({ queryKey: ['showroom', 0], queryFn: () => showroomApi.getShowrooms(0) })
   const { data: dataNorth } = useQuery({ queryKey: ['showroom', 1], queryFn: () => showroomApi.getShowrooms(1) })
-  const showroomsHanoi = dataHanoi?.data.result
-  const showroomsNorth = dataNorth?.data.result
+  const showroomsHanoi = dataHanoi?.data.data
+  const showroomsNorth = dataNorth?.data.data
 
   return (
-    <div className='max-h-screen-90 rounded bg-white p-[25px] xl:w-[1200px] 2xl:w-[1650px]'>
+    <div className='max-h-[80vh] overflow-auto rounded bg-white p-[25px] xl:w-[1200px] 2xl:w-[1650px]'>
       <div className='grid grid-cols-2 gap-10 bg-white px-5'>
         <div className='col-span-1'>
           <p className='mx-auto my-4 w-fit rounded-full border-2 border-[#ed1b24] px-[25px] py-[10px] text-[1.1rem] font-semibold uppercase text-black'>
             hacom hà nội
           </p>
-          <div className='flex flex-row flex-wrap justify-between'>
-            {showroomsHanoi?.map((showroom) => <Showroom key={showroom._id} {...showroom} />)}
+          <div className='grid grid-cols-2 gap-5'>
+            {showroomsHanoi?.map((showroom, index) => <Showroom key={showroom._id} {...showroom} index={index} />)}
           </div>
         </div>
         <div className='col-span-1'>
           <p className='mx-auto my-4 w-fit rounded-full border-2 border-[#ed1b24] px-[25px] py-[10px] text-[1.1rem] font-semibold uppercase text-black'>
             hacom miền bắc
           </p>
-          <div className='flex flex-row flex-wrap justify-between'>
-            {showroomsNorth?.map((showroom) => <Showroom key={showroom._id} {...showroom} />)}
+          <div className='grid grid-cols-2 gap-5'>
+            {showroomsNorth?.map((showroom, index) => <Showroom key={showroom._id} {...showroom} index={index} />)}
           </div>
         </div>
       </div>
@@ -220,15 +236,118 @@ const NorthRegion = () => {
 }
 
 const ShopingOnline = () => {
-  return <div className='rounded bg-white p-4 text-base capitalize text-red-600'>Not implemented</div>
+  const { data: dataOnlineSellers } = useQuery({
+    queryKey: ['online-seller'],
+    queryFn: onlineSellerApi.getAllOnlineSellers
+  })
+  const personalSellers = dataOnlineSellers?.data.data.filter((seller) => seller.seller_type === 0)
+  const interpriseSellers = dataOnlineSellers?.data.data.filter((seller) => seller.seller_type === 1)
+  const OnlineSeller = ({
+    className,
+    mail,
+    name,
+    phone_number
+  }: {
+    className: string
+    name: string
+    mail: string
+    phone_number: string
+  }) => {
+    return (
+      <div className={className}>
+        <div className='text-[13px] font-bold text-[#ed1c24]'>{name}</div>
+        <div className='mt-3 flex items-center justify-center'>
+          <MailIcon className='h-4 w-4' fill='black' stroke='white' />
+          <p className='ml-1 text-xs'>{mail}</p>
+        </div>
+        <div className='mt-3 flex items-center justify-center'>
+          <PhoneIcon className='h-3 w-3' fill='black' />
+          <p className='ml-1 text-xs'>{phone_number}</p>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className='max-h-[80vh] overflow-auto rounded bg-white p-[25px] xl:w-[1200px] 2xl:w-[1650px]'>
+      <div className='mx-auto mt-4 w-fit rounded-full border-2 border-[#ed1b24] px-[25px] py-[10px] '>
+        <div className='text-[1.1rem] font-semibold uppercase text-black'>
+          Bán hàng online toàn quốc(8h - 24h hàng ngày)
+        </div>
+        <p className='text-center text-sm font-semibold capitalize italic'>(Miễn phí giao hàng toàn quốc)</p>
+      </div>
+      <div className='mt-9 grid grid-cols-2 gap-10 bg-white px-5'>
+        <div className='col-span-1'>
+          <div className='rounded-lg bg-[#ed1c24] py-3 text-center font-semibold text-white'>
+            <div className='text-lg uppercase'>Bộ phận khách hàng cá nhân</div>
+            <p className='text-sm italic'>(Tối Ưu và Chuyên sâu)</p>
+          </div>
+          <div className='mt-[18px] grid grid-cols-3 gap-2'>
+            {personalSellers?.map((seller) => (
+              <OnlineSeller
+                key={seller._id}
+                className='rounded-md border border-[#2d2b75] py-2 text-center'
+                mail={seller.email}
+                name={seller.name}
+                phone_number={seller.phone_number}
+              />
+            ))}
+          </div>
+        </div>
+        <div className='col-span-1'>
+          <div className='rounded-lg bg-[#2d2b75] py-3 text-center font-semibold text-white'>
+            <div className='text-lg uppercase'>Bộ phận khách hàng doanh nghiệp</div>
+            <p className='text-sm italic'>(Cam kết giá tốt nhất cho Khách hàng Doanh nghiệp)</p>
+          </div>
+          <div className='mt-[18px] grid grid-cols-2 gap-2'>
+            {interpriseSellers?.map((seller) => (
+              <OnlineSeller
+                key={seller._id}
+                className='rounded-md border border-[#ed1c24] py-2 text-center'
+                mail={seller.email}
+                name={seller.name}
+                phone_number={seller.phone_number}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 const SouthernRegion = () => {
-  return <div className='rounded bg-white p-4 text-base capitalize text-red-600'>Not implemented</div>
+  const { data: dataSorth } = useQuery({ queryKey: ['showroom', 0], queryFn: () => showroomApi.getShowrooms(3) })
+  const showroomsSorth = dataSorth?.data.data
+  return (
+    <div className='max-h-[80vh] overflow-auto rounded bg-white p-[25px] xl:w-[1200px] 2xl:w-[1650px]'>
+      <div className='px-5'>
+        <p className='mx-auto my-4 w-fit rounded-full border-2 border-[#ed1b24] px-[25px] py-[10px] text-[1.1rem] font-semibold uppercase text-black'>
+          hacom miền trung
+        </p>
+        <div className='grid grid-cols-2 gap-5'>
+          {showroomsSorth?.map((showroom, index) => <Showroom key={showroom._id} {...showroom} index={index} />)}
+        </div>
+      </div>
+    </div>
+  )
 }
 
 const CenterRegion = () => {
-  return <div className='rounded bg-white p-4 text-base capitalize text-red-600'>Not implemented</div>
+  const { data: dataCenter } = useQuery({ queryKey: ['showroom', 0], queryFn: () => showroomApi.getShowrooms(2) })
+  const showroomsCenter = dataCenter?.data.data
+  return (
+    <div className='max-h-[80vh] overflow-auto rounded bg-white p-[25px] xl:w-[1200px] 2xl:w-[1650px]'>
+      <div className='px-5'>
+        <p className='mx-auto my-4 w-fit rounded-full border-2 border-[#ed1b24] px-[25px] py-[10px] text-[1.1rem] font-semibold uppercase text-black'>
+          hacom miền trung
+        </p>
+        <div className='grid grid-cols-2 gap-5'>
+          {showroomsCenter?.map((showroom, index) => <Showroom key={showroom._id} {...showroom} index={index} />)}
+        </div>
+      </div>
+    </div>
+  )
 }
 /**
  * Default component

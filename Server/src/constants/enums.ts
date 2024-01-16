@@ -10,3 +10,8 @@ export enum RegionType {
   Center,
   South
 }
+
+export enum SellerType {
+  Personal,
+  Interprise
+}

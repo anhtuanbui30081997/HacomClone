@@ -2,9 +2,9 @@ import 'dotenv/config'
 import { Route } from './models/Route'
 import App from './app'
 import userRoute from './routes/users.routes'
-import databaseServices from './services/database.service'
 import showroomRoute from './routes/showrooms.routes'
+import onlineSellerRoute from './routes/onlineSellers.routes'
 
-const routes: Route[] = [userRoute, showroomRoute]
+const routes: Route[] = [userRoute, showroomRoute, onlineSellerRoute]
 const app = new App(routes)
 app.listen()

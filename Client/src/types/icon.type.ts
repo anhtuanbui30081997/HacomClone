@@ -5,4 +5,5 @@ export interface IconType {
   stroke_width?: number
   stroke?: string
   fill?: string
+  onClick?: () => void
 }

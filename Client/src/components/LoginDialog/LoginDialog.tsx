@@ -7,6 +7,8 @@ import fbImagin from 'src/assets/images/fb-login.png'
 import ggImagin from 'src/assets/images/gg-login.png'
 import recapcha from 'src/assets/images/recaptcha-logo.png'
 import { Link } from 'react-router-dom'
+import Input from '../Input'
+import Button from '../Button'
 
 export default function LoginDialog() {
   const { isOpenLoginDialog, setIsOpenLoginDialog } = useContext<AppContextInterface>(AppContext)
@@ -38,21 +40,31 @@ export default function LoginDialog() {
               <div className='mt-4 text-2xl font-bold text-[#010101]'>Đăng nhập bằng email</div>
               <span className='mt-[10px] text-sm'>Nhập email và mật khẩu tài khoản HACOM</span>
               <form className='mt-5'>
-                <input
-                  className='h-[34px] w-full border-b-[1px] border-slate-300 text-sm font-normal leading-[34px] outline-none'
+                <Input
                   type='email'
+                  autoFocus={true}
                   placeholder='abc@gmail.com'
+                  classNameError='mt-2 block text-red-500'
+                  classNameInput='h-[34px] w-full border-b-[1px] border-slate-300 text-sm font-normal leading-[34px] outline-none'
+                  errorMessage='Email hoặc mật khẩu không đúng'
                 />
-                <span className='invisible mt-2 block text-red-500'>Email hoặc mật khẩu không đúng</span>
-                <input
-                  className='mt-2 h-[34px] w-full border-b-[1px] border-slate-300 text-sm font-normal leading-[34px] outline-none'
+                <Input
                   type='password'
                   placeholder='Mật khẩu'
+                  className='relative mt-2'
+                  classNameInput='h-[34px] w-full border-b-[1px] border-slate-300 text-sm font-normal leading-[34px] outline-none'
+                  classNameError='mt-2 block text-red-500'
+                  errorMessage='Email hoặc mật khẩu không đúng'
+                  classNameEye='w-5 h-5 absolute top-[10px] right-[8px] cursor-pointer select-none'
                 />
-                <span className='invisible mt-2 block text-red-500'>Email hoặc mật khẩu không đúng</span>
                 <div className='mt-2 flex w-3/4 items-center justify-between rounded border-[1px] border-slate-300 bg-[#f9f9f9] px-3 py-2 shadow-sm'>
                   <div className='flex items-center'>
-                    <input type='checkbox' className='hidden h-7 w-7' checked={isNotRobot} />
+                    <Input
+                      type='checkbox'
+                      onChange={() => console.log('checked')}
+                      classNameInput='hidden h-7 w-7'
+                      checked={isNotRobot}
+                    />
                     {isNotRobot ? (
                       <div className='mr-2 h-7 w-4 translate-x-1 translate-y-[-8px] rotate-45 select-none border-[3px] border-b-green-600 border-l-transparent border-r-green-600 border-t-transparent'></div>
                     ) : (
@@ -79,12 +91,12 @@ export default function LoginDialog() {
                     <span className='text-[8px]'>Private - Terms</span>
                   </div>
                 </div>
-                <button
+                <Button
                   type='submit'
                   className='mt-7 w-full rounded-[4px] border-none bg-[#ed1b24] text-center text-lg font-medium leading-[44px] text-white'
                 >
                   Đăng nhập
-                </button>
+                </Button>
                 <Link to={'/'} className='mt-4 block text-sm text-blue-500'>
                   Quên mật khẩu?
                 </Link>
@@ -95,25 +107,26 @@ export default function LoginDialog() {
               <div className='mb-2 text-2xl font-bold capitalize text-black'>Xin Chào</div>
               <span className='mb-6 text-sm'>Đăng nhập hoặc Tạo tài khoản</span>
               <form>
-                <input
+                <Input
                   type='text'
+                  autoFocus={true}
                   placeholder='Số điện thoại'
-                  className=' w-full border-b-2 py-2 text-xl outline-none placeholder:text-xl'
+                  classNameInput='w-full border-b-2 py-2 text-xl outline-none placeholder:text-xl'
+                  errorMessage='Số điện thoại không đúng'
+                  classNameError='mt-2 block text-red-500'
                 />
-                <span className='invisible mt-2 block text-red-500'>Số điện thoại không đúng</span>
-                <button
+                <Button
                   type='submit'
                   className='mt-7 w-full rounded-[4px] border-none bg-[#ed1b24] text-center text-lg font-medium leading-10 text-white'
                 >
                   Tiếp tục
-                </button>
-                <button
-                  type='button'
+                </Button>
+                <div
                   onClick={() => setIsLoginByEmail(true)}
-                  className='mt-[15px] block w-full text-center text-sm text-blue-500'
+                  className='mt-[15px] block w-full cursor-pointer text-center text-sm text-blue-500'
                 >
                   Đăng nhập bằng email
-                </button>
+                </div>
               </form>
               <div className='mt-6 flex items-center'>
                 <span className='h-[1px] flex-grow bg-[#d7d7d7]'></span>
