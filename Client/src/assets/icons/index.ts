@@ -15,8 +15,16 @@ import ChevronLeftIcon from './ChevronLeftIcon'
 import OpenEyeIcon from './OpenEyeIcon'
 import CloseEyeIcon from './CloseEyeIcon'
 import LoadingIcon from './LoadingIcon'
+import CarIcon from './CarIcon'
+import ArrowPathIcon from './ArrowPathIcon'
+import ChatBubbleLeftRightIcon from './ChatBubbleLeftRightIcon'
+import CreditCartIcon from './CreditCartIcon'
 
 export {
+  CreditCartIcon,
+  ChatBubbleLeftRightIcon,
+  ArrowPathIcon,
+  CarIcon,
   LoadingIcon,
   OpenEyeIcon,
   CloseEyeIcon,

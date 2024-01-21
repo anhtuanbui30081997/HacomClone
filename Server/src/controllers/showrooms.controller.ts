@@ -6,6 +6,13 @@ import { GetShowroomReqParams } from '~/models/requests/Showroom.requests'
 import showroomService from '~/services/showroom.service'
 
 class ShowroomController {
+  async getAllShowrooms(req: Request, res: Response, next: NextFunction) {
+    const showrooms = await showroomService.getAllShowrooms()
+    return res.status(HTTP_STATUS.OK).json({
+      message: SHOWROOM_MESSAGES.GET_SHOWROOMS_SUCCESSFULLY,
+      data: showrooms
+    })
+  }
   async getShowroomsByRegion(req: Request<GetShowroomReqParams>, res: Response, next: NextFunction) {
     const { region } = req.params
     const showrooms = await showroomService.getShowroomsByRegion(Number(region) as RegionType)

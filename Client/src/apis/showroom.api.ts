@@ -7,6 +7,9 @@ const URL = 'showrooms'
 const showroomApi = {
   getShowrooms(region: RegionType) {
     return http.get<SuccessResponse<ShowroomType[]>>(`${URL}/region/${region}`)
+  },
+  getAllShowrooms() {
+    return http.get<SuccessResponse<ShowroomType[]>>(URL)
   }
 }
 

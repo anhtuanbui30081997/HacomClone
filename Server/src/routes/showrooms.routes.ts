@@ -7,6 +7,13 @@ import { wrapRequestHandler } from '~/utils/handlers'
 const showroomRouter = Router()
 
 /**
+ * Description. Get all showrooms
+ * Method: Get
+ * Path: '/
+ * Body: None
+ */
+showroomRouter.get('/', wrapRequestHandler(showroomController.getAllShowrooms))
+/**
  * Description. Get showrooms by region
  * Method: Get
  * Path: '/region/:region'
