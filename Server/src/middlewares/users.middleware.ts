@@ -80,22 +80,44 @@ export const LoginValidator = validate(
       trim: true,
       custom: {
         options: async (value, { req }) => {
-          const password = (req as Request<ParamsDictionary, any, LoginRequestBody>).body.password
           const email = value
           const user = await databaseServices.users.findOne({
-            email,
-            password: hashPassword(password)
+            email
           })
           if (!user) {
             // Can not find this user
-            throw new Error(USER_MESSAGES.USER_OR_PASSWORD_IS_INCORRECT)
+            throw new Error(USER_MESSAGES.EMAIL_IS_INCORRECT)
+          }
+          return true
+        }
+      }
+    },
+    password: {
+      ...passwordSchema,
+      custom: {
+        options: async (value, { req }) => {
+          const email = (req as Request<ParamsDictionary, any, LoginRequestBody>).body.email
+          const password = value
+          const user = await databaseServices.users.findOne(
+            {
+              email,
+              password: hashPassword(password)
+            },
+            {
+              projection: {
+                password: 0
+              }
+            }
+          )
+          if (!user) {
+            // Can not find this user
+            throw new Error(USER_MESSAGES.PASSWORD_IS_INCORRECT)
           }
           ;(req as Request).user = user
           return true
         }
       }
-    },
-    password: passwordSchema
+    }
   })
 )
 

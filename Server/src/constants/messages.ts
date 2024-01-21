@@ -5,13 +5,13 @@ export const USER_MESSAGES = {
   EMAIL_IS_INVALID: 'Email is invalid',
   PASSWORD_MUST_BE_A_STRING: 'Password must be a string',
   PASSWORD_MUST_BE_STRONG:
-    'Password must be at least 8 characters long and contain\
-  at least 1 lowercase, at least 1 uppercase, at least 1 number and at least 1 symbol',
+    'Password must be at least 8 characters long and contain at least 1 lowercase, at least 1 uppercase, at least 1 number and at least 1 symbol',
   VALIDATION_FORM_ERROR: 'Validation error',
   EMAIL_ALREADY_EXISTS: 'Email already exists',
   EMAIL_IS_NOT_REGISTERED: 'This email is not registered',
   REGISTER_SUCCESSFULLY: 'Register successfully',
-  USER_OR_PASSWORD_IS_INCORRECT: 'Email or Password is incorrect',
+  EMAIL_IS_INCORRECT: 'Email is incorrect',
+  PASSWORD_IS_INCORRECT: 'Password is incorrect',
   LOGIN_SUCCESSFULLY: 'Login successfully',
   LOGOUT_SUCCESSFULLY: 'Logout successfully',
   REFRESH_TOKEN_SUCCESSFULLY: 'Refresh token successfully',

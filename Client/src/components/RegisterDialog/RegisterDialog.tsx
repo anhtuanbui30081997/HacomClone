@@ -4,10 +4,68 @@ import { AppContext, AppContextInterface } from 'src/contexts/app.context'
 import { CloseIcon } from 'src/assets/icons'
 import loginImage from 'src/assets/images/loginImage.png'
 import recapcha from 'src/assets/images/recaptcha-logo.png'
+import Input from '../Input'
+import { UserSchema, userSchema } from 'src/utils/rules'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import Button from '../Button'
+import { useMutation } from '@tanstack/react-query'
+import authApi from 'src/apis/auth.api'
+import omit from 'lodash/omit'
+import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
+import { ErrorResponse, ErrorsEntityType } from 'src/types/utils.type'
+import { toast } from 'react-toastify'
+
+export type RegisterFormData = Pick<UserSchema, 'name' | 'email' | 'password' | 'confirm_password'>
+const registerSchema = userSchema.pick(['name', 'email', 'password', 'confirm_password'])
 
 export default function RegisterDialog() {
-  const { isOpenRegisterDialog, setIsOpenRegisterDialog } = useContext<AppContextInterface>(AppContext)
+  const { isOpenRegisterDialog, setIsOpenRegisterDialog, setIsOpenLoginDialog } =
+    useContext<AppContextInterface>(AppContext)
   const [isNotRobot, setIsNotRobot] = useState<boolean>(false)
+  const {
+    register,
+    handleSubmit,
+    setError,
+    reset,
+    formState: { errors }
+  } = useForm<RegisterFormData>({
+    resolver: yupResolver(registerSchema)
+  })
+
+  const registerMutation = useMutation({
+    mutationFn: authApi.register
+  })
+
+  const onSubmit = handleSubmit((data) => {
+    const bodyRegister = omit(data, ['confirm_password'])
+    registerMutation.mutate(bodyRegister, {
+      onSuccess: () => {
+        toast.success('Bạn đã đăng ký tài khoản thành công')
+        setIsOpenLoginDialog(true)
+        reset()
+        setIsNotRobot(false)
+        setIsOpenRegisterDialog(false)
+      },
+      onError: (error) => {
+        if (isAxiosUnprocessableEntityError<ErrorResponse<Omit<RegisterFormData, 'confirm_password'>>>(error)) {
+          const formError = error.response?.data.errors
+          console.log(formError)
+          if (formError) {
+            Object.keys(formError).forEach((key) => {
+              setError(key as keyof Omit<RegisterFormData, 'confirm_password'>, {
+                type: 'Server',
+                message: (
+                  formError[key as keyof Omit<RegisterFormData, 'confirm_password'>] as unknown as ErrorsEntityType
+                ).msg
+              })
+            })
+          }
+        }
+      }
+    })
+  })
+
   return (
     <Dialog
       isOpen={isOpenRegisterDialog}
@@ -22,51 +80,63 @@ export default function RegisterDialog() {
           </div>
           <div className='flex max-h-[520px] flex-grow flex-col overflow-auto scroll-smooth p-10'>
             <div className='mt-4 text-2xl font-bold text-[#010101]'>Đăng ký tài khoản</div>
-            <span className='mt-[10px] text-base'>Tạo tài khoản</span>
-            <form className='mt-5'>
-              <label className='text-sm' htmlFor='email'>
+            <span className='mt-[10px] text-lg'>Tạo tài khoản</span>
+            <form className='mt-5' onSubmit={onSubmit}>
+              <label className='text-base' htmlFor='name'>
                 Vui lòng cho biết tên bạn
               </label>
-              <input
-                id='email'
-                className='h-[34px] w-full border-b-[1px] border-slate-300 text-sm font-normal leading-[34px] outline-none'
+              <Input
+                id='name'
+                name='name'
                 type='text'
-                placeholder='Giang'
+                placeholder='Nguyễn Văn A'
+                register={register}
+                errorMessage={errors.name?.message}
               />
-              <span className='invisible mt-2 block text-red-500'>Tên </span>
-              <label className='text-sm' htmlFor='email'>
+              <label className='mt-3 block text-base' htmlFor='email'>
                 Email
               </label>
-              <input
-                id='email'
-                className='h-[34px] w-full border-b-[1px] border-slate-300 text-sm font-normal leading-[34px] outline-none'
+              <Input
                 type='email'
+                id='email'
+                name='email'
                 placeholder='abc@gmail.com'
+                register={register}
+                errorMessage={errors.email?.message}
               />
-              <span className='invisible mt-2 block text-red-500'>Email hoặc mật khẩu không đúng</span>
-              <label className='text-sm' htmlFor='password'>
+              <label className='mt-3 block text-base' htmlFor='password'>
                 Đặt mật khẩu
               </label>
-              <input
+              <Input
                 id='password'
-                className='mt-2 h-[34px] w-full border-b-[1px] border-slate-300 text-sm font-normal leading-[34px] outline-none'
                 type='password'
+                name='password'
                 placeholder='Mật khẩu'
+                className='relative'
+                register={register}
+                errorMessage={errors.password?.message}
               />
-              <span className='invisible mt-2 block text-red-500'>Email hoặc mật khẩu không đúng</span>
-              <label className='text-sm' htmlFor='confirm_password'>
+              <label className='mt-3 block text-base' htmlFor='confirm_password'>
                 Nhập lại mật khẩu
               </label>
-              <input
-                id='confirm_password'
-                className='mt-2 h-[34px] w-full border-b-[1px] border-slate-300 text-sm font-normal leading-[34px] outline-none'
+              <Input
                 type='password'
-                placeholder='Nhập lại mật khẩu'
+                id='confirm_password'
+                name='confirm_password'
+                placeholder='Mật khẩu'
+                className='relative'
+                register={register}
+                errorMessage={errors.confirm_password?.message}
               />
-              <span className='invisible mt-2 block text-red-500'>Password không trùng khớp</span>
-              <div className='mt-2 flex w-3/4 items-center justify-between rounded border-[1px] border-slate-300 bg-[#f9f9f9] px-3 py-2 shadow-sm'>
+
+              <div className='mt-7 flex w-3/4 items-center justify-between rounded border-[1px] border-slate-300 bg-[#f9f9f9] px-3 py-2 shadow-sm'>
                 <div className='flex items-center'>
-                  <input type='checkbox' className='hidden h-7 w-7' checked={isNotRobot} />
+                  <Input
+                    type='checkbox'
+                    className='hidden h-7 w-7'
+                    checked={isNotRobot}
+                    onChange={() => console.log("i'm not robot")}
+                  />
                   {isNotRobot ? (
                     <div className='mr-2 h-7 w-4 translate-x-1 translate-y-[-8px] rotate-45 select-none border-[3px] border-b-green-600 border-l-transparent border-r-green-600 border-t-transparent'></div>
                   ) : (
@@ -93,12 +163,14 @@ export default function RegisterDialog() {
                   <span className='text-[8px]'>Private - Terms</span>
                 </div>
               </div>
-              <button
+              <Button
                 type='submit'
-                className='mt-7 w-full rounded-[4px] border-none bg-[#ed1b24] text-center text-lg font-medium leading-[44px] text-white'
+                disabled={isNotRobot === false || registerMutation.isPending}
+                isLoading={registerMutation.isPending}
+                className='mt-7 w-full select-none rounded-[4px] border-none text-center text-lg font-medium leading-[44px] text-white'
               >
                 Tạo tài khoản
-              </button>
+              </Button>
             </form>
           </div>
           <div className='flex flex-col justify-center rounded-r-3xl bg-[#f2f6ff] px-10 py-12'>

@@ -13,11 +13,13 @@ export const validate = (validation: RunnableValidationChains<ValidationChain>) 
       return next()
     }
     const errorsObject: Record<string, ValidationError> = errors.mapped()
+    console.log(errorsObject)
     const entityError = new EntityError({ errors: {} })
     for (const key in errorsObject) {
       const { msg } = errorsObject[key]
       /**
-       * If error is ErrorWithStatus, msg like
+       * If error is ErrorWithStatus, msg like:
+       * msg: { message: 'test ty thoi', status: 400 }
        * {
           email: {
               type: 'field',

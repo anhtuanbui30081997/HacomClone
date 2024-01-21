@@ -9,11 +9,64 @@ import recapcha from 'src/assets/images/recaptcha-logo.png'
 import { Link } from 'react-router-dom'
 import Input from '../Input'
 import Button from '../Button'
+import { useForm } from 'react-hook-form'
+import { UserSchema, userSchema } from 'src/utils/rules'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useMutation } from '@tanstack/react-query'
+import authApi from 'src/apis/auth.api'
+import { toast } from 'react-toastify'
+import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
+import { ErrorResponse, ErrorsEntityType } from 'src/types/utils.type'
+
+export type LoginFormData = Pick<UserSchema, 'email' | 'password'>
+const loginSchema = userSchema.pick(['email', 'password'])
 
 export default function LoginDialog() {
-  const { isOpenLoginDialog, setIsOpenLoginDialog } = useContext<AppContextInterface>(AppContext)
-  const [isLoginByEmail, setIsLoginByEmail] = useState<boolean>(false)
+  const { isOpenLoginDialog, setIsOpenLoginDialog, setProfile, setIsAuthenticated } =
+    useContext<AppContextInterface>(AppContext)
+  const [isLoginByEmail, setIsLoginByEmail] = useState<boolean>(true)
   const [isNotRobot, setIsNotRobot] = useState<boolean>(false)
+
+  const {
+    register,
+    reset,
+    setError,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<LoginFormData>({
+    resolver: yupResolver(loginSchema)
+  })
+
+  const loginMutation = useMutation({
+    mutationFn: (data: LoginFormData) => authApi.login(data)
+  })
+
+  const onSubmit = handleSubmit((data) => {
+    loginMutation.mutate(data, {
+      onSuccess: (res) => {
+        setIsAuthenticated(true)
+        setProfile(res.data.data.user)
+        toast.success('Đăng nhập thành công')
+        reset()
+        setIsOpenLoginDialog(false)
+        setIsNotRobot(false)
+      },
+      onError: (error) => {
+        if (isAxiosUnprocessableEntityError<ErrorResponse<LoginFormData>>(error)) {
+          const formError = error.response?.data.errors
+          if (formError) {
+            Object.keys(formError).forEach((key) => {
+              setError(key as keyof LoginFormData, {
+                type: 'Server',
+                message: (formError[key as keyof LoginFormData] as unknown as ErrorsEntityType).msg
+              })
+            })
+          }
+        }
+      }
+    })
+  })
+
   return (
     <Dialog
       isOpen={isOpenLoginDialog}
@@ -35,29 +88,28 @@ export default function LoginDialog() {
                 }}
                 className='pb-2 pr-2'
               >
-                <ChevronLeftIcon className='h-5 w-5 cursor-pointer' stroke='#999' stroke_width={2.5} />
+                <ChevronLeftIcon className='ml-[-4px] h-5 w-5 cursor-pointer' stroke='#999' stroke_width={2.5} />
               </div>
               <div className='mt-4 text-2xl font-bold text-[#010101]'>Đăng nhập bằng email</div>
               <span className='mt-[10px] text-sm'>Nhập email và mật khẩu tài khoản HACOM</span>
-              <form className='mt-5'>
+              <form onSubmit={onSubmit} className='mt-5'>
                 <Input
                   type='email'
+                  name='email'
                   autoFocus={true}
                   placeholder='abc@gmail.com'
-                  classNameError='mt-2 block text-red-500'
-                  classNameInput='h-[34px] w-full border-b-[1px] border-slate-300 text-sm font-normal leading-[34px] outline-none'
-                  errorMessage='Email hoặc mật khẩu không đúng'
+                  register={register}
+                  errorMessage={errors.email?.message}
                 />
                 <Input
+                  name='password'
                   type='password'
                   placeholder='Mật khẩu'
-                  className='relative mt-2'
-                  classNameInput='h-[34px] w-full border-b-[1px] border-slate-300 text-sm font-normal leading-[34px] outline-none'
-                  classNameError='mt-2 block text-red-500'
-                  errorMessage='Email hoặc mật khẩu không đúng'
-                  classNameEye='w-5 h-5 absolute top-[10px] right-[8px] cursor-pointer select-none'
+                  className='relative mt-5'
+                  errorMessage={errors.password?.message}
+                  register={register}
                 />
-                <div className='mt-2 flex w-3/4 items-center justify-between rounded border-[1px] border-slate-300 bg-[#f9f9f9] px-3 py-2 shadow-sm'>
+                <div className='mt-7 flex w-3/4 items-center justify-between rounded border-[1px] border-slate-300 bg-[#f9f9f9] px-3 py-2 shadow-sm'>
                   <div className='flex items-center'>
                     <Input
                       type='checkbox'
@@ -92,8 +144,9 @@ export default function LoginDialog() {
                   </div>
                 </div>
                 <Button
+                  disabled={isNotRobot === false}
                   type='submit'
-                  className='mt-7 w-full rounded-[4px] border-none bg-[#ed1b24] text-center text-lg font-medium leading-[44px] text-white'
+                  className='mt-7 w-full rounded-[4px] border-none text-center text-lg font-medium leading-[44px] text-white'
                 >
                   Đăng nhập
                 </Button>
@@ -112,7 +165,7 @@ export default function LoginDialog() {
                   autoFocus={true}
                   placeholder='Số điện thoại'
                   classNameInput='w-full border-b-2 py-2 text-xl outline-none placeholder:text-xl'
-                  errorMessage='Số điện thoại không đúng'
+                  errorMessage='Tính năng này chưa được phát triển'
                   classNameError='mt-2 block text-red-500'
                 />
                 <Button

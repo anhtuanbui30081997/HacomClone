@@ -15,11 +15,13 @@ import {
 import Popover from '../Popover'
 import { Link } from 'react-router-dom'
 import { useContext } from 'react'
-import { AppContext } from 'src/contexts/app.context'
-import { useQuery } from '@tanstack/react-query'
+import { AppContext, AppContextInterface } from 'src/contexts/app.context'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import showroomApi from 'src/apis/showroom.api'
 import { ShowroomType } from 'src/types/showroom.type'
 import onlineSellerApi from 'src/apis/onlineSeller.api'
+import authApi from 'src/apis/auth.api'
+import { toast } from 'react-toastify'
 
 /**
  * Internal type
@@ -34,38 +36,63 @@ interface ShowroomProps extends ShowroomType {
  * @returns
  */
 const UserService = () => {
-  const { setIsOpenLoginDialog, setIsOpenRegisterDialog } = useContext(AppContext)
+  const { setIsOpenLoginDialog, setIsOpenRegisterDialog, profile, setProfile, setIsAuthenticated } =
+    useContext<AppContextInterface>(AppContext)
+
+  const logoutMutation = useMutation({
+    mutationFn: authApi.logout,
+    onSuccess: () => {
+      setProfile(null)
+      setIsAuthenticated(false)
+      toast.success('Đăng xuất thành công')
+    }
+  })
+
+  const handleLogout = () => {
+    logoutMutation.mutate()
+  }
 
   return (
     <div className='flex cursor-pointer flex-col rounded-sm bg-white p-4 shadow-md'>
-      <div
-        onClick={() => setIsOpenLoginDialog(true)}
-        className='mb-1 w-full min-w-[206px] rounded-sm bg-yellow-400 p-2 text-center text-xs font-medium'
-      >
-        Đăng nhập
-      </div>
-      <div
-        onClick={() => setIsOpenRegisterDialog(true)}
-        className='mb-1 w-full min-w-[206px] rounded-sm bg-yellow-400 p-2 text-center text-xs font-medium'
-      >
-        Đăng ký
-      </div>
-      <div className='mb-1 flex'>
-        <div className='flex h-10 min-w-10 items-center justify-center rounded-l-sm bg-[#c5422e]'>
-          <GoogleIcon className='h-4 w-4' stroke='white' stroke_width={3.5} />
+      {profile ? (
+        <div
+          onClick={handleLogout}
+          className='mb-1 w-full min-w-[206px] rounded-sm bg-yellow-400 p-2 text-center text-xs font-medium'
+        >
+          Đăng xuất
         </div>
-        <div className='flex h-10 w-full items-center rounded-r-sm bg-[#e44a32] p-2 text-center text-xs font-medium text-white'>
-          Đăng nhập bằng Google
+      ) : (
+        <div>
+          <div
+            onClick={() => setIsOpenLoginDialog(true)}
+            className='mb-1 w-full min-w-[206px] rounded-sm bg-yellow-400 p-2 text-center text-xs font-medium'
+          >
+            Đăng nhập
+          </div>
+          <div
+            onClick={() => setIsOpenRegisterDialog(true)}
+            className='mb-1 w-full min-w-[206px] rounded-sm bg-yellow-400 p-2 text-center text-xs font-medium'
+          >
+            Đăng ký
+          </div>
+          <div className='mb-1 flex'>
+            <div className='flex h-10 min-w-10 items-center justify-center rounded-l-sm bg-[#c5422e]'>
+              <GoogleIcon className='h-4 w-4' stroke='white' stroke_width={3.5} />
+            </div>
+            <div className='flex h-10 w-full items-center rounded-r-sm bg-[#e44a32] p-2 text-center text-xs font-medium text-white'>
+              Đăng nhập bằng Google
+            </div>
+          </div>
+          <div className='mb-1 flex'>
+            <div className='flex h-10 min-w-10 items-center justify-center rounded-l-sm bg-[#25268d]'>
+              <FacebookIcon className='h-5 w-5' stroke='white' />
+            </div>
+            <div className='flex h-10 w-full items-center rounded-r-sm bg-[#4454df] p-2 text-center text-xs font-medium text-white'>
+              Đăng nhập bằng Facebook
+            </div>
+          </div>
         </div>
-      </div>
-      <div className='mb-1 flex'>
-        <div className='flex h-10 min-w-10 items-center justify-center rounded-l-sm bg-[#25268d]'>
-          <FacebookIcon className='h-5 w-5' stroke='white' />
-        </div>
-        <div className='flex h-10 w-full items-center rounded-r-sm bg-[#4454df] p-2 text-center text-xs font-medium text-white'>
-          Đăng nhập bằng Facebook
-        </div>
-      </div>
+      )}
     </div>
   )
 }
@@ -354,6 +381,7 @@ const CenterRegion = () => {
  * @returns Header component
  */
 export default function Header() {
+  const { profile } = useContext<AppContextInterface>(AppContext)
   return (
     <div className='border-b bg-neutral-100'>
       <div className='container mx-auto flex items-center justify-between'>
@@ -417,7 +445,11 @@ export default function Header() {
           </Popover>
           <Popover className='flex cursor-pointer items-center py-[10px] pl-[10px]' renderPopover={<UserService />}>
             <UserIcon className='h-3 w-3' />
-            <span className='ml-1 text-xs text-[#333e48]'>Tài khoản</span>
+            {profile ? (
+              <span className='ml-1 text-xs text-[#eb5656]'>{profile.name}</span>
+            ) : (
+              <span className='ml-1 text-xs text-[#333e48]'>Tài khoản</span>
+            )}
           </Popover>
         </div>
       </div>
