@@ -26,7 +26,16 @@ export const SHOWROOM_MESSAGES = {
   REGION_MUST_BE_A_NUMBER: 'Region must be a number',
   REGION_IS_INCORRECT: 'Region is incorrect',
   GET_SHOWROOMS_SUCCESSFULLY: 'Get showrooms sucessfully'
-}
+} as const
+
 export const ONLINE_SELLER_MESSAGES = {
   GET_ALL_ONLINE_SELLERS_SUCCESSFULLY: 'Get all online sellers sucessfully'
-}
+} as const
+
+export const CATEGORY_MESSAGES = {
+  CATEGORY_NAME_MUST_BE_A_STRING: 'Category name must be a string',
+  CATEGORY_MUST_BE_A_NUMBER: 'Category must be a number',
+  CATEGORY_UNKNOW: 'Category unknow',
+  CREATE_CATEGORY_SUCCESSFULLY: 'Create category successfully',
+  GET_CATEGORY_SUCCESSFULLY: 'Get category successfully'
+} as const

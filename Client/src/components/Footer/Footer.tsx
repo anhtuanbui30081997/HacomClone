@@ -49,7 +49,9 @@ export default function Footer() {
               classNameInput='p-[10px] text-xs h-10 w-[500px] rounded-l outline-none'
               placeholder='Nhập email hoặc số điện thoại của bạn'
             />
-            <Button className='h-10 rounded-r bg-[#ed1b24] px-[50px] py-[10px] text-[13px] font-semibold '>Gửi</Button>
+            <Button className='h-10 rounded-r bg-[#ed1b24] px-[50px] py-[10px] text-[13px] font-semibold text-white '>
+              Gửi
+            </Button>
           </form>
         </div>
       </div>
