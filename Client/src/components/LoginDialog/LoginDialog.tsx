@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 import Input from '../Input'
 import Button from '../Button'
 import { useForm } from 'react-hook-form'
-import { UserSchema, userSchema } from 'src/utils/rules'
+import { LoginFormData, userSchema } from 'src/utils/rules'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation } from '@tanstack/react-query'
 import authApi from 'src/apis/auth.api'
@@ -18,7 +18,6 @@ import { toast } from 'react-toastify'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
 import { ErrorResponse, ErrorsEntityType } from 'src/types/utils.type'
 
-export type LoginFormData = Pick<UserSchema, 'email' | 'password'>
 const loginSchema = userSchema.pick(['email', 'password'])
 
 export default function LoginDialog() {

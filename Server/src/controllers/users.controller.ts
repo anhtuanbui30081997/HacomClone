@@ -35,6 +35,17 @@ class UserController {
       }
     })
   }
+  async loginAdmin(req: Request<ParamsDictionary, any, LoginRequestBody>, res: Response, next: NextFunction) {
+    const user_id = (req.user as User)._id
+    const result = await userService.loginAdmin(user_id.toString())
+    return res.json({
+      message: USER_MESSAGES.LOGIN_SUCCESSFULLY,
+      data: {
+        ...result,
+        user: req.user
+      }
+    })
+  }
 
   async logout(req: Request<ParamsDictionary, any, LogoutRequestBody>, res: Response, next: NextFunction) {
     const { user_id } = req.decoded_refresh_token as TokenPayload

@@ -4,6 +4,11 @@ export enum TokenType {
   ForgotPasswordToken
 }
 
+export enum RoleType {
+  Admin,
+  User
+}
+
 export enum RegionType {
   Hanoi,
   North,
@@ -18,8 +23,8 @@ export enum SellerType {
 
 export enum CategoryType {
   None = 0,
-  LaptopTabletMobile = 1,
-  Laptop = 2,
+  LaptopMacbookSurface = 1,
+  LaptopMayTinhXachTay = 2,
   LaptopAcer = 3,
   LaptopAcerAspire = 4,
   LaptopAcerSwift = 5,
@@ -72,5 +77,9 @@ export enum CategoryType {
   SurfaceGo = 52,
   SurfaceLaptop = 53,
   LaptopVAIO = 54,
-  LaptopVAIOFE = 55
+  LaptopVAIOFE = 55,
+  MayTinhBang = 56,
+  DienThoaiIPhone = 57,
+  MayDocSach = 58,
+  DongHoThongMinh = 59
 }

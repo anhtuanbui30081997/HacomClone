@@ -2,17 +2,18 @@ import { RegisterRequestBody, TokenPayload } from '~/models/requests/User.reques
 import databaseService from './database.service'
 import { User } from '~/models/schemas/User.schema'
 import { hashPassword } from '~/utils/crypto'
-import { TokenType } from '~/constants/enums'
+import { RoleType, TokenType } from '~/constants/enums'
 import { signToken, verifyToken } from '~/utils/jwt'
 import { ObjectId } from 'mongodb'
 import { RefreshToken } from '~/models/schemas/RefreshToken.schema'
 
 class UserService {
-  private signAccessToken(user_id: string) {
+  private signAccessToken({ user_id, role }: { user_id: string; role: RoleType }) {
     return signToken({
       payload: {
         user_id,
-        token_type: TokenType.AccessToken
+        token_type: TokenType.AccessToken,
+        role
       },
       privateKey: process.env.JWT_SECRET_ACCESS_TOKEN as string,
       options: {
@@ -21,11 +22,12 @@ class UserService {
     })
   }
 
-  private signRefreshToken({ user_id, exp }: { user_id: string; exp?: number }) {
+  private signRefreshToken({ user_id, exp, role }: { user_id: string; exp?: number; role: RoleType }) {
     if (exp) {
       return signToken({
         payload: {
           user_id,
+          role,
           token_type: TokenType.RefreshToken,
           exp
         },
@@ -35,6 +37,7 @@ class UserService {
     return signToken({
       payload: {
         user_id,
+        role,
         token_type: TokenType.RefreshToken
       },
       privateKey: process.env.JWT_SECRET_REFRESH_TOKEN as string,
@@ -57,8 +60,8 @@ class UserService {
     })
   }
 
-  private signAccessTokenAndRefreshToken({ user_id, exp }: { user_id: string; exp?: number }) {
-    return Promise.all([this.signAccessToken(user_id), this.signRefreshToken({ user_id, exp })])
+  private signAccessTokenAndRefreshToken({ user_id, exp, role }: { user_id: string; exp?: number; role: RoleType }) {
+    return Promise.all([this.signAccessToken({ user_id, role }), this.signRefreshToken({ user_id, exp, role })])
   }
 
   private decodeRefreshToken(refresh_token: string) {
@@ -77,10 +80,14 @@ class UserService {
         _id: user_id,
         email,
         name,
+        role: RoleType.User,
         password: hashPassword(password)
       })
     )
-    const [access_token, refresh_token] = await this.signAccessTokenAndRefreshToken({ user_id: user_id.toString() })
+    const [access_token, refresh_token] = await this.signAccessTokenAndRefreshToken({
+      user_id: user_id.toString(),
+      role: RoleType.User
+    })
     const { iat, exp } = await this.decodeRefreshToken(refresh_token)
     await databaseService.refreshTokens.insertOne(
       new RefreshToken({
@@ -104,7 +111,34 @@ class UserService {
       const { exp, iat } = await this.decodeRefreshToken(old_refresh_token.token)
       const [access_token, refresh_token] = await this.signAccessTokenAndRefreshToken({
         user_id,
-        exp
+        exp,
+        role: RoleType.User
+      })
+      // Update new refresh_token into database
+      await databaseService.refreshTokens.insertOne(
+        new RefreshToken({
+          user_id: new ObjectId(user_id),
+          token: refresh_token,
+          exp,
+          iat
+        })
+      )
+      return {
+        access_token,
+        refresh_token
+      }
+    }
+  }
+  async loginAdmin(user_id: string) {
+    const old_refresh_token = await databaseService.refreshTokens.findOne({
+      user_id: new ObjectId(user_id)
+    })
+    if (old_refresh_token) {
+      const { exp, iat } = await this.decodeRefreshToken(old_refresh_token.token)
+      const [access_token, refresh_token] = await this.signAccessTokenAndRefreshToken({
+        user_id,
+        exp,
+        role: RoleType.Admin
       })
       // Update new refresh_token into database
       await databaseService.refreshTokens.insertOne(
@@ -142,7 +176,8 @@ class UserService {
     const { exp, iat } = await this.decodeRefreshToken(refresh_token)
     const [access_token, new_refresh_token] = await this.signAccessTokenAndRefreshToken({
       user_id,
-      exp
+      exp,
+      role: RoleType.User
     })
     // Update new refresh_token into database
     await databaseService.refreshTokens.findOneAndUpdate(

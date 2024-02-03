@@ -16,7 +16,7 @@ export default function Footer() {
   const showrooms = data?.data.data
 
   return (
-    <footer className='mt-5'>
+    <footer>
       <div className='container mx-auto grid min-h-[384px] grid-cols-12 gap-3'>
         <div className='gradient col-span-3 flex items-center justify-center rounded-lg'>
           <img className='w-full object-cover' src={customerImage} alt='' />

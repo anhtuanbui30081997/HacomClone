@@ -19,7 +19,8 @@ export const USER_MESSAGES = {
   UPDATE_PASSWORD_SUCCESSFULLY: 'Update password successfully',
   ACCESS_TOKEN_IS_REQUIRED: 'Access token is required',
   REFRESH_TOKEN_MUST_BE_A_STRING: 'Refresh token must be a string',
-  FORGOT_PASSWORD_TOKEN_MUST_BE_A_STRING: 'Forgot password token must be a string'
+  FORGOT_PASSWORD_TOKEN_MUST_BE_A_STRING: 'Forgot password token must be a string',
+  USER_IS_NOT_ADMIN: 'You are not an administrator'
 } as const
 
 export const SHOWROOM_MESSAGES = {

@@ -19,6 +19,7 @@ import onlineSellerApi from 'src/apis/onlineSeller.api'
 import authApi from 'src/apis/auth.api'
 import { toast } from 'react-toastify'
 import Showroom from '../Showroom'
+import path from 'src/constants/path'
 
 /**
  * Internal component
@@ -64,6 +65,12 @@ const UserService = () => {
           >
             Đăng ký
           </div>
+          <Link
+            to={path.admin}
+            className='mb-1 block w-full min-w-[206px] rounded-sm bg-yellow-400 p-2 text-center text-xs font-medium'
+          >
+            Admin
+          </Link>
           <div className='mb-1 flex'>
             <div className='flex h-10 min-w-10 items-center justify-center rounded-l-sm bg-[#c5422e]'>
               <GoogleIcon className='h-4 w-4' stroke='white' stroke_width={3.5} />
@@ -384,12 +391,15 @@ export default function Header() {
             <GiftIcon />
             <span className='ml-1 text-xs text-[#333e48]'>Khuyến mãi</span>
           </Popover>
-          <Popover className='flex cursor-pointer items-center py-[10px] pl-[10px]' renderPopover={<UserService />}>
-            <UserIcon className='h-3 w-3' />
+          <Popover
+            className='gradient flex cursor-pointer items-center rounded-full px-[10px] py-[8px]'
+            renderPopover={<UserService />}
+          >
+            <UserIcon className='h-3 w-3' stroke='white' stroke_width={3} />
             {profile ? (
-              <span className='ml-1 text-xs text-[#eb5656]'>{profile.name}</span>
+              <span className='ml-1 text-xs text-white'>{profile.name}</span>
             ) : (
-              <span className='ml-1 text-xs text-[#333e48]'>Tài khoản</span>
+              <span className='ml-1 text-xs text-white'>Tài khoản</span>
             )}
           </Popover>
         </div>

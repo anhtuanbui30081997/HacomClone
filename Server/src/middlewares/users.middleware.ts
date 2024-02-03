@@ -14,6 +14,7 @@ import Logger from '~/utils/logger'
 import { verifyToken } from '~/utils/jwt'
 import { capitalize } from 'lodash'
 import { JsonWebTokenError } from 'jsonwebtoken'
+import { RoleType } from '~/constants/enums'
 
 const passwordSchema: ParamSchema = {
   isString: {
@@ -87,6 +88,59 @@ export const LoginValidator = validate(
           if (!user) {
             // Can not find this user
             throw new Error(USER_MESSAGES.EMAIL_IS_INCORRECT)
+          }
+          return true
+        }
+      }
+    },
+    password: {
+      ...passwordSchema,
+      custom: {
+        options: async (value, { req }) => {
+          const email = (req as Request<ParamsDictionary, any, LoginRequestBody>).body.email
+          const password = value
+          const user = await databaseServices.users.findOne(
+            {
+              email,
+              password: hashPassword(password)
+            },
+            {
+              projection: {
+                password: 0
+              }
+            }
+          )
+          if (!user) {
+            // Can not find this user
+            throw new Error(USER_MESSAGES.PASSWORD_IS_INCORRECT)
+          }
+          ;(req as Request).user = user
+          return true
+        }
+      }
+    }
+  })
+)
+
+export const LoginAdminValidator = validate(
+  checkSchema({
+    email: {
+      isEmail: {
+        errorMessage: USER_MESSAGES.EMAIL_IS_INVALID
+      },
+      trim: true,
+      custom: {
+        options: async (value, { req }) => {
+          const email = value
+          const user = await databaseServices.users.findOne({
+            email
+          })
+          if (!user) {
+            // Can not find this user
+            throw new Error(USER_MESSAGES.EMAIL_IS_INCORRECT)
+          }
+          if (user.role !== RoleType.Admin) {
+            throw new Error(USER_MESSAGES.USER_IS_NOT_ADMIN)
           }
           return true
         }

@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import userController from '~/controllers/users.controller'
 import {
+  LoginAdminValidator,
   LoginValidator,
   RegisterValidator,
   accessTokenValidator,
@@ -28,6 +29,13 @@ usersRouter.post('/register', RegisterValidator, wrapRequestHandler(userControll
  * Body: LoginRequestBody
  */
 usersRouter.post('/login', LoginValidator, wrapRequestHandler(userController.login))
+/**
+ * Description. Login to account
+ * Method: Post
+ * Path: '/login'
+ * Body: LoginRequestBody
+ */
+usersRouter.post('/login-admin', LoginAdminValidator, wrapRequestHandler(userController.loginAdmin))
 
 /**
  * Description. Logout a user

@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosInstance, InternalAxiosRequestConfig } from 'axios'
 import { toast } from 'react-toastify'
-import { URL_LOGIN, URL_LOGOUT, URL_REFRESH_TOKEN, URL_REGISTER } from 'src/apis/auth.api'
+import { URL_ADMIN_LOGIN, URL_LOGIN, URL_LOGOUT, URL_REFRESH_TOKEN, URL_REGISTER } from 'src/apis/auth.api'
 import config from 'src/constants/config'
 import HttpStatusCode from 'src/constants/httpStatusCode.enum'
 import {
@@ -52,7 +52,7 @@ class Http {
     this.instance.interceptors.response.use(
       (response) => {
         const { url } = response.config
-        if (url === URL_LOGIN || url === URL_REGISTER) {
+        if (url === URL_LOGIN || url === URL_REGISTER || url === URL_ADMIN_LOGIN) {
           const data = response.data
           this.access_token = (data as AuthResponse).data.access_token
           this.refresh_token = (data as AuthResponse).data.refresh_token
@@ -84,7 +84,6 @@ class Http {
           const config = error.response?.config || ({ headers: {} } as InternalAxiosRequestConfig)
           // Nếu token hết hạn và đó không phải là request refresh_token thì tiến hành refresh token
           if (error.response?.data.message === 'Jwt expired' && config.url !== URL_REFRESH_TOKEN) {
-            console.log('Token expried')
             this.refreshTokenRequest = this.refreshTokenRequest
               ? this.refreshTokenRequest
               : this.handleRefreshToken().finally(() => {

@@ -21,3 +21,4 @@ export const userSchema = yup.object({
 })
 
 export type UserSchema = yup.InferType<typeof userSchema>
+export type LoginFormData = Pick<UserSchema, 'email' | 'password'>

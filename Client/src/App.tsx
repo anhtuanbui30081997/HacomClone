@@ -6,6 +6,7 @@ import CheckOrder from './pages/CheckOrder'
 import Cart from './pages/Cart'
 import NotFound from './pages/NotFound'
 import path from './constants/path'
+import Admin from './pages/Admin/Admin'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path={path.home} element={<MainLayout />}>
           <Route index element={<Home />} />
+          <Route path={path.admin} element={<Admin />} />
           <Route path={path.build_pc} element={<BuildPc />} />
           <Route path={path.check_oder} element={<CheckOrder />} />
           <Route path={path.cart} element={<Cart />} />
