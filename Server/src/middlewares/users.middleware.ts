@@ -294,3 +294,43 @@ export const updatePasswordValidator = validate(
     ['body']
   )
 )
+
+export const accessTokenAdminValidator = validate(
+  checkSchema(
+    {
+      Authorization: {
+        custom: {
+          options: async (value: string, { req }) => {
+            const access_token = (value || '').split(' ')[1]
+            if (!access_token) {
+              throw new ErrorWithStatus({
+                status: HTTP_STATUS.UNAUTHORIZED,
+                message: USER_MESSAGES.ACCESS_TOKEN_IS_REQUIRED
+              })
+            }
+            try {
+              const decoded_access_token = await verifyToken({
+                secretOrPublicKey: process.env.JWT_SECRET_ACCESS_TOKEN as string,
+                token: access_token
+              })
+              if (decoded_access_token.role !== RoleType.Admin) {
+                throw new ErrorWithStatus({
+                  status: HTTP_STATUS.UNAUTHORIZED,
+                  message: USER_MESSAGES.YOU_ARE_NOT_AN_ADMIN
+                })
+              }
+              ;(req as Request).decoded_access_token = decoded_access_token
+              return true
+            } catch (error) {
+              throw new ErrorWithStatus({
+                status: HTTP_STATUS.UNAUTHORIZED,
+                message: capitalize((error as JsonWebTokenError).message)
+              })
+            }
+          }
+        }
+      }
+    },
+    ['headers']
+  )
+)

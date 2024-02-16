@@ -6,6 +6,9 @@ import { RoleType, TokenType } from '~/constants/enums'
 import { signToken, verifyToken } from '~/utils/jwt'
 import { ObjectId } from 'mongodb'
 import { RefreshToken } from '~/models/schemas/RefreshToken.schema'
+import { ErrorWithStatus } from '~/models/Errors'
+import { USER_MESSAGES } from '~/constants/messages'
+import HTTP_STATUS from '~/constants/httpStatus'
 
 class UserService {
   private signAccessToken({ user_id, role }: { user_id: string; role: RoleType }) {
@@ -173,11 +176,11 @@ class UserService {
   }
 
   async refreshToken({ user_id, refresh_token }: { user_id: string; refresh_token: string }) {
-    const { exp, iat } = await this.decodeRefreshToken(refresh_token)
+    const { exp, iat, role } = await this.decodeRefreshToken(refresh_token)
     const [access_token, new_refresh_token] = await this.signAccessTokenAndRefreshToken({
       user_id,
       exp,
-      role: RoleType.User
+      role
     })
     // Update new refresh_token into database
     await databaseService.refreshTokens.findOneAndUpdate(
@@ -234,6 +237,39 @@ class UserService {
       }
     )
     return user as User
+  }
+
+  async getAllUsers() {
+    const users = await databaseService.users
+      .find(
+        {},
+        {
+          projection: {
+            password: 0
+          }
+        }
+      )
+      .toArray()
+    return users
+  }
+
+  async deleteOneUsers({ email }: { email: string }) {
+    // Delete this user and database ralated to this user
+    const result = await databaseService.users.findOneAndDelete(
+      { email: email },
+      {
+        projection: {
+          password: 0
+        }
+      }
+    )
+    if (!result) {
+      throw new ErrorWithStatus({
+        status: HTTP_STATUS.NOT_FOUND,
+        message: USER_MESSAGES.EMAIL_IS_NOT_FOUNDED
+      })
+    }
+    return result
   }
 }
 

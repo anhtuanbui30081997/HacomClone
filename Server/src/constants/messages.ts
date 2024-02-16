@@ -20,7 +20,11 @@ export const USER_MESSAGES = {
   ACCESS_TOKEN_IS_REQUIRED: 'Access token is required',
   REFRESH_TOKEN_MUST_BE_A_STRING: 'Refresh token must be a string',
   FORGOT_PASSWORD_TOKEN_MUST_BE_A_STRING: 'Forgot password token must be a string',
-  USER_IS_NOT_ADMIN: 'You are not an administrator'
+  USER_IS_NOT_ADMIN: 'You are not an administrator',
+  GET_ALL_USERS_SUCCESSFULLY: 'Get all users successfully',
+  DELETE_ONE_USER_SUCCESSFULLY: 'Delete one user successfully',
+  YOU_ARE_NOT_AN_ADMIN: 'You are not an admin',
+  EMAIL_IS_NOT_FOUNDED: 'Email is not founded'
 } as const
 
 export const SHOWROOM_MESSAGES = {

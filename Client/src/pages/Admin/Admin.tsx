@@ -1,22 +1,31 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import classNames from 'classnames'
 import { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import authApi from 'src/apis/auth.api'
+import { SearchIcon } from 'src/assets/icons'
 import Button from 'src/components/Button'
 import Input from 'src/components/Input'
 import { AppContext, AppContextInterface } from 'src/contexts/app.context'
+import { User } from 'src/types/user.type'
 import { ErrorResponse, ErrorsEntityType } from 'src/types/utils.type'
 import { LoginFormData, userSchema } from 'src/utils/rules'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
 
-type AdminAction = 'login' | 'user_management' | 'order_management' | 'category_management' | 'purchage_management'
+type AdminAction =
+  | 'login'
+  | 'user_management'
+  | 'order_management'
+  | 'category_management'
+  | 'purchage_management'
+  | 'logout'
 
 const loginSchema = userSchema.pick(['email', 'password'])
 
-const Login = (props: { onLogin: React.Dispatch<React.SetStateAction<boolean>> }) => {
+const Login = (props: { onLogin: () => void }) => {
   const { setProfile, setIsAuthenticated } = useContext<AppContextInterface>(AppContext)
   const {
     register,
@@ -36,7 +45,7 @@ const Login = (props: { onLogin: React.Dispatch<React.SetStateAction<boolean>> }
         setIsAuthenticated(true)
         setProfile(res.data.data.user)
         toast.success('Đăng nhập thành công')
-        props.onLogin(true)
+        props.onLogin()
         reset()
       },
       onError: (error) => {
@@ -102,7 +111,7 @@ const Login = (props: { onLogin: React.Dispatch<React.SetStateAction<boolean>> }
                       id='remember'
                       aria-describedby='remember'
                       type='checkbox'
-                      className='focus:ring-3 focus:ring-primary-300 dark:focus:ring-primary-600 h-4 w-4 rounded border border-gray-300 bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800'
+                      className='focus:ring-3 h-4 w-4 rounded border border-gray-300 bg-gray-50 focus:ring-primary-300 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600'
                       required
                     />
                   </div>
@@ -112,19 +121,19 @@ const Login = (props: { onLogin: React.Dispatch<React.SetStateAction<boolean>> }
                     </label>
                   </div>
                 </div>
-                <a href='#' className='text-primary-600 dark:text-primary-500 text-sm font-medium hover:underline'>
+                <a href='#' className='text-sm font-medium text-primary-600 hover:underline dark:text-primary-500'>
                   Forgot password?
                 </a>
               </div>
               <Button
                 type='submit'
-                className='bg-primary-600 hover:bg-primary-700 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-full rounded-lg px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4'
+                className='w-full rounded-lg bg-primary-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800'
               >
                 Login
               </Button>
               <p className='text-sm font-light text-gray-500 dark:text-gray-400'>
                 Don’t have an account yet?{' '}
-                <a href='#' className='text-primary-600 dark:text-primary-500 font-medium hover:underline'>
+                <a href='#' className='font-medium text-primary-600 hover:underline dark:text-primary-500'>
                   Sign up
                 </a>
               </p>
@@ -133,6 +142,114 @@ const Login = (props: { onLogin: React.Dispatch<React.SetStateAction<boolean>> }
         </div>
       </div>
     </section>
+  )
+}
+
+const UserManager = () => {
+  const deleteOneUserMutation = useMutation({
+    mutationFn: (email: string) => authApi.deleteOneUser({ email })
+  })
+  const fetchUsersMutation = useMutation({
+    mutationFn: authApi.getAllUsers,
+    onSuccess: (data) => {
+      setUsers(data.data.data)
+    }
+  })
+  // Search User and Pagination feature is implemented in future
+  const { data, error, isPending, isError } = useQuery({ queryKey: ['users'], queryFn: authApi.getAllUsers })
+  if (isPending) {
+    return <span>Loading ...</span>
+  }
+  if (isError) {
+    return <span>Error: {error.message}</span>
+  }
+  const [users, setUsers] = useState<User[]>(data.data.data)
+
+  return (
+    <div className='relative h-full overflow-x-auto p-2 shadow-md sm:rounded-lg dark:bg-gray-900'>
+      <div className=' bg-white pb-4 md:flex-row md:space-y-0 dark:bg-gray-900'>
+        <label htmlFor='table-search' className='sr-only'>
+          Search
+        </label>
+        <div className='relative'>
+          <div className='rtl:inset-r-0 pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3'>
+            <SearchIcon className='h-4 w-4 text-gray-500 dark:text-gray-400' />
+          </div>
+          <input
+            type='text'
+            id='table-search-users'
+            className='block w-80 rounded-lg border border-gray-300 bg-gray-50 p-2 ps-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500'
+            placeholder='Search for users'
+          />
+        </div>
+      </div>
+      <table className='w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400'>
+        <thead className='bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400'>
+          <tr>
+            <th scope='col' className='p-4'>
+              <div className='flex items-center'>
+                <input
+                  type='checkbox'
+                  className='h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 dark:focus:ring-offset-gray-800'
+                />
+              </div>
+            </th>
+            <th scope='col' className='px-6 py-3'>
+              Name
+            </th>
+            <th scope='col' className='px-6 py-3'>
+              Role
+            </th>
+            <th scope='col' className='px-6 py-3'>
+              Action
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user) => {
+            return (
+              <tr
+                key={user._id}
+                className='border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600'
+              >
+                <td className='w-4 p-4'>
+                  <div className='flex items-center'>
+                    <input
+                      id='checkbox-table-search-1'
+                      type='checkbox'
+                      className='h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 dark:focus:ring-offset-gray-800'
+                    />
+                  </div>
+                </td>
+                <th scope='row' className='flex items-center whitespace-nowrap px-6 py-4 text-gray-900 dark:text-white'>
+                  <div>
+                    <div className='text-base font-semibold'>{user.name}</div>
+                    <div className='font-normal text-gray-500'>{user.email}</div>
+                  </div>
+                </th>
+                <td className='px-6 py-4'>{user.role === 0 ? 'Admin' : 'User'}</td>
+                <td className='px-6 py-4'>
+                  <button
+                    onClick={() => {
+                      console.log(user.email)
+                      deleteOneUserMutation.mutate(user.email, {
+                        onSuccess: () => {
+                          toast.success('Delete user thành công')
+                        }
+                      })
+                      fetchUsersMutation.mutate()
+                    }}
+                    className='font-medium text-blue-600 hover:underline dark:text-blue-500'
+                  >
+                    Delete User
+                  </button>
+                </td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    </div>
   )
 }
 
@@ -145,10 +262,16 @@ export default function Admin() {
     onSuccess: () => {
       setProfile(null)
       setIsAuthenticated(false)
+      setAction('login')
       setIsAdmin(false)
       toast.success('Đăng xuất thành công')
     }
   })
+
+  const handleLogin = () => {
+    setIsAdmin(true)
+    setAction('user_management')
+  }
 
   const handleLogout = () => {
     logoutMutation.mutate()
@@ -159,6 +282,12 @@ export default function Admin() {
         <div className='h-full py-5'>
           <div className='flex h-full border-y border-slate-200'>
             <div className=' flex w-1/5 flex-col border-r border-gray-400 p-2 shadow-md'>
+              <Link
+                className='mb-2 rounded border border-red-500 p-2 text-center hover:border-blue-500 hover:bg-orange-500 hover:text-white'
+                to={'/'}
+              >
+                Home
+              </Link>
               <button
                 onClick={() => setAction('login')}
                 className={classNames('mb-2 rounded border border-red-500 p-2', {
@@ -212,8 +341,8 @@ export default function Admin() {
                 <button
                   onClick={handleLogout}
                   className={classNames('mb-2 rounded border border-red-500 p-2', {
-                    ' bg-orange-500 text-white': action === 'purchage_management',
-                    ' bg-white text-orange-500': action !== 'purchage_management'
+                    ' bg-orange-500 text-white': action === 'logout',
+                    ' bg-white text-orange-500': action !== 'logout'
                   })}
                 >
                   Logout
@@ -221,8 +350,8 @@ export default function Admin() {
               )}
             </div>
             <div className='w-4/5 p-2'>
-              {action === 'login' && <Login onLogin={setIsAdmin} />}
-              {action === 'user_management' && <div className='h-full bg-white'>User Management</div>}
+              {action === 'login' && <Login onLogin={handleLogin} />}
+              {action === 'user_management' && <UserManager />}
               {action === 'order_management' && <div className='h-full bg-white'>Order Management</div>}
               {action === 'category_management' && <div className='h-full bg-white'>Category Management</div>}
               {action === 'purchage_management' && <div className='h-full bg-white'>Purchase Mangement</div>}

@@ -1,9 +1,10 @@
 import { JwtPayload } from 'jsonwebtoken'
-import { TokenType } from '~/constants/enums'
+import { RoleType, TokenType } from '~/constants/enums'
 
 export interface TokenPayload extends JwtPayload {
   user_id: string
   tokenType: TokenType
+  role: RoleType
   exp: number
   iat: number
 }
@@ -33,4 +34,8 @@ export interface ForgotPasswordRequestBody {
 export interface UpdatePasswordRequestBody {
   forgot_password_token: string
   new_password: string
+}
+
+export interface DeleteUserRequestBody {
+  email: string
 }

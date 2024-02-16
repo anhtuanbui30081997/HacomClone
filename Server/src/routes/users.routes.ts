@@ -4,6 +4,7 @@ import {
   LoginAdminValidator,
   LoginValidator,
   RegisterValidator,
+  accessTokenAdminValidator,
   accessTokenValidator,
   forgotPasswordRequestValidator,
   refreshTokenValidator,
@@ -73,6 +74,22 @@ usersRouter.post(
  * Body: UpdatePasswordRequestBody
  */
 usersRouter.post('/update-password', updatePasswordValidator, wrapRequestHandler(userController.updatePassword))
+
+/**
+ * Description. Refresh access token
+ * Path: /get-all-users
+ * Method: PUT
+ * Body: None
+ */
+usersRouter.get('/get-all-users', accessTokenAdminValidator, wrapRequestHandler(userController.getAllUsers))
+
+/**
+ * Description. Refresh access token
+ * Path: /get-all-users
+ * Method: PUT
+ * Body: None
+ */
+usersRouter.post('/delete-one-user', accessTokenAdminValidator, wrapRequestHandler(userController.deleteOneUser))
 
 const userRoute: Route = {
   path: '/users',

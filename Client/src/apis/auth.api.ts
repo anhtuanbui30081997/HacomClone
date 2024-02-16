@@ -1,5 +1,6 @@
 import { RegisterFormData } from 'src/components/RegisterDialog/RegisterDialog'
-import { AuthResponse } from 'src/types/utils.type'
+import { User } from 'src/types/user.type'
+import { AuthResponse, SuccessResponse } from 'src/types/utils.type'
 import http from 'src/utils/http'
 import { getRefreshTokenFromLS } from 'src/utils/out'
 import { LoginFormData } from 'src/utils/rules'
@@ -8,6 +9,8 @@ export const URL_ADMIN_LOGIN = '/users/login-admin'
 export const URL_REGISTER = 'users/register'
 export const URL_LOGOUT = 'users/logout'
 export const URL_REFRESH_TOKEN = 'users/refresh-token'
+export const URL_GET_ALL_USERS = 'users/get-all-users'
+export const URL_DELETE_ONE_USER = 'users/delete-one-user'
 
 const authApi = {
   register(body: Omit<RegisterFormData, 'confirm_password'>) {
@@ -23,6 +26,12 @@ const authApi = {
     return http.post(URL_LOGOUT, {
       refresh_token: getRefreshTokenFromLS()
     })
+  },
+  getAllUsers() {
+    return http.get<SuccessResponse<User[]>>(URL_GET_ALL_USERS)
+  },
+  deleteOneUser(body: { email: string }) {
+    return http.post<SuccessResponse<User>>(URL_DELETE_ONE_USER, body)
   }
 }
 

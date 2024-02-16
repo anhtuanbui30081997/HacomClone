@@ -19,8 +19,10 @@ import CarIcon from './CarIcon'
 import ArrowPathIcon from './ArrowPathIcon'
 import ChatBubbleLeftRightIcon from './ChatBubbleLeftRightIcon'
 import CreditCartIcon from './CreditCartIcon'
+import SearchIcon from './SearchIcon'
 
 export {
+  SearchIcon,
   CreditCartIcon,
   ChatBubbleLeftRightIcon,
   ArrowPathIcon,

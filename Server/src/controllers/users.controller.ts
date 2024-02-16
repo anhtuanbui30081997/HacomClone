@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express'
 import { ParamsDictionary } from 'express-serve-static-core'
 import { USER_MESSAGES } from '~/constants/messages'
 import {
+  DeleteUserRequestBody,
   ForgotPasswordRequestBody,
   LoginRequestBody,
   LogoutRequestBody,
@@ -76,7 +77,7 @@ class UserController {
     const forgotPasswordToken = await userService.forgotTokenRequest(email)
     return res.json({
       message: USER_MESSAGES.FORGOT_PASSWORD_REQUEST_SUCCESSFULLY,
-      result: forgotPasswordToken
+      data: forgotPasswordToken
     })
   }
 
@@ -90,7 +91,24 @@ class UserController {
     const user = await userService.updatePassword({ user_id, password: new_password })
     return res.json({
       message: USER_MESSAGES.UPDATE_PASSWORD_SUCCESSFULLY,
-      result: user
+      data: user
+    })
+  }
+
+  async getAllUsers(req: Request<ParamsDictionary, any, any>, res: Response, next: NextFunction) {
+    const users = await userService.getAllUsers()
+    return res.json({
+      message: USER_MESSAGES.GET_ALL_USERS_SUCCESSFULLY,
+      data: users
+    })
+  }
+
+  async deleteOneUser(req: Request<ParamsDictionary, any, DeleteUserRequestBody>, res: Response, next: NextFunction) {
+    const email = req.body.email
+    const result = await userService.deleteOneUsers({ email })
+    return res.json({
+      message: USER_MESSAGES.DELETE_ONE_USER_SUCCESSFULLY,
+      data: result
     })
   }
 }
