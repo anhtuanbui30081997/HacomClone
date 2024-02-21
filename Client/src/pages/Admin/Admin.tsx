@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import classNames from 'classnames'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -146,24 +146,19 @@ const Login = (props: { onLogin: () => void }) => {
 }
 
 const UserManager = () => {
+  const [users, setUsers] = useState<User[]>([])
   const deleteOneUserMutation = useMutation({
     mutationFn: (email: string) => authApi.deleteOneUser({ email })
   })
-  const fetchUsersMutation = useMutation({
-    mutationFn: authApi.getAllUsers,
-    onSuccess: (data) => {
+  const { data, error, isPending, isSuccess, isError } = useQuery({
+    queryKey: ['users'],
+    queryFn: authApi.getAllUsers
+  })
+  useEffect(() => {
+    if (data) {
       setUsers(data.data.data)
     }
-  })
-  // Search User and Pagination feature is implemented in future
-  const { data, error, isPending, isError } = useQuery({ queryKey: ['users'], queryFn: authApi.getAllUsers })
-  if (isPending) {
-    return <span>Loading ...</span>
-  }
-  if (isError) {
-    return <span>Error: {error.message}</span>
-  }
-  const [users, setUsers] = useState<User[]>(data.data.data)
+  }, [data])
 
   return (
     <div className='relative h-full overflow-x-auto p-2 shadow-md sm:rounded-lg dark:bg-gray-900'>
@@ -206,7 +201,7 @@ const UserManager = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => {
+          {users.map((user, index) => {
             return (
               <tr
                 key={user._id}
@@ -231,13 +226,12 @@ const UserManager = () => {
                 <td className='px-6 py-4'>
                   <button
                     onClick={() => {
-                      console.log(user.email)
                       deleteOneUserMutation.mutate(user.email, {
                         onSuccess: () => {
                           toast.success('Delete user thành công')
                         }
                       })
-                      fetchUsersMutation.mutate()
+                      setUsers(users.splice(index, 1))
                     }}
                     className='font-medium text-blue-600 hover:underline dark:text-blue-500'
                   >
