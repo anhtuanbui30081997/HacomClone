@@ -231,7 +231,8 @@ const UserManager = () => {
                           toast.success('Delete user thành công')
                         }
                       })
-                      setUsers(users.splice(index, 1))
+                      users.splice(index, 1)
+                      setUsers(users)
                     }}
                     className='font-medium text-blue-600 hover:underline dark:text-blue-500'
                   >
@@ -250,7 +251,7 @@ const UserManager = () => {
 export default function Admin() {
   const [action, setAction] = useState<AdminAction>('login')
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
-  const { setProfile, setIsAuthenticated } = useContext<AppContextInterface>(AppContext)
+  const { profile, setProfile, setIsAuthenticated } = useContext<AppContextInterface>(AppContext)
   const logoutMutation = useMutation({
     mutationFn: authApi.logout,
     onSuccess: () => {
@@ -261,6 +262,12 @@ export default function Admin() {
       toast.success('Đăng xuất thành công')
     }
   })
+  useEffect(() => {
+    if (profile === null) {
+      setIsAdmin(false)
+      setAction('login')
+    }
+  }, [profile])
 
   const handleLogin = () => {
     setIsAdmin(true)
@@ -289,7 +296,7 @@ export default function Admin() {
                   ' bg-white text-orange-500': action !== 'login'
                 })}
               >
-                Login
+                Login Admin
               </button>
               <button
                 disabled={isAdmin === false}
@@ -339,7 +346,7 @@ export default function Admin() {
                     ' bg-white text-orange-500': action !== 'logout'
                   })}
                 >
-                  Logout
+                  Logout Admin
                 </button>
               )}
             </div>
