@@ -12,6 +12,7 @@ import Input from 'src/components/Input'
 import { AppContext, AppContextInterface } from 'src/contexts/app.context'
 import { User } from 'src/types/user.type'
 import { ErrorResponse, ErrorsEntityType } from 'src/types/utils.type'
+import { CategoryType } from 'src/utils/enums'
 import { LoginFormData, userSchema } from 'src/utils/rules'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
 
@@ -23,9 +24,11 @@ type AdminAction =
   | 'purchage_management'
   | 'logout'
 
+type RootCategory = 'LaptopMacbookSurface' | 'LaptopGamingDohoa'
+
 const loginSchema = userSchema.pick(['email', 'password'])
 
-const Login = (props: { onLogin: () => void }) => {
+const LoginAdmin = (props: { onLogin: () => void }) => {
   const { setProfile, setIsAuthenticated } = useContext<AppContextInterface>(AppContext)
   const {
     register,
@@ -145,7 +148,7 @@ const Login = (props: { onLogin: () => void }) => {
   )
 }
 
-const UserManager = () => {
+const UserManagement = () => {
   const [users, setUsers] = useState<User[]>([])
   const deleteOneUserMutation = useMutation({
     mutationFn: (email: string) => authApi.deleteOneUser({ email })
@@ -244,6 +247,38 @@ const UserManager = () => {
           })}
         </tbody>
       </table>
+    </div>
+  )
+}
+
+const PurchaseManagement = () => {
+  const [rootCategory, setRootCategory] = useState<RootCategory>('LaptopMacbookSurface')
+  const categories = Object.values(CategoryType).filter((value) => typeof value === 'string')
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log(e.target.value)
+    if (e.target.value.includes('Laptop')) {
+      console.log('huhu')
+    }
+  }
+  return (
+    <div className='h-full bg-slate-200'>
+      <form>
+        <div className='w-[30%]'>
+          <label htmlFor='countries' className='mb-2 block text-sm font-medium text-gray-900'>
+            Select an category
+          </label>
+          <select
+            id='countries'
+            onChange={handleCategoryChange}
+            className='block w-full rounded-md border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500'
+          >
+            <option selected>Choose a category</option>
+            {categories.map((category) => (
+              <option value={category}>{category}</option>
+            ))}
+          </select>
+        </div>
+      </form>
     </div>
   )
 }
@@ -351,11 +386,11 @@ export default function Admin() {
               )}
             </div>
             <div className='w-4/5 p-2'>
-              {action === 'login' && <Login onLogin={handleLogin} />}
-              {action === 'user_management' && <UserManager />}
+              {action === 'login' && <LoginAdmin onLogin={handleLogin} />}
+              {action === 'user_management' && <UserManagement />}
               {action === 'order_management' && <div className='h-full bg-white'>Order Management</div>}
               {action === 'category_management' && <div className='h-full bg-white'>Category Management</div>}
-              {action === 'purchage_management' && <div className='h-full bg-white'>Purchase Mangement</div>}
+              {action === 'purchage_management' && <PurchaseManagement />}
             </div>
           </div>
         </div>

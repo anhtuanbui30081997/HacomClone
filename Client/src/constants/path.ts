@@ -3,6 +3,7 @@ const path = {
   build_pc: '/buildpc',
   check_oder: '/check-order',
   cart: '/cart',
-  admin: '/admin'
+  admin: '/admin',
+  laptop_tablet_mobile: '/laptop-tablet-mobile'
 } as const
 export default path

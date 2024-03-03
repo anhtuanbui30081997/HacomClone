@@ -7,6 +7,7 @@ import Cart from './pages/Cart'
 import NotFound from './pages/NotFound'
 import path from './constants/path'
 import Admin from './pages/Admin/Admin'
+import ProductList from './pages/ProductList'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path={path.home} element={<MainLayout />}>
           <Route index element={<Home />} />
           <Route path={path.admin} element={<Admin />} />
+          <Route path={path.laptop_tablet_mobile} element={<ProductList />} />
           <Route path={path.build_pc} element={<BuildPc />} />
           <Route path={path.check_oder} element={<CheckOrder />} />
           <Route path={path.cart} element={<Cart />} />

@@ -20,8 +20,10 @@ import ArrowPathIcon from './ArrowPathIcon'
 import ChatBubbleLeftRightIcon from './ChatBubbleLeftRightIcon'
 import CreditCartIcon from './CreditCartIcon'
 import SearchIcon from './SearchIcon'
+import SettingIcon from './SettingIcon'
 
 export {
+  SettingIcon,
   SearchIcon,
   CreditCartIcon,
   ChatBubbleLeftRightIcon,
