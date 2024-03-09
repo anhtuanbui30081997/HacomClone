@@ -1,125 +1,427 @@
-import { SearchIcon, SettingIcon } from 'src/assets/icons'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import {
+  CartIcon,
+  ChevronDoubleRightIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  SearchIcon,
+  SettingIcon,
+  TruckIcon
+} from 'src/assets/icons'
 import logo from 'src/assets/images/logo-hacom-since-2001.png'
+import path from 'src/constants/path'
+import slide1 from 'src/assets/images/slide1.jpg'
+import slide2 from 'src/assets/images/slide2.png'
+import slide3 from 'src/assets/images/slide3.jpg'
+import slide4 from 'src/assets/images/slide4.png'
+import slide5 from 'src/assets/images/slide5.png'
+import slide6 from 'src/assets/images/slide6.jpg'
+import slide7 from 'src/assets/images/slide7.jpg'
+import slide8 from 'src/assets/images/slide8.png'
+import classNames from 'classnames'
 
+// Internal Component
+const SlideImage = (props: { className: string; slide: string }) => {
+  return (
+    <div className={props.className}>
+      <img src={props.slide} className='h-full w-full object-cover' alt='...' />
+    </div>
+  )
+}
+
+const SlideShow = () => {
+  const [active, setActive] = useState<number>(0)
+  const imagesSlide = [slide1, slide2, slide3, slide4, slide5, slide6, slide7, slide8]
+
+  useEffect(() => {
+    let id = setInterval(() => {
+      setActive((prevActive) => (prevActive === imagesSlide.length - 1 ? 0 : prevActive + 1))
+    }, 4000)
+
+    return () => clearInterval(id)
+  }, [])
+
+  return (
+    <div className='relative w-full'>
+      <div className='relative w-full overflow-hidden xl:h-48 2xl:h-64'>
+        {imagesSlide.map((slide, index) => {
+          return (
+            <div
+              key={index}
+              className={classNames('absolute right-[-50%] flex h-full w-[50%] duration-200 ease-linear', {
+                'translate-x-[-200%] justify-start': active === index,
+                'translate-x-[-100%] justify-end': active + 1 === index || (active === 7 && index === 0),
+                'translate-x-[-300%]': active - 1 === index || (active === 0 && index === 7)
+              })}
+            >
+              <SlideImage slide={slide} className={'w-[99.2%]'} />
+            </div>
+          )
+        })}
+      </div>
+      {/* Slider controls */}
+      <button
+        type='button'
+        className='group absolute start-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none'
+        onClick={() => setActive((prevActive) => (prevActive === 0 ? imagesSlide.length - 1 : prevActive - 1))}
+      >
+        <ChevronLeftIcon className='h-8 w-8 text-red-500' />
+      </button>
+      <button
+        type='button'
+        className='group absolute end-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none'
+        onClick={() => setActive((prevActive) => (prevActive === imagesSlide.length - 1 ? 0 : prevActive + 1))}
+      >
+        <span className='inline-flex h-10 w-10 items-center justify-center rounded-full'>
+          <ChevronRightIcon className='h-8 w-8 text-red-500' />
+        </span>
+      </button>
+    </div>
+  )
+}
+
+const Title = (props: { children: React.ReactNode }) => {
+  return <div className='border-b border-[#d9d9d9] py-3 text-sm font-bold uppercase'>{props.children}</div>
+}
+
+const FilterGroupItem = ({ children }: { children: React.ReactNode }) => {
+  return <div className='flex items-center'>{children}</div>
+}
+
+const FilterItem = ({ name, quantity }: { name: string; quantity: number }) => {
+  return (
+    <div className='flex w-full items-center gap-2 py-2'>
+      <input type='checkbox' className='cursor-pointer' id='asus' />
+      <label htmlFor='asus' className='cursor-pointer text-xs'>
+        {name} ({quantity})
+      </label>
+    </div>
+  )
+}
+
+// Export Component
 export default function ProductList() {
   return (
     <div className='bg-white py-6'>
       <div className='container mx-auto'>
-        <div className='grid grid-cols-10 items-center'>
+        {/* Top Search */}
+        <div className='grid grid-cols-12 items-center'>
           <div className='col-span-2'>
             <img src={logo} alt='logo-hacom' />
           </div>
-          <div className='col-span-5'>
-            <form className='flex h-8'>
-              <input
-                type='text'
-                className='grow rounded-l-full border-2 border-red-500 px-5 py-1 text-xs text-[#000] outline-none'
-                placeholder='Nhập tên sản phẩm, từ khóa cần tìm'
-              />
-              <button className='rounded-r-full bg-red-500 px-5 py-1 text-white'>
-                <SearchIcon className='h-4 w-4' />
-              </button>
-            </form>
-          </div>
-          <div className='col-span-3'>
-            <div className='grid grid-cols-3'>
+          <div className='col-span-10'>
+            <div className='grid grid-cols-3 items-center'>
+              <div className='col-span-2'>
+                <form className='flex xl:h-8 2xl:h-10'>
+                  <input
+                    type='text'
+                    className='grow rounded-l-full border-2 border-red-500 px-5 py-1 text-xs text-[#000] outline-none'
+                    placeholder='Nhập tên sản phẩm, từ khóa cần tìm'
+                  />
+                  <button className='rounded-r-full bg-red-500 px-5 py-1 text-white'>
+                    <SearchIcon className='h-4 w-4' />
+                  </button>
+                </form>
+              </div>
               <div className='col-span-1'>
-                <div className='flex pl-2'>
+                <div className='flex items-center justify-center xl:gap-3 2xl:gap-8'>
+                  <div className='flex pl-2'>
+                    <div className='flex items-center gap-1'>
+                      <div className='flex h-8 w-8 items-center justify-center rounded-full border border-[#666] shadow-sm'>
+                        <SettingIcon className='h-5 w-5' stroke='#666' />
+                      </div>
+                      <div className='flex flex-col'>
+                        <span className='text-xs text-[#333e48]'>Xây dựng</span>
+                        <span className='text-xs text-[#333e48]'>cấu hình</span>
+                      </div>
+                    </div>
+                  </div>
                   <div className='flex items-center gap-1'>
-                    <div className='flex h-8 w-8 items-center justify-center rounded-full border border-[#666] shadow-sm'>
-                      <SettingIcon className='h-5 w-5' stroke='#666' />
+                    <div className='flex h-12 w-12 items-center justify-center rounded-full border border-[#666] shadow-sm'>
+                      <TruckIcon />
                     </div>
                     <div className='flex flex-col'>
-                      <span className='text-xs text-[#333e48]'>Xây dựng</span>
-                      <span className='text-xs text-[#333e48]'>cấu hình</span>
+                      <span className='text-xs text-[#333e48]'>Tra cứu</span>
+                      <span className='text-xs text-[#333e48]'>đơn hàng</span>
                     </div>
+                  </div>
+                  <div className='flex items-center gap-1'>
+                    <CartIcon />
+                    <span className='text-xs text-[#333e48]'>Giỏ hàng</span>
                   </div>
                 </div>
               </div>
-              <div className='col-span-1'>
-                <svg xmlns='http://www.w3.org/2000/svg' height='36' viewBox='0 0 64 64' width='36'>
-                  <g id='Icons'>
-                    <g>
-                      <g>
-                        <path d='m54 28h-12v20h-38v4h54c1.105 0 2-.895 2-2v-12z' fill='#243a76'></path>
-                      </g>
-                      <g>
-                        <path
-                          d='m32 22c-4.091 0-7.612-2.473-9.159-6h-18.841v32h38v-32h-.841c-1.547 3.527-5.068 6-9.159 6z'
-                          fill='#ed1b24'
-                        ></path>
-                      </g>
-                      <g>
-                        <path d='m4 16h4v32h-4z' fill='#d70d16'></path>
-                      </g>
-                      <g>
-                        <path d='m14 30v-2h-6v10h2v-4h4v-2h-4v-2z' fill='#f0f0f0'></path>
-                      </g>
-                      <g>
-                        <path d='m30 30v-2h-6v10h6v-2h-4v-2h4v-2h-4v-2z' fill='#f0f0f0'></path>
-                      </g>
-                      <g>
-                        <path d='m38 30v-2h-6v10h6v-2h-4v-2h4v-2h-4v-2z' fill='#f0f0f0'></path>
-                      </g>
-                      <g>
-                        <path
-                          d='m22 31.914v-1.828c0-1.152-.934-2.086-2.086-2.086h-3.828c-.047 0-.086.038-.086.086v9.828c0 .047.039.086.086.086h1.828c.047 0 .086-.039.086-.086v-3.828c0-.018.01-.033.019-.047l1.981 3.961h2l-2.004-4.008c1.113-.044 2.004-.954 2.004-2.078zm-3 .086h-1v-2h1c.552 0 1 .448 1 1s-.448 1-1 1z'
-                          fill='#f0f0f0'
-                        ></path>
-                      </g>
-                      <g>
-                        <path d='m4 48h4v4h-4z' fill='#182c62'></path>
-                      </g>
-                      <g>
-                        <path d='m54 28h-12v-4h12c1.105 0 2 .895 2 2 0 1.105-.895 2-2 2z' fill='#505050'></path>
-                      </g>
-                      <g>
-                        <path d='m60 38h-12v-10h6z' fill='#f0f0f0'></path>
-                      </g>
-                      <g>
-                        <path d='m55 46h5v-4h-5c-.552 0-1 .448-1 1v2c0 .552.448 1 1 1z' fill='#fab400'></path>
-                      </g>
-                      <g>
-                        <path
-                          d='m51 56c-2.761 0-5-2.239-5-5 0-2.761 2.239-5 5-5 2.761 0 5 2.239 5 5 0 2.761-2.239 5-5 5z'
-                          fill='#505050'
-                        ></path>
-                      </g>
-                      <g>
-                        <path
-                          d='m13 56c-2.761 0-5-2.239-5-5 0-2.761 2.239-5 5-5 2.761 0 5 2.239 5 5 0 2.761-2.239 5-5 5z'
-                          fill='#505050'
-                        ></path>
-                      </g>
-                      <g>
-                        <path
-                          d='m51 53c-1.105 0-2-.895-2-2 0-1.105.895-2 2-2 1.105 0 2 .895 2 2 0 1.105-.895 2-2 2z'
-                          fill='#f0f0f0'
-                        ></path>
-                      </g>
-                      <g>
-                        <path
-                          d='m13 53c-1.105 0-2-.895-2-2 0-1.105.895-2 2-2 1.105 0 2 .895 2 2 0 1.105-.895 2-2 2z'
-                          fill='#f0f0f0'
-                        ></path>
-                      </g>
-                      <g>
-                        <circle cx='32' cy='12' fill='#00af80' r='8'></circle>
-                      </g>
-                      <g>
-                        <path
-                          d='m25.983 12c0-4.082 3.059-7.443 7.009-7.932-.326-.041-.656-.068-.992-.068-4.418 0-8 3.582-8 8s3.582 8 8 8c.336 0 .666-.027.991-.068-3.949-.489-7.008-3.85-7.008-7.932z'
-                          fill='#048f69'
-                        ></path>
-                      </g>
-                      <g>
-                        <path d='m37 10-6 6-4-4 2-2 2 2 4-4z' fill='#f0f0f0'></path>
-                      </g>
-                    </g>
-                  </g>
-                </svg>
+            </div>
+          </div>
+        </div>
+
+        {/* Link you are here*/}
+        <div className='mt-8 flex items-center'>
+          <Link to={path.home} className='text-sm font-semibold text-[#555]'>
+            Trang chủ
+          </Link>
+          <span className='mx-2'>
+            <ChevronRightIcon />
+          </span>
+          <Link to={path.laptop_tablet_mobile} className='text-sm font-semibold text-[#243a76]'>
+            Laptop, Macbook, Surface
+          </Link>
+        </div>
+
+        {/* Title */}
+        <div className='mt-8 w-max border-b-2 border-[#243a76]'>
+          <span className='text-2xl font-semibold uppercase text-[#243a76]'>Laptop, macbook, surface</span>
+          <span className='ml-2 text-xs text-gray-400'>(Tổng 614 sản phẩm)</span>
+        </div>
+
+        {/* Slide Show */}
+        <div className='mt-5'>
+          <SlideShow />
+        </div>
+
+        {/* Body */}
+        <div className='mt-5 flex flex-row'>
+          {/* Left */}
+          <div className='w-[280px] px-[10px] py-0'>
+            <div className='my-[10px] rounded border border-[#d9d9d9] text-center text-xs font-semibold uppercase leading-8'>
+              Lọc sản phẩm
+            </div>
+            {/* Danh mục */}
+            <div>
+              <Title>Danh mục</Title>
+              <div className='px-[10px] py-3'>
+                <div className='mb-2 flex items-center gap-1'>
+                  <ChevronDoubleRightIcon />
+                  <Link to={'/'} className='text-xs font-bold capitalize'>
+                    laptop, máy tính xách tay
+                  </Link>
+                </div>
+                <div className='mb-2 flex items-center gap-1'>
+                  <ChevronDoubleRightIcon />
+                  <Link to={'/'} className='text-xs font-bold capitalize'>
+                    máy tính bảng
+                  </Link>
+                </div>
+                <div className='mb-2 flex items-center gap-1'>
+                  <ChevronDoubleRightIcon />
+                  <Link to={'/'} className='text-xs font-bold capitalize'>
+                    điện thoại iPhone
+                  </Link>
+                </div>
+                <div className='mb-2 flex items-center gap-1'>
+                  <ChevronDoubleRightIcon />
+                  <Link to={'/'} className='text-xs font-bold capitalize'>
+                    máy đọc sách
+                  </Link>
+                </div>
+                <div className='flex items-center gap-1'>
+                  <ChevronDoubleRightIcon />
+                  <Link to={'/'} className='text-xs font-bold capitalize'>
+                    đồng hồ thông minh
+                  </Link>
+                </div>
               </div>
             </div>
+            {/* Hãng sản xuất */}
+            <div>
+              <Title>Hãng sản xuất</Title>
+              <FilterGroupItem>
+                <FilterItem name='ASUS' quantity={52} />
+                <FilterItem name='ACER' quantity={50} />
+              </FilterGroupItem>
+              <FilterGroupItem>
+                <FilterItem name='AMAZON' quantity={6} />
+                <FilterItem name='APPLE' quantity={98} />
+              </FilterGroupItem>
+              <FilterGroupItem>
+                <FilterItem name='CHUWI' quantity={1} />
+                <FilterItem name='DELL' quantity={114} />
+              </FilterGroupItem>
+              <FilterGroupItem>
+                <FilterItem name='HP' quantity={111} />
+                <FilterItem name='IMIN' quantity={1} />
+              </FilterGroupItem>
+              <FilterGroupItem>
+                <FilterItem name='LENOVO' quantity={96} />
+                <FilterItem name='LG' quantity={13} />
+              </FilterGroupItem>
+              <FilterGroupItem>
+                <FilterItem name='MICROSOFT' quantity={26} />
+                <FilterItem name='MSI' quantity={24} />
+              </FilterGroupItem>
+              <FilterGroupItem>
+                <FilterItem name='SAMSUNG' quantity={17} />
+                <FilterItem name='VAIO' quantity={4} />
+              </FilterGroupItem>
+              <FilterGroupItem>
+                <FilterItem name='XIAOMI' quantity={2} />
+              </FilterGroupItem>
+            </div>
+            {/* Phong cách */}
+            <div>
+              <Title>Phong cách</Title>
+            </div>
+            {/* Giới tính */}
+            <div>
+              <Title>Giới tính</Title>
+            </div>
+            {/* Màu sắc */}
+            <div>
+              <Title>Màu sắc</Title>
+            </div>
+            {/* Phân loại LAPTOP */}
+            <div>
+              <Title>Phân loại LAPTOP</Title>
+            </div>
+            {/* CPU */}
+            <div>
+              <Title>CPU</Title>
+            </div>
+            {/* CPU */}
+            <div>
+              <Title>CPU</Title>
+            </div>
+            {/* RAM */}
+            <div>
+              <Title>RAM</Title>
+            </div>
+            {/* Ổ cứng */}
+            <div>
+              <Title>Ổ cứng</Title>
+            </div>
+            {/* VGA - Card màn hình */}
+            <div>
+              <Title>VGA - Card màn hình</Title>
+            </div>
+            {/* Kích thước màn hình */}
+            <div>
+              <Title>Kích thước màn hình</Title>
+            </div>
+            {/* Độ phân giải màn hình */}
+            <div>
+              <Title>Độ phân giải màn hình</Title>
+            </div>
+            {/* Cảm ứng màn hình */}
+            <div>
+              <Title>Cảm ứng màn hình</Title>
+            </div>
+            {/* Tần số màn hình */}
+            <div>
+              <Title>Tần số màn hình</Title>
+            </div>
+            {/* Hệ điều hành */}
+            <div>
+              <Title>Hệ điều hành</Title>
+            </div>
+          </div>
+
+          {/* Right */}
+          <div className='grow'>
+            <div className='w-full bg-[#f2f2f2] p-3'>
+              {/* Filter Top */}
+              <div className='flex items-center gap-5'>
+                {/* Tình trạng kho hàng */}
+                <select name='' id='' className='h-7 w-[180px] rounded-sm border pl-1 text-sm outline-none'>
+                  <option value='' className='text text-[13px]'>
+                    Tình trạng kho hàng
+                  </option>
+                  <option value=''>Còn hàng</option>
+                </select>
+                {/* Kho */}
+                <select name='' id='' className='h-7 w-[302px] rounded-sm border pl-1 text-[13px] outline-none'>
+                  <option value='' className='text-[13px]'>
+                    Tất cả kho
+                  </option>
+                  <option value=''> 131 Lê Thanh Nghị - Hai Bà Trưng - Hà Nội </option>
+                  <option value=''> 43 Thái Hà - Đống Đa - Hà Nội </option>
+                  <option value=''> 406 Tô Hiệu - Lê Chân - Hải Phòng </option>
+                  <option value=''> 79 Nguyễn Văn Huyên - Cầu Giấy - Hà Nội </option>
+                  <option value=''> 511 Quang Trung - Hà Đông - Hà Nội </option>
+                </select>
+                {/* Lọc the giá tiền */}
+                <div>
+                  <form action='' className='flex items-center gap-1'>
+                    <div className='text-[13px] xl:w-16 2xl:w-32'>Lọc theo sản phẩm:</div>
+                    <div className=' flex items-center rounded-sm border border-[#ccc] bg-white p-[6px] text-[13px]'>
+                      <input type='text' value='649.000' className='mr-1 text-end outline-none xl:w-[76px]' />
+                      <div className='text-[13px]'>₫</div>
+                    </div>
+                    <div> - </div>
+                    <div className='flex items-center rounded-sm border border-[#ccc] bg-white p-[6px] text-[13px]'>
+                      <input type='text' value='37.999.000' className='mr-1 text-end outline-none xl:w-[76px]' />
+                      <div className='text-[13px]'>₫</div>
+                    </div>
+                    <button className=' rounded bg-[#243a76] px-5 py-[6px] text-sm text-white'>Lọc</button>
+                  </form>
+                </div>
+              </div>
+              {/* Filter Bottom */}
+              <div className='mt-3 flex items-center justify-between'>
+                <div className='flex items-center gap-2'>
+                  <div
+                    className='rounded-sm border border-dashed border-[#243a76] 
+                  px-[10px] py-[5px] font-semibold capitalize text-[#243a76] hover:bg-[#243a76] hover:text-white xl:text-xs 2xl:text-sm'
+                  >
+                    Hàng mới
+                  </div>
+                  <div
+                    className='rounded-sm border border-dashed border-[#243a76] 
+                  px-[10px] py-[5px] font-semibold capitalize text-[#243a76] hover:bg-[#243a76] hover:text-white xl:text-xs 2xl:text-sm'
+                  >
+                    Xem nhiều
+                  </div>
+                  <div
+                    className='rounded-sm border border-dashed border-[#243a76] 
+                  px-[10px] py-[5px] font-semibold capitalize text-[#243a76] hover:bg-[#243a76] hover:text-white xl:text-xs 2xl:text-sm'
+                  >
+                    Giá giảm nhiều
+                  </div>
+                  <div
+                    className='rounded-sm border border-dashed border-[#243a76] 
+                  px-[10px] py-[5px] font-semibold capitalize text-[#243a76] hover:bg-[#243a76] hover:text-white xl:text-xs 2xl:text-sm'
+                  >
+                    Giá tăng dần
+                  </div>
+                  <div
+                    className='rounded-sm border border-dashed border-[#243a76] 
+                  px-[10px] py-[5px] font-semibold capitalize text-[#243a76] hover:bg-[#243a76] hover:text-white xl:text-xs 2xl:text-sm'
+                  >
+                    Giá Giảm dần
+                  </div>
+                </div>
+                <div>
+                  <select name='' id='' className='h-7 w-[130px] rounded-sm border pl-1 text-sm outline-none'>
+                    <option value='' className='text text-[13px]'>
+                      Lọc sản phẩm
+                    </option>
+                    <option value=''>đánh giá</option>
+                    <option value=''>tên từ a - z</option>
+                  </select>
+                </div>
+                {/* Phân trang */}
+                <div className='flex items-center gap-1'>
+                  <button className='rounded bg-white font-semibold text-[#243a76] hover:bg-[#243a76] hover:text-white xl:px-[7px] xl:py-[3px] xl:text-xs 2xl:px-3 2xl:py-2 2xl:text-sm'>
+                    prev
+                  </button>
+                  <button className='rounded bg-white font-semibold text-[#243a76] hover:bg-[#243a76] hover:text-white xl:px-[7px] xl:py-[3px] xl:text-xs 2xl:px-3 2xl:py-2 2xl:text-sm'>
+                    1
+                  </button>
+                  <button className='rounded bg-white font-semibold text-[#243a76] hover:bg-[#243a76] hover:text-white xl:px-[7px] xl:py-[3px] xl:text-xs 2xl:px-3 2xl:py-2 2xl:text-sm'>
+                    2
+                  </button>
+                  <button className='rounded bg-white font-semibold text-[#243a76] hover:bg-[#243a76] hover:text-white xl:px-[7px] xl:py-[3px] xl:text-xs 2xl:px-3 2xl:py-2 2xl:text-sm'>
+                    3
+                  </button>
+                  <button className='rounded bg-white font-semibold text-[#243a76] hover:bg-[#243a76] hover:text-white xl:px-[7px] xl:py-[3px] xl:text-xs 2xl:px-3 2xl:py-2 2xl:text-sm'>
+                    next
+                  </button>
+                </div>
+              </div>
+            </div>
+            {/* Product List */}
+
+            <div></div>
           </div>
         </div>
       </div>

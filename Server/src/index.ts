@@ -6,6 +6,26 @@ import showroomRoute from './routes/showrooms.routes'
 import onlineSellerRoute from './routes/onlineSellers.routes'
 import categoriesRoute from './routes/categories.routes'
 
+// console.log('Start')
+
+// setImmediate(() => {
+//   console.log('setImmediate callback')
+// })
+
+// process.nextTick(() => {
+//   console.log('process.nextTick callback')
+// })
+
+// setTimeout(() => {
+//   console.log('Inside setTimeout (0ms)')
+// }, 0)
+
+// setTimeout(() => {
+//   console.log('Inside setTimeout (1ms)')
+// }, 100)
+
+// console.log('End')
+
 const routes: Route[] = [userRoute, showroomRoute, onlineSellerRoute, categoriesRoute]
 const app = new App(routes)
 app.listen()

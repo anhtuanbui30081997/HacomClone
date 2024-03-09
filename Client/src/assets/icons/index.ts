@@ -21,8 +21,16 @@ import ChatBubbleLeftRightIcon from './ChatBubbleLeftRightIcon'
 import CreditCartIcon from './CreditCartIcon'
 import SearchIcon from './SearchIcon'
 import SettingIcon from './SettingIcon'
+import TruckIcon from './TruckIcon'
+import CartIcon from './CartIcon'
+import ChevronRightIcon from './ChevronRightIcon'
+import ChevronDoubleRightIcon from './ChevronDoubleRightIcon'
 
 export {
+  ChevronDoubleRightIcon,
+  ChevronRightIcon,
+  CartIcon,
+  TruckIcon,
   SettingIcon,
   SearchIcon,
   CreditCartIcon,
