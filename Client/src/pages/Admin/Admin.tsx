@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import classNames from 'classnames'
+import { divide } from 'lodash'
 import { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
@@ -8,13 +9,15 @@ import { toast } from 'react-toastify'
 import authApi from 'src/apis/auth.api'
 import { SearchIcon } from 'src/assets/icons'
 import Button from 'src/components/Button'
+import Dialog from 'src/components/Dialog'
 import Input from 'src/components/Input'
 import { AppContext, AppContextInterface } from 'src/contexts/app.context'
 import { User } from 'src/types/user.type'
 import { ErrorResponse, ErrorsEntityType } from 'src/types/utils.type'
-import { CategoryType } from 'src/utils/enums'
+import { CategoryType } from 'src/constants/category.enum'
 import { LoginFormData, userSchema } from 'src/utils/rules'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
+import { PurchaseType } from 'src/types/purchase.type'
 
 type AdminAction =
   | 'login'
@@ -23,8 +26,6 @@ type AdminAction =
   | 'category_management'
   | 'purchage_management'
   | 'logout'
-
-type RootCategory = 'LaptopMacbookSurface' | 'LaptopGamingDohoa'
 
 const loginSchema = userSchema.pick(['email', 'password'])
 
@@ -251,34 +252,251 @@ const UserManagement = () => {
   )
 }
 
-const PurchaseManagement = () => {
-  const [rootCategory, setRootCategory] = useState<RootCategory>('LaptopMacbookSurface')
+const PanelItem = ({ label, children }: { children: React.ReactNode; label: string }) => {
+  return (
+    <div className='mb-4 flex items-start gap-5 border-b'>
+      <label
+        htmlFor={label}
+        className='mb-2 block w-[20%] text-sm font-medium capitalize leading-5 text-gray-700 underline'
+      >
+        {label}
+      </label>
+      <div className='w-[80%]'>{children}</div>
+    </div>
+  )
+}
+
+const CategoryDialog = ({
+  isOpen,
+  onOpenChange,
+  onSelectedCategoriesChange
+}: {
+  children?: React.ReactNode
+  renderDialog?: React.ReactNode
+  className?: string
+  isOpen: boolean
+  onOpenChange: React.Dispatch<React.SetStateAction<boolean>>
+  onSelectedCategoriesChange: (selectedCategories: string[]) => void
+}) => {
+  const [selectedCategories, setSelectedCategory] = useState<string[]>([])
   const categories = Object.values(CategoryType).filter((value) => typeof value === 'string')
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value)
-    if (e.target.value.includes('Laptop')) {
-      console.log('huhu')
+
+  const handleSelectedCategoriesChange = (category: string) => {
+    if (selectedCategories.includes(category)) {
+      setSelectedCategory((prev) => prev.filter((item) => item !== category))
+    } else {
+      setSelectedCategory((prev) => [...prev, category])
     }
   }
+
   return (
-    <div className='h-full bg-slate-200'>
-      <form>
-        <div className='w-[30%]'>
-          <label htmlFor='countries' className='mb-2 block text-sm font-medium text-gray-900'>
-            Select an category
-          </label>
-          <select
-            id='countries'
-            onChange={handleCategoryChange}
-            className='block w-full rounded-md border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500'
-          >
-            <option selected>Choose a category</option>
+    <Dialog
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+      renderDialog={
+        <div className='mx-auto flex h-[40vh] w-[50%] overflow-auto rounded border-2  border-white bg-slate-300 p-2.5'>
+          <div className='flex flex-wrap gap-1'>
             {categories.map((category) => (
-              <option value={category}>{category}</option>
+              <span
+                key={`${category}`}
+                onClick={() => handleSelectedCategoriesChange(category as string)}
+                className={classNames(
+                  'flex cursor-pointer items-center justify-center rounded-full border-2 border-white bg-gray-700 px-3 py-2.5 text-xs text-white hover:bg-orange-500',
+                  {
+                    'bg-orange-500': selectedCategories.includes(category as string)
+                  }
+                )}
+              >
+                {category}
+              </span>
             ))}
-          </select>
+          </div>
+          <button
+            onClick={() => {
+              onOpenChange(false)
+              onSelectedCategoriesChange(selectedCategories)
+            }}
+            className='sticky top-0 bg-slate-600 px-2 text-white hover:bg-green-600'
+          >
+            Apply
+          </button>
         </div>
-      </form>
+      }
+    />
+  )
+}
+
+const PurchaseManagement = () => {
+  const [purchase, setPurchase] = useState<PurchaseType>({
+    categories: [],
+    guarantee: '',
+    name: '',
+    new_price: '',
+    old_price: '',
+    showrooms: [],
+    specifications: [],
+    product_code: ''
+  })
+  const [categoriesList, setCategoriesList] = useState<string[]>([])
+  const [specification, setSpecification] = useState<string>('')
+  const [isOpenCategoryDialog, setIsOpenCategoryDialog] = useState<boolean>(false)
+
+  const handleProductNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPurchase((prev) => ({ ...prev, name: e.target.value }))
+  }
+  const handleCategoriesChange = (selectedCategories: string[]) => {
+    setCategoriesList(selectedCategories)
+    const category = selectedCategories.map((item) => Number(CategoryType[item as any]))
+    setPurchase((prev) => ({ ...prev, categories: [...category] }))
+  }
+  const handleRemoveCategory = (categoryName: string) => {
+    const categoryNameValue = Number(CategoryType[categoryName as any])
+    setCategoriesList((prev) => prev.filter((item) => item !== categoryName))
+    setPurchase((prev) => ({ ...prev, categories: prev.categories.filter((item) => item !== categoryNameValue) }))
+  }
+  const handleProductCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPurchase((prev) => ({ ...prev, product_code: e.target.value }))
+  }
+  const handleSpecificationsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setSpecification(e.target.value)
+    const specifications = e.target.value.trim().split('\n')
+    setPurchase((prev) => ({ ...prev, specifications: specifications }))
+  }
+  const handleOldPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPurchase((prev) => ({ ...prev, old_price: e.target.value }))
+  }
+  const handleNewPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPurchase((prev) => ({ ...prev, new_price: e.target.value }))
+  }
+  const handleGuaranteeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPurchase((prev) => ({ ...prev, guarantee: e.target.value }))
+  }
+
+  const handleAddPurchae = () => {
+    console.log('purchase:', purchase)
+  }
+  return (
+    <div className='flex h-full flex-col justify-between gap-3 bg-slate-200 p-5'>
+      <div className='grow overflow-auto'>
+        {/* Product Name */}
+        <PanelItem label='Product Name'>
+          <input
+            value={purchase.name}
+            onChange={handleProductNameChange}
+            type='text'
+            id='Product Name'
+            className='w-full rounded bg-gray-700 p-2.5 px-3 text-sm text-white outline-none'
+          />
+        </PanelItem>
+        {/* Product Code */}
+        <PanelItem label='Product Code'>
+          <input
+            value={purchase.product_code}
+            onChange={handleProductCodeChange}
+            type='text'
+            id='Product Code'
+            className='w-full rounded bg-gray-700 p-2.5 px-3 text-sm text-white outline-none'
+          />
+        </PanelItem>
+        {/* Specifications */}
+        <PanelItem label='Specifications'>
+          <textarea
+            value={specification}
+            onChange={handleSpecificationsChange}
+            id='Specifications'
+            spellCheck={false}
+            className='w-full rounded bg-gray-700 p-2.5 px-3 text-sm text-white outline-none'
+            rows={8}
+          />
+        </PanelItem>
+        {/* Old price */}
+        <PanelItem label='Old price'>
+          <input
+            type='text'
+            value={purchase.old_price}
+            onChange={handleOldPriceChange}
+            id='Old price'
+            className='w-full rounded bg-gray-700 p-2.5 px-3 text-sm text-white outline-none'
+          />
+        </PanelItem>
+        {/* New price */}
+        <PanelItem label='New price'>
+          <input
+            type='text'
+            value={purchase.new_price}
+            onChange={handleNewPriceChange}
+            id='New price'
+            className='w-full rounded bg-gray-700 p-2.5 px-3 text-sm text-white outline-none'
+          />
+        </PanelItem>
+        {/* Guarantee */}
+        <PanelItem label='Guarantee'>
+          <input
+            type='text'
+            value={purchase.guarantee}
+            id='Guarantee'
+            onChange={handleGuaranteeChange}
+            className='w-full rounded bg-gray-700 p-2.5 px-3 text-sm text-white outline-none'
+          />
+        </PanelItem>
+        {/* Categories */}
+        <PanelItem label='Select categories'>
+          <div className='w-full'>
+            {/* <select
+              id='Select categories'
+              onChange={handleCategoryChange}
+              defaultValue={'Choose a category'}
+              className='block rounded-md border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500'
+            >
+              <option>Choose a category</option>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select> */}
+            <button
+              onClick={() => setIsOpenCategoryDialog(true)}
+              className='rounded border bg-gray-700 p-2.5 capitalize text-white hover:bg-green-700 hover:opacity-90'
+            >
+              Choose category
+            </button>
+            <div className='mt-3 flex h-24 w-full flex-wrap overflow-auto rounded border border-gray-700 bg-slate-300 p-2.5'>
+              {categoriesList.map((category, index) => (
+                <span
+                  onClick={() => handleRemoveCategory(category)}
+                  key={index}
+                  className='ml-[1px] h-fit w-fit cursor-pointer rounded-full border-2 border-white bg-gray-700 px-3 py-2.5 text-xs text-white'
+                >
+                  {category}
+                </span>
+              ))}
+            </div>
+          </div>
+        </PanelItem>
+        {/* Images */}
+        <PanelItem label='Images'>
+          <input
+            type='file'
+            multiple
+            id='New price'
+            className='w-full rounded bg-gray-700 p-2.5 px-3 text-sm text-white outline-none'
+          />
+        </PanelItem>
+      </div>
+      <div>
+        <button
+          onClick={handleAddPurchae}
+          className='ml-auto block rounded border bg-gray-700 px-4 py-3 capitalize text-white hover:bg-red-600 hover:opacity-90'
+        >
+          Add Purchase
+        </button>
+      </div>
+      <CategoryDialog
+        isOpen={isOpenCategoryDialog}
+        onOpenChange={setIsOpenCategoryDialog}
+        onSelectedCategoriesChange={handleCategoriesChange}
+      />
     </div>
   )
 }

@@ -5,6 +5,7 @@ import userRoute from './routes/users.routes'
 import showroomRoute from './routes/showrooms.routes'
 import onlineSellerRoute from './routes/onlineSellers.routes'
 import categoriesRoute from './routes/categories.routes'
+import purchaseRoute from './routes/purchases.routes'
 
 // console.log('Start')
 
@@ -26,6 +27,6 @@ import categoriesRoute from './routes/categories.routes'
 
 // console.log('End')
 
-const routes: Route[] = [userRoute, showroomRoute, onlineSellerRoute, categoriesRoute]
+const routes: Route[] = [userRoute, showroomRoute, onlineSellerRoute, categoriesRoute, purchaseRoute]
 const app = new App(routes)
 app.listen()

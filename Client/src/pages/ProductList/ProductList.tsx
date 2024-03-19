@@ -19,7 +19,9 @@ import slide5 from 'src/assets/images/slide5.png'
 import slide6 from 'src/assets/images/slide6.jpg'
 import slide7 from 'src/assets/images/slide7.jpg'
 import slide8 from 'src/assets/images/slide8.png'
+import product1 from 'src/assets/images/product1.png'
 import classNames from 'classnames'
+import ProductRating from './ProductRating'
 
 // Internal Component
 const SlideImage = (props: { className: string; slide: string }) => {
@@ -97,6 +99,81 @@ const FilterItem = ({ name, quantity }: { name: string; quantity: number }) => {
         {name} ({quantity})
       </label>
     </div>
+  )
+}
+
+const ProductItem = () => {
+  return (
+    <Link to={'/'}>
+      <div
+        className='shadow-custom overflow-hidden rounded-lg bg-white transition-transform duration-100 
+      hover:translate-y-[-0.04rem]'
+      >
+        <div className='relative w-full pt-[100%]'>
+          <img src={product1} alt='' className='absolute left-0 top-0 h-full w-full bg-white object-cover' />
+        </div>
+        <div className='p-3 text-xs'>
+          <div className='flex items-center justify-between'>
+            <div className='flex items-center'>
+              <ProductRating rating={4} />
+              <span className='ml-1 text-xs'>(2)</span>
+            </div>
+            <span className='rounded-sm bg-[#f1f1f1] px-[5px] py-[3px] uppercase xl:text-[10px] 2xl:text-xs'>
+              Mã: LTLV022
+            </span>
+          </div>
+          <div className='line-clamp-3 pt-[10px] font-semibold text-[#333e48]'>
+            LAPTOP LENOVO THINKBOOK 16 GEN 6 (21KHA0A4VN) (I5 1335U/16GB RAM/512GB SSD/16 WUXGA/DOS/XÁM)
+          </div>
+          <ul className='mb-[10px] mt-3 list-inside list-disc overflow-hidden leading-[18px] xl:h-[104px] 2xl:h-[187px]'>
+            <li className='list-item'>CPU: Intel® Core™ i5-1335U, 10C (2P + 8E)</li>
+            <li className='list-item'>RAM: 16GB (2x8GB) SO-DIMM DDR5-5200 (Tối đa 64GB)</li>
+            <li className='list-item'>Ổ cứng: 512GB SSD M.2 2242 PCIe® 3.0x4 NVMe® (Còn trống 1 khe)</li>
+            <li className='list-item'>VGA: Integrated Intel Iris Xe Graphics</li>
+            <li className='list-item'>Màn hình: 16" IPS 300nits Anti-glare, 100% sRGB</li>
+            <li className='list-item'>Màu sắc: Xám</li>
+            <li className='list-item'>Chất liệu: Nhôm</li>
+            <li className='list-item'>OS: DOS</li>
+          </ul>
+          <div className='flex items-center justify-between'>
+            <span className='font-helvetica text-[15px] text-[#666] line-through'>18.999.000₫</span>
+            <span className='text-red-500'>(Tiết kiệm: 11% )</span>
+          </div>
+          <div className='font-helvetica mt-2 text-[22px] font-semibold text-black'>16.999.000₫</div>
+          <div className='mt-2 flex items-center justify-between'>
+            <div className='flex items-center text-green-500'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                strokeWidth={2.5}
+                stroke='currentColor'
+                className='h-5 w-5'
+              >
+                <path strokeLinecap='round' strokeLinejoin='round' d='m4.5 12.75 6 6 9-13.5' />
+              </svg>
+              <span className='text-[13px]'>Sẵn hàng</span>
+            </div>
+            <div className='rounded-full bg-red-500 p-1 text-white'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                strokeWidth={1.5}
+                stroke='currentColor'
+                className='h-5 w-5'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  d='M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z'
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Link>
   )
 }
 
@@ -183,7 +260,7 @@ export default function ProductList() {
         {/* Body */}
         <div className='mt-5 flex flex-row'>
           {/* Left */}
-          <div className='w-[280px] px-[10px] py-0'>
+          <div className='w-[280px] shrink-0 px-[10px] py-0'>
             <div className='my-[10px] rounded border border-[#d9d9d9] text-center text-xs font-semibold uppercase leading-8'>
               Lọc sản phẩm
             </div>
@@ -420,8 +497,34 @@ export default function ProductList() {
               </div>
             </div>
             {/* Product List */}
-
-            <div></div>
+            <div className='py-5'>
+              <div className='grid grid-cols-4 gap-3'>
+                <div className='col-span-1'>
+                  <ProductItem />
+                </div>
+                <div className='col-span-1'>
+                  <ProductItem />
+                </div>
+                <div className='col-span-1'>
+                  <ProductItem />
+                </div>
+                <div className='col-span-1'>
+                  <ProductItem />
+                </div>
+                <div className='col-span-1'>
+                  <ProductItem />
+                </div>
+                <div className='col-span-1'>
+                  <ProductItem />
+                </div>
+                <div className='col-span-1'>
+                  <ProductItem />
+                </div>
+                <div className='col-span-1'>
+                  <ProductItem />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
