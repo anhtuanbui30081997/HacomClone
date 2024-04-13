@@ -1,6 +1,7 @@
 import { Db, MongoClient, ServerApiVersion } from 'mongodb'
 import { Category } from '~/models/schemas/Category.schema'
 import { OnlineSeller } from '~/models/schemas/OnlineSeller.schema'
+import { Purchase } from '~/models/schemas/Purchase.schema'
 import { RefreshToken } from '~/models/schemas/RefreshToken.schema'
 import { Showroom } from '~/models/schemas/Showroom.schema'
 import { User } from '~/models/schemas/User.schema'
@@ -43,6 +44,9 @@ class DatabaseService {
   }
   get categories() {
     return this.db.collection<Category>(process.env.DB_CATEGORY_COLLECTION as string)
+  }
+  get purchases() {
+    return this.db.collection<Purchase>(process.env.DB_PURCHASE_COLLECTION as string)
   }
 }
 

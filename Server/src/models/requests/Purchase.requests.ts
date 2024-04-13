@@ -8,6 +8,6 @@ export interface PurchaseRequestBody {
   new_price: string
   images?: string[]
   guarantee: string
-  categories: string[]
+  categories: number[]
   showrooms: string[]
 }

@@ -6,7 +6,10 @@ const URL = 'purchases'
 
 const purchaseApi = {
   addPurchase(body: PurchaseType) {
-    return http.post<SuccessResponse<PurchaseType>>(URL, body)
+    return http.post<SuccessResponse<string>>(URL, body)
+  },
+  uploadImagePurchase(body: FormData) {
+    return http.post<SuccessResponse<string>>(`${URL}/upload-images`, body)
   }
 }
 

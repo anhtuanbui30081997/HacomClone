@@ -1,8 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import classNames from 'classnames'
-import { divide } from 'lodash'
-import { useContext, useEffect, useState } from 'react'
+import { FormEventHandler, useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -18,6 +17,7 @@ import { CategoryType } from 'src/constants/category.enum'
 import { LoginFormData, userSchema } from 'src/utils/rules'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
 import { PurchaseType } from 'src/types/purchase.type'
+import purchaseApi from 'src/apis/purchase.api'
 
 type AdminAction =
   | 'login'
@@ -325,21 +325,30 @@ const CategoryDialog = ({
     />
   )
 }
+const initPurchase: PurchaseType = {
+  categories: [],
+  guarantee: '',
+  name: '',
+  new_price: '',
+  old_price: '',
+  showrooms: [],
+  specifications: [],
+  product_code: ''
+}
 
 const PurchaseManagement = () => {
-  const [purchase, setPurchase] = useState<PurchaseType>({
-    categories: [],
-    guarantee: '',
-    name: '',
-    new_price: '',
-    old_price: '',
-    showrooms: [],
-    specifications: [],
-    product_code: ''
-  })
+  const [purchase, setPurchase] = useState<PurchaseType>(initPurchase)
   const [categoriesList, setCategoriesList] = useState<string[]>([])
   const [specification, setSpecification] = useState<string>('')
   const [isOpenCategoryDialog, setIsOpenCategoryDialog] = useState<boolean>(false)
+  const [selectedFiles, setSelectedFiles] = useState<File | null>(null)
+
+  const purchaseMutation = useMutation({
+    mutationFn: (data: PurchaseType) => purchaseApi.addPurchase(data)
+  })
+  const uploadImagePurchaseMutation = useMutation({
+    mutationFn: (data: FormData) => purchaseApi.uploadImagePurchase(data)
+  })
 
   const handleProductNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPurchase((prev) => ({ ...prev, name: e.target.value }))
@@ -371,9 +380,42 @@ const PurchaseManagement = () => {
   const handleGuaranteeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPurchase((prev) => ({ ...prev, guarantee: e.target.value }))
   }
+  const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setSelectedFiles(e.target.files[0])
+    }
+  }
+
+  const handleUploadImage = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const formData = new FormData()
+    if (selectedFiles) {
+      console.log(selectedFiles)
+      formData.append('image', selectedFiles)
+    }
+    uploadImagePurchaseMutation.mutate(formData, {
+      onSuccess: (res) => {
+        toast.success('Upload ảnh sản phẩm thành công')
+        console.log(res.data.data)
+      },
+      onError: (error) => {
+        console.log(error)
+        toast.error(`${error}`)
+      }
+    })
+  }
 
   const handleAddPurchae = () => {
-    console.log('purchase:', purchase)
+    purchaseMutation.mutate(purchase, {
+      onSuccess: (res) => {
+        toast.success('Add sản phẩm thành công')
+        console.log(res.data.data)
+      },
+      onError: (error) => {
+        toast.error(`${error}`)
+      }
+    })
+    setPurchase(initPurchase)
   }
   return (
     <div className='flex h-full flex-col justify-between gap-3 bg-slate-200 p-5'>
@@ -442,19 +484,6 @@ const PurchaseManagement = () => {
         {/* Categories */}
         <PanelItem label='Select categories'>
           <div className='w-full'>
-            {/* <select
-              id='Select categories'
-              onChange={handleCategoryChange}
-              defaultValue={'Choose a category'}
-              className='block rounded-md border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500'
-            >
-              <option>Choose a category</option>
-              {categories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select> */}
             <button
               onClick={() => setIsOpenCategoryDialog(true)}
               className='rounded border bg-gray-700 p-2.5 capitalize text-white hover:bg-green-700 hover:opacity-90'
@@ -476,12 +505,25 @@ const PurchaseManagement = () => {
         </PanelItem>
         {/* Images */}
         <PanelItem label='Images'>
-          <input
-            type='file'
-            multiple
-            id='New price'
-            className='w-full rounded bg-gray-700 p-2.5 px-3 text-sm text-white outline-none'
-          />
+          <form onSubmit={handleUploadImage} encType='multipart/form-data'>
+            <input
+              type='file'
+              multiple
+              id='New price'
+              className='w-full rounded bg-gray-700 p-2.5 px-3 text-sm text-white outline-none'
+              onChange={handleChangeImage}
+            />
+            <button
+              className='block rounded border bg-gray-700 px-4 py-3 capitalize text-white hover:bg-red-600 hover:opacity-90'
+              type='submit'
+            >
+              Upload Image
+            </button>
+          </form>
+          <div className='flex w-1/4 gap-2'>
+            <img src='http://localhost:4000/static/image/06475175092aa15129d552600.jpg' alt=''></img>
+            <img src='http://localhost:4000/static/image/06475175092aa15129d552600.jpg' alt=''></img>
+          </div>
         </PanelItem>
       </div>
       <div>

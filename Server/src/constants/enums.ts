@@ -83,3 +83,9 @@ export enum CategoryType {
   MayDocSach = 58,
   DongHoThongMinh = 59
 }
+
+export enum MediaType {
+  Image,
+  Video,
+  HLS
+}
