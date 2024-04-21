@@ -3,13 +3,14 @@ import { ObjectId } from 'mongodb'
 interface PurchaseType {
   _id?: ObjectId
   name: string
+  product_code: string
   specifications: string[]
   rating?: number
   comments?: number
   views?: number
   old_price: string
   new_price: string
-  images?: string[]
+  images: string[]
   guarantee: string
   categories: number[]
   showrooms: string[]
@@ -18,13 +19,14 @@ interface PurchaseType {
 export class Purchase {
   _id?: ObjectId
   name: string
+  product_code: string
   specifications: string[]
   rating?: number
   comments?: number
   views?: number
   old_price: string
   new_price: string
-  images?: string[]
+  images: string[]
   guarantee: string
   categories: number[]
   showrooms: string[]
@@ -37,5 +39,7 @@ export class Purchase {
     this.guarantee = purchase.guarantee
     this.categories = purchase.categories
     this.showrooms = purchase.showrooms
+    this.images = purchase.images
+    this.product_code = purchase.product_code
   }
 }

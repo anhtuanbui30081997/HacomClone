@@ -14,12 +14,12 @@ import {
 import { AuthResponse, ErrorResponse, RefreshTokenResponse } from 'src/types/utils.type'
 import { isAxiosUnauthorizedError } from './utils'
 
-class Http {
+export class Http {
   public instance: AxiosInstance
   private access_token: string
   private refresh_token: string
   private refreshTokenRequest: Promise<string> | null
-  constructor() {
+  constructor(contentType: string) {
     this.access_token = getAccessTokenFromLS()
     this.refresh_token = getRefreshTokenFromLS()
     this.refreshTokenRequest = null
@@ -29,7 +29,7 @@ class Http {
       // If the request takes longer than `timeout`, the request will be aborted.
       timeout: 10000, // default is `0` (no timeout)
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': contentType
       }
     })
     // Add a request interceptor
@@ -130,6 +130,6 @@ class Http {
   }
 }
 
-const http = new Http().instance
+const http = new Http('application/json').instance
 
 export default http

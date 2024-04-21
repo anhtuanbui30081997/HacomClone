@@ -13,9 +13,7 @@ import sharp from 'sharp'
 
 class PurchaseService {
   private async uploadImageService(req: Request) {
-    console.log('huuhu')
     const files = await handleUploadImage(req)
-    console.log('files:', files)
     const result: Media[] = await Promise.all(
       files.map(async (file) => {
         const newName = getNameFromFullname(file.newFilename)
@@ -25,7 +23,7 @@ class PurchaseService {
         try {
           await fsPromise.unlink(file.filepath)
         } catch (error) {
-          console.log(error)
+          // console.log(error)
         }
         return {
           url: isProduction
@@ -47,16 +45,16 @@ class PurchaseService {
         new_price: purchaseBody.new_price,
         old_price: purchaseBody.old_price,
         showrooms: purchaseBody.showrooms,
-        specifications: purchaseBody.specifications
+        specifications: purchaseBody.specifications,
+        images: purchaseBody.images,
+        product_code: purchaseBody.product_code
       })
     )
     return purchase
   }
 
   async uploadImagesPurchase(req: Request) {
-    console.log('req.body:', req.body)
-    const url = await this.uploadImageService(req)
-    console.log(url)
+    const url: Media[] = await this.uploadImageService(req)
     return url
   }
 }

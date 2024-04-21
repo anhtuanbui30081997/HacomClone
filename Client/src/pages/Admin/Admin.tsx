@@ -18,6 +18,7 @@ import { LoginFormData, userSchema } from 'src/utils/rules'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
 import { PurchaseType } from 'src/types/purchase.type'
 import purchaseApi from 'src/apis/purchase.api'
+import { forEach } from 'lodash'
 
 type AdminAction =
   | 'login'
@@ -341,7 +342,8 @@ const PurchaseManagement = () => {
   const [categoriesList, setCategoriesList] = useState<string[]>([])
   const [specification, setSpecification] = useState<string>('')
   const [isOpenCategoryDialog, setIsOpenCategoryDialog] = useState<boolean>(false)
-  const [selectedFiles, setSelectedFiles] = useState<File | null>(null)
+  const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null)
+  const [images, setImages] = useState<{ url: string; type: number }[]>([])
 
   const purchaseMutation = useMutation({
     mutationFn: (data: PurchaseType) => purchaseApi.addPurchase(data)
@@ -382,7 +384,7 @@ const PurchaseManagement = () => {
   }
   const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      setSelectedFiles(e.target.files[0])
+      setSelectedFiles(e.target.files)
     }
   }
 
@@ -390,13 +392,16 @@ const PurchaseManagement = () => {
     e.preventDefault()
     const formData = new FormData()
     if (selectedFiles) {
-      console.log(selectedFiles)
-      formData.append('image', selectedFiles)
+      for (let i = 0; i < selectedFiles.length; i++) {
+        formData.append('image', selectedFiles[i])
+      }
     }
     uploadImagePurchaseMutation.mutate(formData, {
       onSuccess: (res) => {
         toast.success('Upload ảnh sản phẩm thành công')
-        console.log(res.data.data)
+        setImages(res.data.data)
+        const imageArr: string[] = res.data.data.map((item) => item.url)
+        setPurchase((prev) => ({ ...prev, images: imageArr }))
       },
       onError: (error) => {
         console.log(error)
@@ -416,6 +421,10 @@ const PurchaseManagement = () => {
       }
     })
     setPurchase(initPurchase)
+    setSelectedFiles(null)
+    setSpecification('')
+    setCategoriesList([])
+    setImages([])
   }
   return (
     <div className='flex h-full flex-col justify-between gap-3 bg-slate-200 p-5'>
@@ -505,7 +514,7 @@ const PurchaseManagement = () => {
         </PanelItem>
         {/* Images */}
         <PanelItem label='Images'>
-          <form onSubmit={handleUploadImage} encType='multipart/form-data'>
+          <form onSubmit={handleUploadImage}>
             <input
               type='file'
               multiple
@@ -514,15 +523,18 @@ const PurchaseManagement = () => {
               onChange={handleChangeImage}
             />
             <button
-              className='block rounded border bg-gray-700 px-4 py-3 capitalize text-white hover:bg-red-600 hover:opacity-90'
+              className=' mt-2 block rounded border bg-gray-700 px-4 py-3 capitalize text-white hover:bg-red-600 hover:opacity-90'
               type='submit'
             >
               Upload Image
             </button>
           </form>
-          <div className='flex w-1/4 gap-2'>
-            <img src='http://localhost:4000/static/image/06475175092aa15129d552600.jpg' alt=''></img>
-            <img src='http://localhost:4000/static/image/06475175092aa15129d552600.jpg' alt=''></img>
+          <div className='mt-2 flex flex-wrap'>
+            {images.map((image) => (
+              <div key={image.url} className='w-1/3'>
+                <img src={image.url} alt='' className='h-full w-full object-cover'></img>
+              </div>
+            ))}
           </div>
         </PanelItem>
       </div>

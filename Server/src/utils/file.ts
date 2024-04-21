@@ -2,7 +2,8 @@ import formidable, { File } from 'formidable'
 import fs from 'fs'
 import path from 'path'
 import { Request } from 'express'
-import { UPLOAD_IMAGE_TEMP_DIR } from '~/constants/direction'
+import { UPLOAD_IMAGE_DIR, UPLOAD_IMAGE_TEMP_DIR } from '~/constants/direction'
+import { IncomingForm } from 'formidable'
 
 export const initFolder = () => {
   ;[UPLOAD_IMAGE_TEMP_DIR].forEach((dir) => {
@@ -15,17 +16,14 @@ export const initFolder = () => {
 }
 
 export const handleUploadImage = async (req: Request) => {
-  console.log('hahaha')
-  const form = formidable({
+  const form = new IncomingForm({
+    multiples: true,
     uploadDir: UPLOAD_IMAGE_TEMP_DIR,
-    maxFiles: 4,
+    maxFiles: 16,
     keepExtensions: true,
     maxFileSize: 3000 * 1024, //300KB
     maxTotalFileSize: 3000 * 1024 * 4,
     filter: function ({ name, originalFilename, mimetype }) {
-      console.log('hahaha-anhbt32')
-      console.log(name)
-      console.log(mimetype)
       const valid = name === 'image' && Boolean(mimetype?.includes('image/'))
       if (!valid) {
         form.emit('error' as any, new Error('File type is not valid') as any)
@@ -33,6 +31,7 @@ export const handleUploadImage = async (req: Request) => {
       return valid
     }
   })
+
   return new Promise<File[]>((resolve, reject) => {
     form.parse(req, (err, fields, files) => {
       if (err) {

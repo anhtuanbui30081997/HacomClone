@@ -1,15 +1,15 @@
 import { PurchaseType } from 'src/types/purchase.type'
 import { SuccessResponse } from 'src/types/utils.type'
-import http from 'src/utils/http'
+import http, { Http } from 'src/utils/http'
 
 const URL = 'purchases'
-
+const httpForMultipart = new Http('multipar/form-data').instance
 const purchaseApi = {
   addPurchase(body: PurchaseType) {
     return http.post<SuccessResponse<string>>(URL, body)
   },
   uploadImagePurchase(body: FormData) {
-    return http.post<SuccessResponse<string>>(`${URL}/upload-images`, body)
+    return httpForMultipart.post<SuccessResponse<{ url: string; type: number }[]>>(`${URL}/upload-images`, body)
   }
 }
 
