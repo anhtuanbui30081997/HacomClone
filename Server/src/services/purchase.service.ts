@@ -8,7 +8,7 @@ import { UPLOAD_IMAGE_DIR } from '~/constants/direction'
 import path from 'path'
 import fsPromise from 'fs/promises'
 import { isProduction } from '~/constants/config'
-import { MediaType } from '~/constants/enums'
+import { CategoryType, MediaType } from '~/constants/enums'
 import sharp from 'sharp'
 
 class PurchaseService {
@@ -56,6 +56,11 @@ class PurchaseService {
   async uploadImagesPurchase(req: Request) {
     const url: Media[] = await this.uploadImageService(req)
     return url
+  }
+
+  async getPurchaseList(category: CategoryType) {
+    const purchaseList = await databaseService.purchases.find({ categories: { $in: [category] } })
+    return purchaseList.toArray()
   }
 }
 

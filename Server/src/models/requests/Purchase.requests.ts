@@ -1,3 +1,5 @@
+import { ParamsDictionary } from 'express-serve-static-core'
+
 export interface PurchaseRequestBody {
   name: string
   specifications: string[]
@@ -11,4 +13,8 @@ export interface PurchaseRequestBody {
   guarantee: string
   categories: number[]
   showrooms: string[]
+}
+
+export interface GetPurchaseListRequestParams extends ParamsDictionary {
+  category: string
 }

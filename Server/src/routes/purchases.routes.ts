@@ -7,6 +7,8 @@ const purchaseRouter = Router()
 
 purchaseRouter.post('/', wrapRequestHandler(purchaseController.addPurchase))
 
+purchaseRouter.get('/:category', wrapRequestHandler(purchaseController.getPurchaseList))
+
 purchaseRouter.post('/upload-images', wrapRequestHandler(purchaseController.uploadImagesPurchase))
 
 const purchaseRoute: Route = {

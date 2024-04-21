@@ -46,5 +46,7 @@ export const CATEGORY_MESSAGES = {
 } as const
 
 export const PURCHASE_MESSAGES = {
-  ADD_PURCHASE_SUCCESSFULLY: 'Add purchase successfully'
+  ADD_PURCHASE_SUCCESSFULLY: 'Add purchase successfully',
+  UPLOAD_PURCHASE_IMAGES_SUCCESSFULLY: 'Upload purchase images successfully',
+  GET_PURCHASE_LIST_SUCCESSFULLY: 'Get purchase list successfully'
 } as const

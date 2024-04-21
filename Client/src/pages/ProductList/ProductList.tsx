@@ -22,6 +22,8 @@ import slide8 from 'src/assets/images/slide8.png'
 import product1 from 'src/assets/images/product1.png'
 import classNames from 'classnames'
 import ProductRating from './ProductRating'
+import { useQuery } from '@tanstack/react-query'
+import purchaseApi from 'src/apis/purchase.api'
 
 // Internal Component
 const SlideImage = (props: { className: string; slide: string }) => {
@@ -139,7 +141,7 @@ const ProductItem = () => {
             <span className='font-helvetica text-[15px] text-[#666] line-through'>18.999.000₫</span>
             <span className='text-red-500'>(Tiết kiệm: 11% )</span>
           </div>
-          <div className='font-helvetica mt-2 text-[22px] font-semibold text-black'>16.999.000₫</div>
+          <div className='mt-2 font-helvetica text-[22px] font-semibold text-black'>16.999.000₫</div>
           <div className='mt-2 flex items-center justify-between'>
             <div className='flex items-center text-green-500'>
               <svg
@@ -179,6 +181,12 @@ const ProductItem = () => {
 
 // Export Component
 export default function ProductList() {
+  const { data: dataPruchaseList } = useQuery({
+    queryKey: ['purchases'],
+    queryFn: () => purchaseApi.getPurchaseList(1)
+  })
+  const productList = dataPruchaseList?.data.data
+
   return (
     <div className='bg-white py-6'>
       <div className='container mx-auto'>
@@ -499,30 +507,13 @@ export default function ProductList() {
             {/* Product List */}
             <div className='py-5'>
               <div className='grid grid-cols-4 gap-3'>
-                <div className='col-span-1'>
-                  <ProductItem />
-                </div>
-                <div className='col-span-1'>
-                  <ProductItem />
-                </div>
-                <div className='col-span-1'>
-                  <ProductItem />
-                </div>
-                <div className='col-span-1'>
-                  <ProductItem />
-                </div>
-                <div className='col-span-1'>
-                  <ProductItem />
-                </div>
-                <div className='col-span-1'>
-                  <ProductItem />
-                </div>
-                <div className='col-span-1'>
-                  <ProductItem />
-                </div>
-                <div className='col-span-1'>
-                  <ProductItem />
-                </div>
+                {productList
+                  ? productList.map((productItem) => (
+                      <div className='col-span-1'>
+                        <ProductItem />
+                      </div>
+                    ))
+                  : null}
               </div>
             </div>
           </div>
