@@ -24,6 +24,7 @@ import classNames from 'classnames'
 import ProductRating from './ProductRating'
 import { useQuery } from '@tanstack/react-query'
 import purchaseApi from 'src/apis/purchase.api'
+import { PurchaseType } from 'src/types/purchase.type'
 
 // Internal Component
 const SlideImage = (props: { className: string; slide: string }) => {
@@ -104,7 +105,7 @@ const FilterItem = ({ name, quantity }: { name: string; quantity: number }) => {
   )
 }
 
-const ProductItem = () => {
+const ProductItem = (props: PurchaseType) => {
   return (
     <Link to={'/'}>
       <div
@@ -112,36 +113,33 @@ const ProductItem = () => {
       hover:translate-y-[-0.04rem]'
       >
         <div className='relative w-full pt-[100%]'>
-          <img src={product1} alt='' className='absolute left-0 top-0 h-full w-full bg-white object-cover' />
+          <img
+            src={props.images ? props.images[0] : product1}
+            alt=''
+            className='absolute left-0 top-0 h-full w-full bg-white object-cover'
+          />
         </div>
         <div className='p-3 text-xs'>
           <div className='flex items-center justify-between'>
             <div className='flex items-center'>
-              <ProductRating rating={4} />
-              <span className='ml-1 text-xs'>(2)</span>
+              <ProductRating rating={props.rating ? props.rating : 0} />
+              <span className='ml-1 text-xs'>({props.rating_count ? props.rating_count : 0})</span>
             </div>
             <span className='rounded-sm bg-[#f1f1f1] px-[5px] py-[3px] uppercase xl:text-[10px] 2xl:text-xs'>
-              Mã: LTLV022
+              Mã: {props.product_code}
             </span>
           </div>
-          <div className='line-clamp-3 pt-[10px] font-semibold text-[#333e48]'>
-            LAPTOP LENOVO THINKBOOK 16 GEN 6 (21KHA0A4VN) (I5 1335U/16GB RAM/512GB SSD/16 WUXGA/DOS/XÁM)
-          </div>
+          <div className='line-clamp-3 pt-[10px] font-semibold text-[#333e48]'>{props.name}</div>
           <ul className='mb-[10px] mt-3 list-inside list-disc overflow-hidden leading-[18px] xl:h-[104px] 2xl:h-[187px]'>
-            <li className='list-item'>CPU: Intel® Core™ i5-1335U, 10C (2P + 8E)</li>
-            <li className='list-item'>RAM: 16GB (2x8GB) SO-DIMM DDR5-5200 (Tối đa 64GB)</li>
-            <li className='list-item'>Ổ cứng: 512GB SSD M.2 2242 PCIe® 3.0x4 NVMe® (Còn trống 1 khe)</li>
-            <li className='list-item'>VGA: Integrated Intel Iris Xe Graphics</li>
-            <li className='list-item'>Màn hình: 16" IPS 300nits Anti-glare, 100% sRGB</li>
-            <li className='list-item'>Màu sắc: Xám</li>
-            <li className='list-item'>Chất liệu: Nhôm</li>
-            <li className='list-item'>OS: DOS</li>
+            {props.specifications.map((item) => (
+              <li className='list-item'>{item}</li>
+            ))}
           </ul>
           <div className='flex items-center justify-between'>
-            <span className='font-helvetica text-[15px] text-[#666] line-through'>18.999.000₫</span>
+            <span className='font-helvetica text-[15px] text-[#666] line-through'>{props.old_price}₫</span>
             <span className='text-red-500'>(Tiết kiệm: 11% )</span>
           </div>
-          <div className='mt-2 font-helvetica text-[22px] font-semibold text-black'>16.999.000₫</div>
+          <div className='mt-2 font-helvetica text-[22px] font-semibold text-black'>{props.new_price}₫</div>
           <div className='mt-2 flex items-center justify-between'>
             <div className='flex items-center text-green-500'>
               <svg
@@ -186,7 +184,7 @@ export default function ProductList() {
     queryFn: () => purchaseApi.getPurchaseList(1)
   })
   const productList = dataPruchaseList?.data.data
-
+  console.log(productList)
   return (
     <div className='bg-white py-6'>
       <div className='container mx-auto'>
@@ -510,7 +508,7 @@ export default function ProductList() {
                 {productList
                   ? productList.map((productItem) => (
                       <div className='col-span-1'>
-                        <ProductItem />
+                        <ProductItem {...productItem} />
                       </div>
                     ))
                   : null}
