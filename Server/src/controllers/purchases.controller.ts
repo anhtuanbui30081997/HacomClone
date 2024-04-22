@@ -25,7 +25,6 @@ class PurchaseController {
 
   async getPurchaseList(req: Request<GetPurchaseListRequestParams, any, any>, res: Response, next: NextFunction) {
     const { category } = req.params
-    console.log('category:', category)
     const purchases = await await purchaseService.getPurchaseList(Number(category) as CategoryType)
     return res.json({
       message: PURCHASE_MESSAGES.GET_PURCHASE_LIST_SUCCESSFULLY,
