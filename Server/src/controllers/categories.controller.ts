@@ -31,6 +31,15 @@ class CategoryController {
       data
     })
   }
+
+  async getAllParentCategories(req: Request<GetCategoriesReqParams, any, any>, res: Response, next: NextFunction) {
+    const { category } = req.params
+    const data = await categoryService.getAllParentCategories(Number(category) as CategoryType)
+    return res.status(HTTP_STATUS.OK).json({
+      message: CATEGORY_MESSAGES.GET_CATEGORY_SUCCESSFULLY,
+      data
+    })
+  }
 }
 
 const categoriesController = new CategoryController()

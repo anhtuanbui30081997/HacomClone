@@ -15,14 +15,14 @@ const categoriesRouter = Router()
 categoriesRouter.post('/create-category', categoryValidator, wrapRequestHandler(categoriesController.createCategory))
 
 /**
- * Description.  Create new category
+ * Description.  Get Nested Categories
  * Path: /
- * Method: POST
+ * Method: GET
  * Body: CategoryRequestBody
  */
 categoriesRouter.get('/:category', categoryTypeValidator, wrapRequestHandler(categoriesController.getCategories))
 /**
- * Description.  Create new category
+ * Description.  Get all child categories
  * Path: /
  * Method: POST
  * Body: CategoryRequestBody
@@ -31,6 +31,12 @@ categoriesRouter.get(
   '/all-categories/:category',
   categoryTypeValidator,
   wrapRequestHandler(categoriesController.getAllCategories)
+)
+
+categoriesRouter.get(
+  '/all-parent-categories/:category',
+  categoryTypeValidator,
+  wrapRequestHandler(categoriesController.getAllParentCategories)
 )
 
 const categoriesRoute: Route = {

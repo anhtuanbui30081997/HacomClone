@@ -19,12 +19,13 @@ import slide5 from 'src/assets/images/slide5.png'
 import slide6 from 'src/assets/images/slide6.jpg'
 import slide7 from 'src/assets/images/slide7.jpg'
 import slide8 from 'src/assets/images/slide8.png'
-import product1 from 'src/assets/images/product1.png'
 import classNames from 'classnames'
-import ProductRating from './ProductRating'
 import { useQuery } from '@tanstack/react-query'
 import purchaseApi from 'src/apis/purchase.api'
-import { PurchaseType } from 'src/types/purchase.type'
+import ProductItem from './ProductItem'
+import { CategoryType } from 'src/constants/category.enum'
+import categoriesApi from 'src/apis/category.api'
+import { toSlug } from 'src/utils/utils'
 
 // Internal Component
 const SlideImage = (props: { className: string; slide: string }) => {
@@ -105,86 +106,26 @@ const FilterItem = ({ name, quantity }: { name: string; quantity: number }) => {
   )
 }
 
-const ProductItem = (props: PurchaseType) => {
-  return (
-    <Link to={'/'}>
-      <div
-        className='shadow-custom overflow-hidden rounded-lg bg-white transition-transform duration-100 
-      hover:translate-y-[-0.04rem]'
-      >
-        <div className='relative w-full pt-[100%]'>
-          <img
-            src={props.images ? props.images[0] : product1}
-            alt=''
-            className='absolute left-0 top-0 h-full w-full bg-white object-cover'
-          />
-        </div>
-        <div className='p-3 text-xs'>
-          <div className='flex items-center justify-between'>
-            <div className='flex items-center'>
-              <ProductRating rating={props.rating ? props.rating : 0} />
-              <span className='ml-1 text-xs'>({props.rating_count ? props.rating_count : 0})</span>
-            </div>
-            <span className='rounded-sm bg-[#f1f1f1] px-[5px] py-[3px] uppercase xl:text-[10px] 2xl:text-xs'>
-              Mã: {props.product_code}
-            </span>
-          </div>
-          <div className='line-clamp-3 pt-[10px] font-semibold text-[#333e48]'>{props.name}</div>
-          <ul className='mb-[10px] mt-3 list-inside list-disc overflow-hidden leading-[18px] xl:h-[104px] 2xl:h-[187px]'>
-            {props.specifications.map((item) => (
-              <li className='list-item'>{item}</li>
-            ))}
-          </ul>
-          <div className='flex items-center justify-between'>
-            <span className='font-helvetica text-[15px] text-[#666] line-through'>{props.old_price}₫</span>
-            <span className='text-red-500'>(Tiết kiệm: 11% )</span>
-          </div>
-          <div className='mt-2 font-helvetica text-[22px] font-semibold text-black'>{props.new_price}₫</div>
-          <div className='mt-2 flex items-center justify-between'>
-            <div className='flex items-center text-green-500'>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                strokeWidth={2.5}
-                stroke='currentColor'
-                className='h-5 w-5'
-              >
-                <path strokeLinecap='round' strokeLinejoin='round' d='m4.5 12.75 6 6 9-13.5' />
-              </svg>
-              <span className='text-[13px]'>Sẵn hàng</span>
-            </div>
-            <div className='rounded-full bg-red-500 p-1 text-white'>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                strokeWidth={1.5}
-                stroke='currentColor'
-                className='h-5 w-5'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z'
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Link>
-  )
-}
-
 // Export Component
-export default function ProductList() {
+export default function ProductList(props: { category: CategoryType }) {
+  const categories = Object.values(CategoryType).filter((value) => typeof value === 'string')
+  const title = categories[props.category] as string
   const { data: dataPruchaseList } = useQuery({
-    queryKey: ['purchases'],
-    queryFn: () => purchaseApi.getPurchaseList(1)
+    queryKey: ['purchases', props.category],
+    queryFn: () => purchaseApi.getPurchaseList(props.category)
   })
   const productList = dataPruchaseList?.data.data
-  console.log(productList)
+  const { data: dataNestedCategorisList } = useQuery({
+    queryKey: ['categories', props.category],
+    queryFn: () => categoriesApi.getNestedCategories(props.category)
+  })
+  const nestedCategories = dataNestedCategorisList?.data.data
+  const { data: dataAllParentCategorisList } = useQuery({
+    queryKey: ['parent-categories', props.category],
+    queryFn: () => categoriesApi.getAllParentCategories(props.category)
+  })
+  const youAreHereCategories = dataAllParentCategorisList?.data.data
+
   return (
     <div className='bg-white py-6'>
       <div className='container mx-auto'>
@@ -244,18 +185,26 @@ export default function ProductList() {
           <Link to={path.home} className='text-sm font-semibold text-[#555]'>
             Trang chủ
           </Link>
-          <span className='mx-2'>
-            <ChevronRightIcon />
-          </span>
-          <Link to={path.laptop_tablet_mobile} className='text-sm font-semibold text-[#243a76]'>
-            Laptop, Macbook, Surface
-          </Link>
+          {youAreHereCategories &&
+            youAreHereCategories.map((category) => (
+              <>
+                <span className='mx-2'>
+                  <ChevronRightIcon />
+                </span>
+                <Link
+                  to={`/${toSlug(category.name.toLocaleLowerCase().replace(/[ ]/g, '-').split(',').join(''))}`}
+                  className='text-sm font-semibold text-[#243a76]'
+                >
+                  {category.name}
+                </Link>
+              </>
+            ))}
         </div>
 
         {/* Title */}
         <div className='mt-8 w-max border-b-2 border-[#243a76]'>
-          <span className='text-2xl font-semibold uppercase text-[#243a76]'>Laptop, macbook, surface</span>
-          <span className='ml-2 text-xs text-gray-400'>(Tổng 614 sản phẩm)</span>
+          <span className='text-2xl font-bold uppercase text-[#243a76]'>{title.replace(/[A-Z]/g, ' $&').slice(1)}</span>
+          <span className='ml-2 text-xs text-gray-400'>(Tổng {productList?.length} sản phẩm)</span>
         </div>
 
         {/* Slide Show */}
@@ -274,36 +223,18 @@ export default function ProductList() {
             <div>
               <Title>Danh mục</Title>
               <div className='px-[10px] py-3'>
-                <div className='mb-2 flex items-center gap-1'>
-                  <ChevronDoubleRightIcon />
-                  <Link to={'/'} className='text-xs font-bold capitalize'>
-                    laptop, máy tính xách tay
-                  </Link>
-                </div>
-                <div className='mb-2 flex items-center gap-1'>
-                  <ChevronDoubleRightIcon />
-                  <Link to={'/'} className='text-xs font-bold capitalize'>
-                    máy tính bảng
-                  </Link>
-                </div>
-                <div className='mb-2 flex items-center gap-1'>
-                  <ChevronDoubleRightIcon />
-                  <Link to={'/'} className='text-xs font-bold capitalize'>
-                    điện thoại iPhone
-                  </Link>
-                </div>
-                <div className='mb-2 flex items-center gap-1'>
-                  <ChevronDoubleRightIcon />
-                  <Link to={'/'} className='text-xs font-bold capitalize'>
-                    máy đọc sách
-                  </Link>
-                </div>
-                <div className='flex items-center gap-1'>
-                  <ChevronDoubleRightIcon />
-                  <Link to={'/'} className='text-xs font-bold capitalize'>
-                    đồng hồ thông minh
-                  </Link>
-                </div>
+                {nestedCategories &&
+                  nestedCategories.map((category) => (
+                    <div key={category._id} className='mb-2 flex items-center gap-1'>
+                      <ChevronDoubleRightIcon />
+                      <Link
+                        to={`/${toSlug(category.name.toLocaleLowerCase().replace(/[ ]/g, '-').split(',').join(''))}`}
+                        className='text-xs font-bold capitalize'
+                      >
+                        {category.name}
+                      </Link>
+                    </div>
+                  ))}
               </div>
             </div>
             {/* Hãng sản xuất */}
@@ -507,7 +438,7 @@ export default function ProductList() {
               <div className='grid grid-cols-4 gap-3'>
                 {productList
                   ? productList.map((productItem) => (
-                      <div className='col-span-1'>
+                      <div key={productItem._id} className='col-span-1'>
                         <ProductItem {...productItem} />
                       </div>
                     ))

@@ -48,6 +48,27 @@ class CategoryService {
     }
     return categories
   }
+
+  async getAllParentCategories(categoryType: CategoryType) {
+    const parentCategories: Category[] = []
+    // get current category
+    const category = await databaseService.categories.findOne({
+      category: categoryType
+    })
+    if (category) {
+      parentCategories.push(category)
+    }
+
+    while (parentCategories[0].parent_category !== 0) {
+      const tempCategory = await databaseService.categories.findOne({
+        category: parentCategories[0].parent_category
+      })
+      if (tempCategory) {
+        parentCategories.unshift(tempCategory)
+      }
+    }
+    return parentCategories
+  }
 }
 
 const categoryService = new CategoryService()
