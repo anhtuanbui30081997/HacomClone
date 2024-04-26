@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import purchaseApi from 'src/apis/purchase.api'
+import productApi from 'src/apis/product.api'
 import ProductItem from './components/ProductItem'
 import { CategoryType } from 'src/constants/category.enum'
 import SlideShow from './components/SlideShow'
@@ -12,11 +12,11 @@ import TopSearch from './components/TopSearch'
 export default function ProductList(props: { category: CategoryType }) {
   const categories = Object.values(CategoryType).filter((value) => typeof value === 'string')
   const title = categories[props.category] as string
-  const { data: dataPruchaseList } = useQuery({
-    queryKey: ['purchases', props.category],
-    queryFn: () => purchaseApi.getPurchaseList(props.category)
+  const { data: dataProductList } = useQuery({
+    queryKey: ['products', props.category],
+    queryFn: () => productApi.getProductList(props.category)
   })
-  const productList = dataPruchaseList?.data.data
+  const productList = dataProductList?.data.data
 
   return (
     <div className='bg-white py-6'>

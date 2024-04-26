@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
-import { PurchaseType } from 'src/types/purchase.type'
+import { ProductType } from 'src/types/product.type'
 import product1 from 'src/assets/images/product1.png'
 import ProductRating from '../ProductRating'
 import { rateSale } from 'src/utils/utils'
 
-const ProductItem = (props: PurchaseType) => {
+const ProductItem = (props: ProductType) => {
   const originalPrice = Number(props.old_price.replace(/[.]/g, ''))
   const salePrice = Number(props.new_price.replace(/[.]/g, ''))
   return (

@@ -1,6 +1,6 @@
 import { ParamsDictionary } from 'express-serve-static-core'
 
-export interface PurchaseRequestBody {
+export interface ProductRequestBody {
   name: string
   specifications: string[]
   product_code: string
@@ -15,6 +15,6 @@ export interface PurchaseRequestBody {
   showrooms: string[]
 }
 
-export interface GetPurchaseListRequestParams extends ParamsDictionary {
+export interface GetProductListRequestParams extends ParamsDictionary {
   category: string
 }

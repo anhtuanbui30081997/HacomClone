@@ -6,7 +6,7 @@ export default function Home() {
     <div className='w-full bg-white'>
       <div className='container mx-auto'>
         Home:
-        <Link className='text-blue-500' to={path.laptop_tablet_mobile}>
+        <Link className='text-blue-500' to={path.laptop_macbook_surface}>
           Laptop-tablet-mobile
         </Link>
       </div>

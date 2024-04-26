@@ -45,8 +45,8 @@ export const CATEGORY_MESSAGES = {
   GET_CATEGORY_SUCCESSFULLY: 'Get category successfully'
 } as const
 
-export const PURCHASE_MESSAGES = {
-  ADD_PURCHASE_SUCCESSFULLY: 'Add purchase successfully',
-  UPLOAD_PURCHASE_IMAGES_SUCCESSFULLY: 'Upload purchase images successfully',
-  GET_PURCHASE_LIST_SUCCESSFULLY: 'Get purchase list successfully'
+export const PRODUCT_MESSAGES = {
+  ADD_PRODUCT_SUCCESSFULLY: 'Add product successfully',
+  UPLOAD_PRODUCT_IMAGES_SUCCESSFULLY: 'Upload product images successfully',
+  GET_PRODUCT_LIST_SUCCESSFULLY: 'Get product list successfully'
 } as const

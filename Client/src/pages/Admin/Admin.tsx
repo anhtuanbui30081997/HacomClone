@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import classNames from 'classnames'
-import { FormEventHandler, useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -16,16 +16,15 @@ import { ErrorResponse, ErrorsEntityType } from 'src/types/utils.type'
 import { CategoryType } from 'src/constants/category.enum'
 import { LoginFormData, userSchema } from 'src/utils/rules'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
-import { PurchaseType } from 'src/types/purchase.type'
-import purchaseApi from 'src/apis/purchase.api'
-import { forEach } from 'lodash'
+import { ProductType } from 'src/types/product.type'
+import productApi from 'src/apis/product.api'
 
 type AdminAction =
   | 'login'
   | 'user_management'
   | 'order_management'
   | 'category_management'
-  | 'purchage_management'
+  | 'product_management'
   | 'logout'
 
 const loginSchema = userSchema.pick(['email', 'password'])
@@ -326,7 +325,7 @@ const CategoryDialog = ({
     />
   )
 }
-const initPurchase: PurchaseType = {
+const initProduct: ProductType = {
   categories: [],
   guarantee: '',
   name: '',
@@ -337,50 +336,50 @@ const initPurchase: PurchaseType = {
   product_code: ''
 }
 
-const PurchaseManagement = () => {
-  const [purchase, setPurchase] = useState<PurchaseType>(initPurchase)
+const ProductManagement = () => {
+  const [product, setProduct] = useState<ProductType>(initProduct)
   const [categoriesList, setCategoriesList] = useState<string[]>([])
   const [specification, setSpecification] = useState<string>('')
   const [isOpenCategoryDialog, setIsOpenCategoryDialog] = useState<boolean>(false)
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null)
   const [images, setImages] = useState<{ url: string; type: number }[]>([])
 
-  const purchaseMutation = useMutation({
-    mutationFn: (data: PurchaseType) => purchaseApi.addPurchase(data)
+  const productMutation = useMutation({
+    mutationFn: (data: ProductType) => productApi.addProduct(data)
   })
-  const uploadImagePurchaseMutation = useMutation({
-    mutationFn: (data: FormData) => purchaseApi.uploadImagePurchase(data)
+  const uploadImageProductMutation = useMutation({
+    mutationFn: (data: FormData) => productApi.uploadImageProduct(data)
   })
 
   const handleProductNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPurchase((prev) => ({ ...prev, name: e.target.value }))
+    setProduct((prev) => ({ ...prev, name: e.target.value }))
   }
   const handleCategoriesChange = (selectedCategories: string[]) => {
     setCategoriesList(selectedCategories)
     const category = selectedCategories.map((item) => Number(CategoryType[item as any]))
-    setPurchase((prev) => ({ ...prev, categories: [...category] }))
+    setProduct((prev) => ({ ...prev, categories: [...category] }))
   }
   const handleRemoveCategory = (categoryName: string) => {
     const categoryNameValue = Number(CategoryType[categoryName as any])
     setCategoriesList((prev) => prev.filter((item) => item !== categoryName))
-    setPurchase((prev) => ({ ...prev, categories: prev.categories.filter((item) => item !== categoryNameValue) }))
+    setProduct((prev) => ({ ...prev, categories: prev.categories.filter((item) => item !== categoryNameValue) }))
   }
   const handleProductCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPurchase((prev) => ({ ...prev, product_code: e.target.value }))
+    setProduct((prev) => ({ ...prev, product_code: e.target.value }))
   }
   const handleSpecificationsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setSpecification(e.target.value)
     const specifications = e.target.value.trim().split('\n')
-    setPurchase((prev) => ({ ...prev, specifications: specifications }))
+    setProduct((prev) => ({ ...prev, specifications: specifications }))
   }
   const handleOldPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPurchase((prev) => ({ ...prev, old_price: e.target.value }))
+    setProduct((prev) => ({ ...prev, old_price: e.target.value }))
   }
   const handleNewPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPurchase((prev) => ({ ...prev, new_price: e.target.value }))
+    setProduct((prev) => ({ ...prev, new_price: e.target.value }))
   }
   const handleGuaranteeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPurchase((prev) => ({ ...prev, guarantee: e.target.value }))
+    setProduct((prev) => ({ ...prev, guarantee: e.target.value }))
   }
   const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -396,12 +395,12 @@ const PurchaseManagement = () => {
         formData.append('image', selectedFiles[i])
       }
     }
-    uploadImagePurchaseMutation.mutate(formData, {
+    uploadImageProductMutation.mutate(formData, {
       onSuccess: (res) => {
         toast.success('Upload ảnh sản phẩm thành công')
         setImages(res.data.data)
         const imageArr: string[] = res.data.data.map((item) => item.url)
-        setPurchase((prev) => ({ ...prev, images: imageArr }))
+        setProduct((prev) => ({ ...prev, images: imageArr }))
       },
       onError: (error) => {
         console.log(error)
@@ -410,8 +409,8 @@ const PurchaseManagement = () => {
     })
   }
 
-  const handleAddPurchae = () => {
-    purchaseMutation.mutate(purchase, {
+  const handleAddProduct = () => {
+    productMutation.mutate(product, {
       onSuccess: (res) => {
         toast.success('Add sản phẩm thành công')
         console.log(res.data.data)
@@ -420,7 +419,7 @@ const PurchaseManagement = () => {
         toast.error(`${error}`)
       }
     })
-    setPurchase(initPurchase)
+    setProduct(initProduct)
     setSelectedFiles(null)
     setSpecification('')
     setCategoriesList([])
@@ -432,7 +431,7 @@ const PurchaseManagement = () => {
         {/* Product Name */}
         <PanelItem label='Product Name'>
           <input
-            value={purchase.name}
+            value={product.name}
             onChange={handleProductNameChange}
             type='text'
             id='Product Name'
@@ -442,7 +441,7 @@ const PurchaseManagement = () => {
         {/* Product Code */}
         <PanelItem label='Product Code'>
           <input
-            value={purchase.product_code}
+            value={product.product_code}
             onChange={handleProductCodeChange}
             type='text'
             id='Product Code'
@@ -464,7 +463,7 @@ const PurchaseManagement = () => {
         <PanelItem label='Old price'>
           <input
             type='text'
-            value={purchase.old_price}
+            value={product.old_price}
             onChange={handleOldPriceChange}
             id='Old price'
             className='w-full rounded bg-gray-700 p-2.5 px-3 text-sm text-white outline-none'
@@ -474,7 +473,7 @@ const PurchaseManagement = () => {
         <PanelItem label='New price'>
           <input
             type='text'
-            value={purchase.new_price}
+            value={product.new_price}
             onChange={handleNewPriceChange}
             id='New price'
             className='w-full rounded bg-gray-700 p-2.5 px-3 text-sm text-white outline-none'
@@ -484,7 +483,7 @@ const PurchaseManagement = () => {
         <PanelItem label='Guarantee'>
           <input
             type='text'
-            value={purchase.guarantee}
+            value={product.guarantee}
             id='Guarantee'
             onChange={handleGuaranteeChange}
             className='w-full rounded bg-gray-700 p-2.5 px-3 text-sm text-white outline-none'
@@ -540,10 +539,10 @@ const PurchaseManagement = () => {
       </div>
       <div>
         <button
-          onClick={handleAddPurchae}
+          onClick={handleAddProduct}
           className='ml-auto block rounded border bg-gray-700 px-4 py-3 capitalize text-white hover:bg-red-600 hover:opacity-90'
         >
-          Add Purchase
+          Add Product
         </button>
       </div>
       <CategoryDialog
@@ -637,13 +636,13 @@ export default function Admin() {
               </button>
               <button
                 disabled={isAdmin === false}
-                onClick={() => setAction('purchage_management')}
+                onClick={() => setAction('product_management')}
                 className={classNames('mb-2 rounded border border-red-500 p-2', {
-                  ' bg-orange-500 text-white': action === 'purchage_management',
-                  ' bg-white text-orange-500': action !== 'purchage_management'
+                  ' bg-orange-500 text-white': action === 'product_management',
+                  ' bg-white text-orange-500': action !== 'product_management'
                 })}
               >
-                Purchase Mangement
+                Product Mangement
               </button>
               {isAdmin === true && (
                 <button
@@ -662,7 +661,7 @@ export default function Admin() {
               {action === 'user_management' && <UserManagement />}
               {action === 'order_management' && <div className='h-full bg-white'>Order Management</div>}
               {action === 'category_management' && <div className='h-full bg-white'>Category Management</div>}
-              {action === 'purchage_management' && <PurchaseManagement />}
+              {action === 'product_management' && <ProductManagement />}
             </div>
           </div>
         </div>

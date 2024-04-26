@@ -1,7 +1,7 @@
 import { Request } from 'express'
-import { PurchaseRequestBody } from '~/models/requests/Purchase.requests'
+import { ProductRequestBody } from '~/models/requests/Product.requests'
 import databaseService from './database.service'
-import { Purchase } from '~/models/schemas/Purchase.schema'
+import { Product } from '~/models/schemas/Product.schema'
 import { getNameFromFullname, handleUploadImage } from '~/utils/file'
 import { Media } from '~/models/Other'
 import { UPLOAD_IMAGE_DIR } from '~/constants/direction'
@@ -11,7 +11,7 @@ import { isProduction } from '~/constants/config'
 import { CategoryType, MediaType } from '~/constants/enums'
 import sharp from 'sharp'
 
-class PurchaseService {
+class ProductService {
   private async uploadImageService(req: Request) {
     const files = await handleUploadImage(req)
     const result: Media[] = await Promise.all(
@@ -36,33 +36,33 @@ class PurchaseService {
     return result
   }
 
-  async addPurchase(purchaseBody: PurchaseRequestBody, req: Request) {
-    const purchase = await databaseService.purchases.insertOne(
-      new Purchase({
-        categories: purchaseBody.categories,
-        guarantee: purchaseBody.guarantee,
-        name: purchaseBody.name,
-        new_price: purchaseBody.new_price,
-        old_price: purchaseBody.old_price,
-        showrooms: purchaseBody.showrooms,
-        specifications: purchaseBody.specifications,
-        images: purchaseBody.images,
-        product_code: purchaseBody.product_code
+  async addProduct(productReqBody: ProductRequestBody, req: Request) {
+    const product = await databaseService.products.insertOne(
+      new Product({
+        categories: productReqBody.categories,
+        guarantee: productReqBody.guarantee,
+        name: productReqBody.name,
+        new_price: productReqBody.new_price,
+        old_price: productReqBody.old_price,
+        showrooms: productReqBody.showrooms,
+        specifications: productReqBody.specifications,
+        images: productReqBody.images,
+        product_code: productReqBody.product_code
       })
     )
-    return purchase
+    return product
   }
 
-  async uploadImagesPurchase(req: Request) {
+  async uploadImagesProduct(req: Request) {
     const url: Media[] = await this.uploadImageService(req)
     return url
   }
 
-  async getPurchaseList(category: CategoryType) {
-    const purchaseList = await databaseService.purchases.find({ categories: { $in: [category] } })
-    return purchaseList.toArray()
+  async getProductList(category: CategoryType) {
+    const productList = await databaseService.products.find({ categories: { $in: [category] } })
+    return productList.toArray()
   }
 }
 
-const purchaseService = new PurchaseService()
-export default purchaseService
+const productService = new ProductService()
+export default productService
