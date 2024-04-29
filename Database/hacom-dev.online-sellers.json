@@ -1,0 +1,134 @@
+[
+    {
+        "name": "Mr. HOÀNG QUỐC HIẾU",
+        "email": "hieuhq@hacom.vn",
+        "phone_number": "0962142200",
+        "seller_type": 0
+    },
+    {
+        "name": "Mr. NGUYỄN TIẾN ĐẠT",
+        "email": "datnt1@hacom.vn",
+        "phone_number": "0987957825",
+        "seller_type": 0
+    },
+    {
+        "name": "Mr. ĐẶNG DUY TRƯỜNG",
+        "email": "truongdd@hacom.vn",
+        "phone_number": "0862371369",
+        "seller_type": 0
+    },
+    {
+        "name": "Mr. NGUYỄN CHÍ THÀNH",
+        "email": "thanhnc@hacom.vn",
+        "phone_number": "0989805607",
+        "seller_type": 0
+    },
+    {
+        "name": "Ms. TRẦN HỒNG NHUNG",
+        "email": "nhungth@hacom.vn",
+        "phone_number": "0327196468",
+        "seller_type": 0
+    },
+    {
+        "name": "Mr. NGUYỄN ĐỨC TIỆP",
+        "email": "tiepnd@hacom.vn",
+        "phone_number": "0983263330",
+        "seller_type": 0
+    },
+    {
+        "name": "Mr. ĐẶNG THÁI SƠN",
+        "email": "sondt@hacom.vn",
+        "phone_number": "0978132129",
+        "seller_type": 0
+    },
+    {
+        "name": "Ms. LƯƠNG NGỌC TUYỀN",
+        "email": "tuyenln@hacom.vn",
+        "phone_number": "0962163750",
+        "seller_type": 0
+    },
+    {
+        "name": "Mr. ĐỖ TUẤN HÙNG",
+        "email": "hungdt@hacom.vn",
+        "phone_number": "0963320660",
+        "seller_type": 0
+    },
+    {
+        "name": "Mr. LÊ VẠN PHÚC",
+        "email": "phuclv@hacom.vn",
+        "phone_number": "0962942543",
+        "seller_type": 0
+    },
+    {
+        "name": "Mr. NGUYỄN TRẦN MINH",
+        "email": "minhnt@hacom.vn",
+        "phone_number": "0862096929",
+        "seller_type": 0
+    },
+    {
+        "name": "Mr. NGUYỄN VĂN LONG",
+        "email": "longnv@hacom.vn",
+        "phone_number": "0862123529",
+        "seller_type": 0
+    },
+    {
+        "name": "Mr. PHAN CHÍ NGUYÊN",
+        "email": "nguyenpc@hacom.vn",
+        "phone_number": "0862123029",
+        "seller_type": 0
+    },
+    {
+        "name": "Mr. NGUYỄN VINH QUANG",
+        "email": "quangnv@hacom.vn",
+        "phone_number": "0962660318",
+        "seller_type": 0
+    },
+    {
+        "name": "Mr. ĐỖ TUẤN HÙNG",
+        "email": "hungdt@hacom.vn",
+        "phone_number": "0936493126",
+        "seller_type": 1
+    },
+    {
+        "name": "Mr. PHẠM TRUNG HÒA",
+        "email": "hoapt1@hacom.vn",
+        "phone_number": "0983844490",
+        "seller_type": 1
+    },
+    {
+        "name": "Mr. ĐẶNG THÁI DUY",
+        "email": "duydt@hacom.vn",
+        "phone_number": "0981145239",
+        "seller_type": 1
+    },
+    {
+        "name": "Ms. TRẦN THỊ NHẬT",
+        "email": "nhattt@hacom.vn",
+        "phone_number": "0984710688",
+        "seller_type": 1
+    },
+    {
+        "name": "Mr. BÙI VIẾT LINH",
+        "email": "linhbv@hacom.vn",
+        "phone_number": "0981089066",
+        "seller_type": 1
+    },
+    {
+        "name": "Ms. TRỊNH THỊ HÀ",
+        "email": "hatt@hacom.vn",
+        "phone_number": "0962660317",
+        "seller_type": 1
+    },
+    {
+        "name": "Mr. TRẦN QUỐC HOÀN",
+        "email": "hoantq@hacom.vn",
+        "phone_number": "0978533129",
+        "seller_type": 1
+    },
+    {
+        "name": "Mr. PHẠM TÙNG LINH",
+        "email": "linhpt@hacom.vn",
+        "phone_number": "0962163730",
+        "seller_type": 1
+    }
+]

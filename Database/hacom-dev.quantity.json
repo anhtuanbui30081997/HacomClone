@@ -1,0 +1,37 @@
+[
+    {
+        "code": "LTAC854",
+        "showroom": "ObjectId('65b7c92dc3e833e7c8b7cb7c')",
+        "quantity": 12
+    },
+    {
+        "code": "LTAC854",
+        "showroom": "ObjectId('65a385a6874b310b82e2f2f4')",
+        "quantity": 3
+    },
+    {
+        "code": "LTAC854",
+        "showroom": "ObjectId('65a385a6874b310b82e2f2ef')",
+        "quantity": 1
+    },
+    {
+        "code": "LTAC854",
+        "showroom": "ObjectId('65a385a6874b310b82e2f2f0')",
+        "quantity": 2
+    },
+    {
+        "code": "LTAC854",
+        "showroom": "ObjectId('65a385a6874b310b82e2f2f1')",
+        "quantity": 4
+    },
+    {
+        "code": "LTLV033",
+        "showroom": "ObjectId('65a385a6874b310b82e2f2ec')",
+        "quantity": 4
+    },
+    {
+        "code": "LTLV033",
+        "showroom": "ObjectId('65a385a6874b310b82e2f2ed')",
+        "quantity": 4
+    }
+]
