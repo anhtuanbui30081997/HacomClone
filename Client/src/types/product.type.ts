@@ -13,6 +13,7 @@ export type Cpu =
   | 'madRyzen7'
   | 'appleM1'
   | 'appleM2'
+  | 'appleM3'
 export type Ram = '4GB' | '8GB' | '16GB' | '32GB' | '>32GB'
 export type Vga = 'vgaNvidia' | 'vgaAmd' | ' vagTichHop' | 'rtx2050/2050ti' | 'rtx4050' | 'rtx3050/3050ti' | 'rxt4060'
 export type SizeScreen =
@@ -48,7 +49,7 @@ export type ScreenResolution =
   | 'other'
 export type TouchScreen = 'yes' | 'no'
 export type ScreenFrequency = '60Hz' | '90Hz' | '120Hz' | '165Hz'
-export type OperationSystem = 'Windows' | 'Linux' | ' Dos' | 'MacOS' | 'Ubuntu'
+export type OperationSystem = 'Windows' | 'Linux' | 'Dos' | 'MacOS' | 'Ubuntu'
 
 export interface ProductType {
   _id?: string
