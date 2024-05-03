@@ -1,5 +1,6 @@
 import { Db, MongoClient, ServerApiVersion } from 'mongodb'
 import { Category } from '~/models/schemas/Category.schema'
+import { Laptop } from '~/models/schemas/Laptop.schema'
 import { OnlineSeller } from '~/models/schemas/OnlineSeller.schema'
 import { Product } from '~/models/schemas/Product.schema'
 import { RefreshToken } from '~/models/schemas/RefreshToken.schema'
@@ -47,6 +48,9 @@ class DatabaseService {
   }
   get products() {
     return this.db.collection<Product>(process.env.DB_PRODUCT_COLLECTION as string)
+  }
+  get laptops() {
+    return this.db.collection<Laptop>(process.env.DB_LAPTOP_COLLECTION as string)
   }
 }
 

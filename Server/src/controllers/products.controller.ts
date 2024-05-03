@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express'
 import { ParamsDictionary } from 'express-serve-static-core'
 import { CategoryType } from '~/constants/enums'
 import { PRODUCT_MESSAGES } from '~/constants/messages'
-import { GetProductListRequestParams, ProductRequestBody } from '~/models/requests/Product.requests'
+import { GetProductListQuery, ProductRequestBody } from '~/models/requests/Product.requests'
 import productService from '~/services/product.service'
 
 class ProductController {
@@ -23,9 +23,12 @@ class ProductController {
     })
   }
 
-  async getProductList(req: Request<GetProductListRequestParams, any, any>, res: Response, next: NextFunction) {
-    const { category } = req.params
-    const products = await await productService.getProductList(Number(category) as CategoryType)
+  async getProductList(
+    req: Request<ParamsDictionary, any, any, GetProductListQuery>,
+    res: Response,
+    next: NextFunction
+  ) {
+    const products = await await productService.getProductList(req.query)
     return res.json({
       message: PRODUCT_MESSAGES.GET_PRODUCT_LIST_SUCCESSFULLY,
       data: products

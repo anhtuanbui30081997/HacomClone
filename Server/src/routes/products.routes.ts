@@ -7,7 +7,7 @@ const productRouter = Router()
 
 productRouter.post('/', wrapRequestHandler(productController.addProduct))
 
-productRouter.get('/:category', wrapRequestHandler(productController.getProductList))
+productRouter.get('', wrapRequestHandler(productController.getProductList))
 
 productRouter.post('/upload-images', wrapRequestHandler(productController.uploadImagesProduct))
 
