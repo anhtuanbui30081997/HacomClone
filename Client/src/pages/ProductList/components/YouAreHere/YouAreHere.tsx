@@ -20,7 +20,7 @@ export default function YouAreHere(props: { category: CategoryType }) {
       </Link>
       {youAreHereCategories &&
         youAreHereCategories.map((category) => (
-          <>
+          <div key={category._id}>
             <span className='mx-2'>
               <ChevronRightIcon />
             </span>
@@ -30,7 +30,7 @@ export default function YouAreHere(props: { category: CategoryType }) {
             >
               {category.name}
             </Link>
-          </>
+          </div>
         ))}
     </div>
   )

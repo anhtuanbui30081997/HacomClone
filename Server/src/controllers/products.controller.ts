@@ -28,10 +28,49 @@ class ProductController {
     res: Response,
     next: NextFunction
   ) {
-    const products = await await productService.getProductList(req.query)
+    const { limit, page } = req.query
+    const { productList, total } = await await productService.getProductList(req.query)
     return res.json({
       message: PRODUCT_MESSAGES.GET_PRODUCT_LIST_SUCCESSFULLY,
-      data: products
+      data: {
+        products: productList,
+        page: Number(page),
+        limit: Number(limit),
+        total: total,
+        page_size: Math.ceil(total / Number(limit))
+      }
+    })
+  }
+
+  async getQuantity(req: Request<ParamsDictionary, any, any, any>, res: Response, next: NextFunction) {
+    const {
+      brand,
+      style,
+      color,
+      laptopCategory,
+      cpu,
+      vga,
+      screenSize,
+      screenResolution,
+      operationSystem,
+      screenFrequency,
+      touchScreen
+    } = await productService.getQuantity()
+    return res.json({
+      message: PRODUCT_MESSAGES.GET_QUANTITY_SUCCESSFULLY,
+      data: {
+        brand,
+        style,
+        color,
+        laptopCategory,
+        cpu,
+        vga,
+        screenSize,
+        screenResolution,
+        operationSystem,
+        touchScreen,
+        screenFrequency
+      }
     })
   }
 }

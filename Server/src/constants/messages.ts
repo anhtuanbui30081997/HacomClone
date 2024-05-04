@@ -48,5 +48,6 @@ export const CATEGORY_MESSAGES = {
 export const PRODUCT_MESSAGES = {
   ADD_PRODUCT_SUCCESSFULLY: 'Add product successfully',
   UPLOAD_PRODUCT_IMAGES_SUCCESSFULLY: 'Upload product images successfully',
-  GET_PRODUCT_LIST_SUCCESSFULLY: 'Get product list successfully'
+  GET_PRODUCT_LIST_SUCCESSFULLY: 'Get product list successfully',
+  GET_QUANTITY_SUCCESSFULLY: 'Get quantity successfully'
 } as const

@@ -1,5 +1,4 @@
-import { CategoryType } from 'src/constants/category.enum'
-import { ProductType } from 'src/types/product.type'
+import { ProductList, ProductListConfig, ProductType } from 'src/types/product.type'
 import { SuccessResponse } from 'src/types/utils.type'
 import http, { Http } from 'src/utils/http'
 
@@ -12,8 +11,10 @@ const productApi = {
   uploadImageProduct(body: FormData) {
     return httpForMultipart.post<SuccessResponse<{ url: string; type: number }[]>>(`${URL}/upload-images`, body)
   },
-  getProductList(category: CategoryType) {
-    return http.get<SuccessResponse<ProductType[]>>(`${URL}/${category}`)
+  getProductList(params: ProductListConfig) {
+    return http.get<SuccessResponse<ProductList>>(URL, {
+      params
+    })
   }
 }
 

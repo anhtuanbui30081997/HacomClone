@@ -1,3 +1,5 @@
+import { CategoryType } from 'src/constants/category.enum'
+
 export type Brand = 'asus' | 'acer' | 'dell' | 'hp' | 'lenovo' | 'msi' | 'macbook' | 'lg' | 'microsoft' | 'vaio'
 export type Style = 'fashion' | 'gaming' | 'technology' | 'common'
 export type Color = 'black' | 'gray' | 'sliver' | 'white' | 'pink' | 'gold' | 'blue'
@@ -10,7 +12,7 @@ export type Cpu =
   | 'intelCorei9'
   | 'amdRyzen3'
   | 'amdRyzen5'
-  | 'madRyzen7'
+  | 'amdRyzen7'
   | 'appleM1'
   | 'appleM2'
   | 'appleM3'
@@ -66,4 +68,18 @@ export interface ProductType {
   guarantee: string
   categories: number[]
   showrooms?: string[]
+}
+
+export interface ProductList {
+  products: ProductType[]
+  page: number
+  limit: number
+  total: number
+  page_size: number
+}
+
+export interface ProductListConfig {
+  page?: number | string
+  limit?: number | string
+  category?: CategoryType
 }

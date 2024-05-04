@@ -11,6 +11,8 @@ productRouter.get('', wrapRequestHandler(productController.getProductList))
 
 productRouter.post('/upload-images', wrapRequestHandler(productController.uploadImagesProduct))
 
+productRouter.get('/laptop', wrapRequestHandler(productController.getQuantity))
+
 const productRoute: Route = {
   path: '/products',
   router: productRouter

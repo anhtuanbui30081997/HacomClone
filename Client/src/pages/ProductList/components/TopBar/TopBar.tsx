@@ -1,4 +1,12 @@
-export default function TopBar() {
+import { QueryConfig } from 'src/hooks/useQueryConfig'
+
+interface Props {
+  queryConfig: QueryConfig
+  pageSize: number
+}
+
+export default function TopBar({ pageSize, queryConfig }: Props) {
+  console.log(pageSize)
   return (
     <div className='w-full bg-[#f2f2f2] p-3'>
       {/* Filter Top */}

@@ -1,10 +1,13 @@
 import { useQuery } from '@tanstack/react-query'
-import React from 'react'
+import { forEach } from 'lodash'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import categoriesApi from 'src/apis/category.api'
 import { ChevronDoubleRightIcon } from 'src/assets/icons'
 import { CategoryType } from 'src/constants/category.enum'
+import { Brand, ProductType } from 'src/types/product.type'
 import { toSlug } from 'src/utils/utils'
+import { number } from 'yup'
 const Title = (props: { children: React.ReactNode }) => {
   return <div className='border-b border-[#d9d9d9] py-3 text-sm font-bold uppercase'>{props.children}</div>
 }
@@ -23,12 +26,19 @@ const FilterItem = ({ name, quantity }: { name: string; quantity: number }) => {
     </div>
   )
 }
-export default function SideBar(props: { category: CategoryType }) {
+export default function SideBar(props: { category: CategoryType; products: ProductType[] }) {
   const { data: dataNestedCategorisList } = useQuery({
     queryKey: ['categories', props.category],
     queryFn: () => categoriesApi.getNestedCategories(props.category)
   })
   const nestedCategories = dataNestedCategorisList?.data.data
+
+  useEffect(() => {
+    props.products.forEach((product) => {
+      console.log(product)
+    })
+  }, [props.products])
+
   return (
     <div className='w-[280px] shrink-0 px-[10px] py-0'>
       <div className='my-[10px] rounded border border-[#d9d9d9] text-center text-xs font-semibold uppercase leading-8'>
@@ -90,10 +100,6 @@ export default function SideBar(props: { category: CategoryType }) {
       {/* Phong cách */}
       <div>
         <Title>Phong cách</Title>
-      </div>
-      {/* Giới tính */}
-      <div>
-        <Title>Giới tính</Title>
       </div>
       {/* Màu sắc */}
       <div>
