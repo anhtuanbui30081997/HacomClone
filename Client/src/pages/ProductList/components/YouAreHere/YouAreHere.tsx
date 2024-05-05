@@ -20,7 +20,7 @@ export default function YouAreHere(props: { category: CategoryType }) {
       </Link>
       {youAreHereCategories &&
         youAreHereCategories.map((category) => (
-          <div key={category._id}>
+          <div key={category._id} className='flex items-center'>
             <span className='mx-2'>
               <ChevronRightIcon />
             </span>

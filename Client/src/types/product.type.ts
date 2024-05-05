@@ -82,4 +82,121 @@ export interface ProductListConfig {
   page?: number | string
   limit?: number | string
   category?: CategoryType
+  brand?: Brand
+}
+
+export interface Quantity {
+  brand: {
+    asus: number
+    acer: number
+    dell: number
+    hp: number
+    lenovo: number
+    msi: number
+    macbook: number
+    lg: number
+    microsoft: number
+    vaio: number
+  }
+  style: {
+    fashion: number
+    gaming: number
+    technology: number
+    common: number
+  }
+  color: {
+    black: number
+    gray: number
+    sliver: number
+    white: number
+    pink: number
+    gold: number
+    blue: number
+  }
+  laptopCategory: {
+    laptopGaming: number
+    doHoaKienTruc: number
+    phoThongVanPhong: number
+    mongNheThoiTrang: number
+    doanhNhan: number
+  }
+  cpu: {
+    intelCeleronPentium: number
+    intelCorei3: number
+    intelCorei5: number
+    intelCorei7: number
+    intelCorei9: number
+    amdRyzen3: number
+    amdRyzen5: number
+    amdRyzen7: number
+    appleM1: number
+    appleM2: number
+    appleM3: number
+  }
+  ram: {
+    ram_4GB: number
+    ram_8GB: number
+    ram_16GB: number
+    ram_32GB: number
+    ram_gt_32GB: number
+  }
+  vga: {
+    vgaNvidia: number
+    vgaAmd: number
+    vagTichHop: number
+    rtx2050_2050ti: number
+    rtx4050: number
+    rtx3050_3050ti: number
+    rxt4060: number
+  }
+  screenSize: {
+    s_13_3inch: number
+    s_13inch: number
+    s_13_5inch: number
+    s_13_6inch: number
+    s_13_4inch: number
+    s_15_4inch: number
+    s_14inch: number
+    s_14_2inch: number
+    s_15inch: number
+    s_14_5inch: number
+    s_15_6inch: number
+    s_16inch: number
+    s_16_2inch: number
+    s_17inch: number
+    s_15_3inch: number
+    s_other: number
+  }
+  screenResolution: {
+    r_HD_1366x768: number
+    r_Full_HD_1920x1080: number
+    r_WUXGA_1920x1200: number
+    r_WQHD_2560x1440: number
+    r_WQXGA_2560x1600: number
+    r_Pixel_Sense_2736x1824: number
+    r_2_8K_2880x1800: number
+    r_Retina_2560x1600: number
+    r_Retina_2560x1664: number
+    r_4K_3840x2160: number
+    r_3k_3200x2000: number
+    r_Retina_2880x1864: number
+    r_other: number
+  }
+  operationSystem: {
+    os_windows: number
+    os_linux: number
+    os_dos: number
+    os_macos: number
+    os_ubuntu: number
+  }
+  touchScreen: {
+    t_yes: number
+    t_no: number
+  }
+  screenFrequency: {
+    f_60Hz: number
+    f_90Hz: number
+    f_120Hz: number
+    f_165Hz: number
+  }
 }

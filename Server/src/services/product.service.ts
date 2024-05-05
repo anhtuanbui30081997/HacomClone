@@ -78,6 +78,7 @@ class ProductService {
 
     filter.push({ categories: Number(category) })
     if (brand) {
+      console.log('brand:', brand)
       filter.push({ 'laptop.brand': brand })
     }
     if (color) {
@@ -270,7 +271,12 @@ class ProductService {
       os_linux,
       os_dos,
       os_macos,
-      os_ubuntu
+      os_ubuntu,
+      ram_4GB,
+      ram_8GB,
+      ram_16GB,
+      ram_32GB,
+      ram_gt_32GB
     ] = await Promise.all([
       databaseService.products
         .aggregate([
@@ -2371,6 +2377,131 @@ class ProductService {
             $count: 'total'
           }
         ])
+        .toArray(),
+      databaseService.products
+        .aggregate([
+          {
+            $lookup: {
+              from: 'laptops',
+              localField: 'product_code',
+              foreignField: 'product_code',
+              as: 'laptop'
+            }
+          },
+          {
+            $unwind: {
+              path: '$laptop'
+            }
+          },
+          {
+            $match: {
+              'laptop.ram': '4GB'
+            }
+          },
+          {
+            $count: 'total'
+          }
+        ])
+        .toArray(),
+      databaseService.products
+        .aggregate([
+          {
+            $lookup: {
+              from: 'laptops',
+              localField: 'product_code',
+              foreignField: 'product_code',
+              as: 'laptop'
+            }
+          },
+          {
+            $unwind: {
+              path: '$laptop'
+            }
+          },
+          {
+            $match: {
+              'laptop.ram': '8GB'
+            }
+          },
+          {
+            $count: 'total'
+          }
+        ])
+        .toArray(),
+      databaseService.products
+        .aggregate([
+          {
+            $lookup: {
+              from: 'laptops',
+              localField: 'product_code',
+              foreignField: 'product_code',
+              as: 'laptop'
+            }
+          },
+          {
+            $unwind: {
+              path: '$laptop'
+            }
+          },
+          {
+            $match: {
+              'laptop.ram': '16GB'
+            }
+          },
+          {
+            $count: 'total'
+          }
+        ])
+        .toArray(),
+      databaseService.products
+        .aggregate([
+          {
+            $lookup: {
+              from: 'laptops',
+              localField: 'product_code',
+              foreignField: 'product_code',
+              as: 'laptop'
+            }
+          },
+          {
+            $unwind: {
+              path: '$laptop'
+            }
+          },
+          {
+            $match: {
+              'laptop.ram': '32GB'
+            }
+          },
+          {
+            $count: 'total'
+          }
+        ])
+        .toArray(),
+      databaseService.products
+        .aggregate([
+          {
+            $lookup: {
+              from: 'laptops',
+              localField: 'product_code',
+              foreignField: 'product_code',
+              as: 'laptop'
+            }
+          },
+          {
+            $unwind: {
+              path: '$laptop'
+            }
+          },
+          {
+            $match: {
+              'laptop.ram': '>32GB'
+            }
+          },
+          {
+            $count: 'total'
+          }
+        ])
         .toArray()
     ])
 
@@ -2480,6 +2611,13 @@ class ProductService {
         os_dos: os_dos[0] ? os_dos[0].total : 0,
         os_macos: os_macos[0] ? os_macos[0].total : 0,
         os_ubuntu: os_ubuntu[0] ? os_ubuntu[0].total : 0
+      },
+      ram: {
+        ram_4GB: ram_4GB[0] ? ram_4GB[0].total : 0,
+        ram_8GB: ram_8GB[0] ? ram_8GB[0].total : 0,
+        ram_16GB: ram_16GB[0] ? ram_16GB[0].total : 0,
+        ram_32GB: ram_32GB[0] ? ram_32GB[0].total : 0,
+        ram_gt_32GB: ram_gt_32GB[0] ? ram_gt_32GB[0].total : 0
       }
     }
   }

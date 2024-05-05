@@ -14,10 +14,12 @@ import { ProductListConfig } from 'src/types/product.type'
 export default function ProductList(props: { category: CategoryType }) {
   const queryConfig = useQueryConfig()
   queryConfig.category = String(props.category)
+
   const categories = Object.values(CategoryType).filter((value) => typeof value === 'string')
   const title = categories[props.category] as string
+
   const { data: dataProductList, isPending } = useQuery({
-    queryKey: ['products', props.category],
+    queryKey: ['products', props.category, queryConfig],
     queryFn: () => productApi.getProductList(queryConfig as ProductListConfig),
     placeholderData: keepPreviousData,
     staleTime: 3 * 60 * 1000
@@ -42,7 +44,7 @@ export default function ProductList(props: { category: CategoryType }) {
             <SlideShow />
           </div>
           <div className='mt-5 flex flex-row'>
-            <SideBar category={props.category} products={dataProductList.data.data.products} />
+            <SideBar category={props.category} queryConfig={queryConfig} />
             <div className='grow'>
               <TopBar pageSize={dataProductList.data.data.page_size} queryConfig={queryConfig} />
               <div className='py-5'>
