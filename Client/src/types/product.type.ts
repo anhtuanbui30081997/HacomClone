@@ -17,7 +17,7 @@ export type Cpu =
   | 'appleM2'
   | 'appleM3'
 export type Ram = '4GB' | '8GB' | '16GB' | '32GB' | '>32GB'
-export type Vga = 'vgaNvidia' | 'vgaAmd' | ' vagTichHop' | 'rtx2050/2050ti' | 'rtx4050' | 'rtx3050/3050ti' | 'rxt4060'
+export type Vga = 'vgaNvidia' | 'vgaAmd' | 'vagTichHop' | 'rtx2050/2050ti' | 'rtx4050' | 'rtx3050/3050ti' | 'rxt4060'
 export type SizeScreen =
   | '13.3inch'
   | '13inch'
@@ -83,6 +83,17 @@ export interface ProductListConfig {
   limit?: number | string
   category?: CategoryType
   brand?: Brand
+  style?: Style
+  color?: Color
+  cpu?: Cpu
+  ram?: Ram
+  vga?: Vga
+  laptop_category?: LaptopCategory
+  operation_system?: OperationSystem
+  screen_frequency?: ScreenFrequency
+  screen_resolution?: ScreenResolution
+  size_screen?: SizeScreen
+  touch_screen?: TouchScreen
 }
 
 export interface Quantity {

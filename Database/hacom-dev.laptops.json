@@ -450,7 +450,7 @@
         "operation_system": "Windows"
     },
     {
-        "product_code": "LAHP095",
+        "product_code": "LALV095",
         "brand": "lenovo",
         "style": "common",
         "color": "black",
@@ -556,7 +556,7 @@
     },
     {
         "product_code": "LTMA185",
-        "brand": "mac",
+        "brand": "macbook",
         "style": "common",
         "color": "gold",
         "laptop_category": "mongNheThoiTrang",
@@ -571,7 +571,7 @@
     },
     {
         "product_code": "LTMA168",
-        "brand": "mac",
+        "brand": "macbook",
         "style": "technology",
         "color": "gray",
         "laptop_category": "doanhNhan",

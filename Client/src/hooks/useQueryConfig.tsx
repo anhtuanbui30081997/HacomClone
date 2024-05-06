@@ -13,7 +13,18 @@ export default function useQueryConfig() {
       page: queryParams.page || '1',
       limit: queryParams.limit || 20,
       category: queryParams.category || 1,
-      brand: queryParams.brand
+      brand: queryParams.brand,
+      style: queryParams.style,
+      color: queryParams.color,
+      cpu: queryParams.cpu,
+      ram: queryParams.ram,
+      vga: queryParams.vga,
+      laptop_category: queryParams.laptop_category,
+      operation_system: queryParams.operation_system,
+      screen_frequency: queryParams.screen_frequency,
+      screen_resolution: queryParams.screen_resolution,
+      size_screen: queryParams.size_screen,
+      touch_screen: queryParams.touch_screen
     },
     isUndefined
   )

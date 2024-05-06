@@ -19,7 +19,7 @@ export default function ProductList(props: { category: CategoryType }) {
   const title = categories[props.category] as string
 
   const { data: dataProductList, isPending } = useQuery({
-    queryKey: ['products', props.category, queryConfig],
+    queryKey: ['products', props.category],
     queryFn: () => productApi.getProductList(queryConfig as ProductListConfig),
     placeholderData: keepPreviousData,
     staleTime: 3 * 60 * 1000

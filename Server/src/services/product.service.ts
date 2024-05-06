@@ -66,6 +66,8 @@ class ProductService {
       page,
       color,
       cpu,
+      ram,
+      vga,
       laptop_category,
       operation_system,
       screen_frequency,
@@ -78,7 +80,6 @@ class ProductService {
 
     filter.push({ categories: Number(category) })
     if (brand) {
-      console.log('brand:', brand)
       filter.push({ 'laptop.brand': brand })
     }
     if (color) {
@@ -86,6 +87,12 @@ class ProductService {
     }
     if (cpu) {
       filter.push({ 'laptop.cpu': cpu })
+    }
+    if (ram) {
+      filter.push({ 'laptop.ram': ram })
+    }
+    if (vga) {
+      filter.push({ 'laptop.vga': vga })
     }
     if (laptop_category) {
       filter.push({ 'laptop.laptop_category': laptop_category })
@@ -109,7 +116,7 @@ class ProductService {
       filter.push({ 'laptop.touch_screen': touch_screen })
     }
 
-    const [productList, total] = await Promise.all([
+    const [productList, productListSize, total] = await Promise.all([
       databaseService.products
         .aggregate([
           {
@@ -177,13 +184,24 @@ class ProductService {
             $unset: 'group'
           },
           {
-            $count: 'total'
+            $count: 'count'
+          }
+        ])
+        .toArray(),
+      databaseService.products
+        .aggregate([
+          {
+            $count: 'count'
           }
         ])
         .toArray()
     ])
 
-    return { productList, total: total[0].total }
+    return {
+      productList,
+      productListSize: productListSize[0] ? productListSize[0].count : 0,
+      total: total[0] ? total[0].count : 0
+    }
   }
 
   async getQuantity() {
@@ -445,7 +463,7 @@ class ProductService {
           },
           {
             $match: {
-              'laptop.brand': 'mac'
+              'laptop.brand': 'macbook'
             }
           },
           {
