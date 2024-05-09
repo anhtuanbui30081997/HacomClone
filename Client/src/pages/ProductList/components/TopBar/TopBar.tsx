@@ -1,4 +1,10 @@
+import { useQuery } from '@tanstack/react-query'
+import { useEffect, useState } from 'react'
+import { createSearchParams, useNavigate } from 'react-router-dom'
+import showroomApi from 'src/apis/showroom.api'
 import { QueryConfig } from 'src/hooks/useQueryConfig'
+import { SortType } from 'src/types/product.type'
+import { CodeShowroom } from 'src/types/showroom.type'
 
 interface Props {
   queryConfig: QueryConfig
@@ -6,28 +12,72 @@ interface Props {
 }
 
 export default function TopBar({ pageSize, queryConfig }: Props) {
-  console.log(pageSize)
+  const navigate = useNavigate()
+  const [sort, setSort] = useState<SortType | null>(null)
+  const [statusStock, setStatusStock] = useState<'all' | 'stocking' | null>('all')
+  const [stockId, setStockId] = useState<string>('all')
+
+  const { data: dataShowrooms } = useQuery({
+    queryKey: ['showrooms'],
+    queryFn: showroomApi.getAllShowrooms
+  })
+
+  const showrooms = dataShowrooms?.data.data
+
+  const handleSortChange = (e: SortType) => {
+    setSort(e)
+  }
+  const handleStatusStockChang = (e: any) => {
+    setStatusStock(e)
+  }
+  const handleStockIdChagne = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    if (e.target.value) {
+      setStockId(e.target.value)
+    }
+  }
+
+  useEffect(() => {
+    sort ? (queryConfig.sort = sort) : delete queryConfig.sort
+    statusStock ? (queryConfig.other_filter = statusStock) : delete queryConfig.other_filter
+    stockId ? (queryConfig.stock = stockId) : delete queryConfig.stock
+    navigate({
+      pathname: undefined,
+      search: createSearchParams(queryConfig).toString()
+    })
+  }, [sort, statusStock, stockId])
+
   return (
     <div className='w-full bg-[#f2f2f2] p-3'>
       {/* Filter Top */}
       <div className='flex items-center gap-5'>
         {/* Tình trạng kho hàng */}
-        <select name='' id='' className='h-7 w-[180px] rounded-sm border pl-1 text-sm outline-none'>
-          <option value='' className='text text-[13px]'>
+        <select
+          name=''
+          id=''
+          className='h-7 w-[180px] rounded-sm border pl-1 text-sm outline-none'
+          onChange={(e) => handleStatusStockChang(e.target.value)}
+        >
+          <option value='all' className='text text-[13px]'>
             Tình trạng kho hàng
           </option>
-          <option value=''>Còn hàng</option>
+          <option value='stocking'>Còn hàng</option>
         </select>
         {/* Kho */}
-        <select name='' id='' className='h-7 w-[302px] rounded-sm border pl-1 text-[13px] outline-none'>
-          <option value='' className='text-[13px]'>
+        <select
+          name=''
+          id=''
+          className='h-7 w-[302px] rounded-sm border pl-1 text-[13px] outline-none'
+          onChange={handleStockIdChagne}
+        >
+          <option value={'all'} className='text-[13px]'>
             Tất cả kho
           </option>
-          <option value=''> 131 Lê Thanh Nghị - Hai Bà Trưng - Hà Nội </option>
-          <option value=''> 43 Thái Hà - Đống Đa - Hà Nội </option>
-          <option value=''> 406 Tô Hiệu - Lê Chân - Hải Phòng </option>
-          <option value=''> 79 Nguyễn Văn Huyên - Cầu Giấy - Hà Nội </option>
-          <option value=''> 511 Quang Trung - Hà Đông - Hà Nội </option>
+          {showrooms &&
+            showrooms.map((showroom) => (
+              <option key={showroom._id} value={showroom.code_showroom}>
+                {showroom.address}
+              </option>
+            ))}
         </select>
         {/* Lọc the giá tiền */}
         <div>
@@ -49,44 +99,54 @@ export default function TopBar({ pageSize, queryConfig }: Props) {
       {/* Filter Bottom */}
       <div className='mt-3 flex items-center justify-between'>
         <div className='flex items-center gap-2'>
-          <div
+          <button
+            onClick={() => handleSortChange('new')}
             className='rounded-sm border border-dashed border-[#243a76] 
         px-[10px] py-[5px] font-semibold capitalize text-[#243a76] hover:bg-[#243a76] hover:text-white xl:text-xs 2xl:text-sm'
           >
             Hàng mới
-          </div>
-          <div
+          </button>
+          <button
+            onClick={() => handleSortChange('views')}
             className='rounded-sm border border-dashed border-[#243a76] 
         px-[10px] py-[5px] font-semibold capitalize text-[#243a76] hover:bg-[#243a76] hover:text-white xl:text-xs 2xl:text-sm'
           >
             Xem nhiều
-          </div>
-          <div
+          </button>
+          <button
+            onClick={() => handleSortChange('price_off')}
             className='rounded-sm border border-dashed border-[#243a76] 
         px-[10px] py-[5px] font-semibold capitalize text-[#243a76] hover:bg-[#243a76] hover:text-white xl:text-xs 2xl:text-sm'
           >
             Giá giảm nhiều
-          </div>
-          <div
+          </button>
+          <button
+            onClick={() => handleSortChange('price_inc')}
             className='rounded-sm border border-dashed border-[#243a76] 
         px-[10px] py-[5px] font-semibold capitalize text-[#243a76] hover:bg-[#243a76] hover:text-white xl:text-xs 2xl:text-sm'
           >
             Giá tăng dần
-          </div>
-          <div
+          </button>
+          <button
+            onClick={() => handleSortChange('price_dec')}
             className='rounded-sm border border-dashed border-[#243a76] 
         px-[10px] py-[5px] font-semibold capitalize text-[#243a76] hover:bg-[#243a76] hover:text-white xl:text-xs 2xl:text-sm'
           >
             Giá Giảm dần
-          </div>
+          </button>
         </div>
         <div>
-          <select name='' id='' className='h-7 w-[130px] rounded-sm border pl-1 text-sm outline-none'>
+          <select
+            name=''
+            id=''
+            className='h-7 w-[130px] rounded-sm border pl-1 text-sm outline-none'
+            onChange={(e) => handleSortChange(e.target.value as SortType)}
+          >
             <option value='' className='text text-[13px]'>
               Lọc sản phẩm
             </option>
-            <option value=''>đánh giá</option>
-            <option value=''>tên từ a - z</option>
+            <option value={'rating'}>Đánh giá</option>
+            <option value={'name'}>Tên từ a - z</option>
           </select>
         </div>
         {/* Phân trang */}

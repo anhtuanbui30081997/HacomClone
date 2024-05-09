@@ -1,37 +1,3603 @@
 [
     {
-        "code": "LTAC854",
-        "showroom": "ObjectId('65b7c92dc3e833e7c8b7cb7c')",
-        "quantity": 12
+        "product_code": "LTAC858",
+        "code_showroom": 0,
+        "quantity": 5
     },
     {
-        "code": "LTAC854",
-        "showroom": "ObjectId('65a385a6874b310b82e2f2f4')",
+        "product_code": "LTAC858",
+        "code_showroom": 1,
+        "quantity": 7
+    },
+    {
+        "product_code": "LTAC858",
+        "code_showroom": 2,
         "quantity": 3
     },
     {
-        "code": "LTAC854",
-        "showroom": "ObjectId('65a385a6874b310b82e2f2ef')",
-        "quantity": 1
+        "product_code": "LTAC858",
+        "code_showroom": 3,
+        "quantity": 0
     },
     {
-        "code": "LTAC854",
-        "showroom": "ObjectId('65a385a6874b310b82e2f2f0')",
+        "product_code": "LTAC858",
+        "code_showroom": 4,
         "quantity": 2
     },
     {
-        "code": "LTAC854",
-        "showroom": "ObjectId('65a385a6874b310b82e2f2f1')",
+        "product_code": "LTAC858",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC858",
+        "code_showroom": 6,
+        "quantity": 5
+    },
+    {
+        "product_code": "LTAC858",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC858",
+        "code_showroom": 8,
+        "quantity": 9
+    },
+    {
+        "product_code": "LTAC858",
+        "code_showroom": 9,
+        "quantity": 9
+    },
+    {
+        "product_code": "LTAC858",
+        "code_showroom": 10,
+        "quantity": 6
+    },
+    {
+        "product_code": "LTAC858",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC858",
+        "code_showroom": 12,
+        "quantity": 6
+    },
+    {
+        "product_code": "LTAC858",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC858",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC858",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC897",
+        "code_showroom": 0,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC897",
+        "code_showroom": 1,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTAC897",
+        "code_showroom": 2,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTAC897",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC897",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC897",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC897",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC897",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC897",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC897",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC897",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC897",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC897",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC897",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC897",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC897",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC801",
+        "code_showroom": 0,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC801",
+        "code_showroom": 1,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC801",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC801",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC801",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC801",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC801",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC801",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC801",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC801",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC801",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC801",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC801",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC801",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC801",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC801",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC829",
+        "code_showroom": 0,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC829",
+        "code_showroom": 1,
         "quantity": 4
     },
     {
-        "code": "LTLV033",
-        "showroom": "ObjectId('65a385a6874b310b82e2f2ec')",
+        "product_code": "LTAC829",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC829",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC829",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC829",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC829",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC829",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC829",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC829",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC829",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC829",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC829",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC829",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC829",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAC829",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+
+    {
+        "product_code": "LTAU794",
+        "code_showroom": 0,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTAU794",
+        "code_showroom": 1,
+        "quantity": 2
+    },
+    {
+        "product_code": "LTAU794",
+        "code_showroom": 2,
         "quantity": 4
     },
     {
-        "code": "LTLV033",
-        "showroom": "ObjectId('65a385a6874b310b82e2f2ed')",
+        "product_code": "LTAU794",
+        "code_showroom": 3,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTAU794",
+        "code_showroom": 4,
         "quantity": 4
+    },
+    {
+        "product_code": "LTAU794",
+        "code_showroom": 5,
+        "quantity": 5
+    },
+    {
+        "product_code": "LTAU794",
+        "code_showroom": 6,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTAU794",
+        "code_showroom": 7,
+        "quantity": 2
+    },
+    {
+        "product_code": "LTAU794",
+        "code_showroom": 8,
+        "quantity": 5
+    },
+    {
+        "product_code": "LTAU794",
+        "code_showroom": 9,
+        "quantity": 6
+    },
+    {
+        "product_code": "LTAU794",
+        "code_showroom": 10,
+        "quantity": 4
+    },
+    {
+        "product_code": "LTAU794",
+        "code_showroom": 11,
+        "quantity": 1
+    },
+    {
+        "product_code": "LTAU794",
+        "code_showroom": 12,
+        "quantity": 4
+    },
+    {
+        "product_code": "LTAU794",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU794",
+        "code_showroom": 14,
+        "quantity": 4
+    },
+    {
+        "product_code": "LTAU794",
+        "code_showroom": 15,
+        "quantity": 5
+    },
+    {
+        "product_code": "LTAU868",
+        "code_showroom": 0,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU868",
+        "code_showroom": 1,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU868",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU868",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU868",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU868",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU868",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU868",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU868",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU868",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU868",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU868",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU868",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU868",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU868",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU868",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU839",
+        "code_showroom": 0,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTAU839",
+        "code_showroom": 1,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU839",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU839",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU839",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU839",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU839",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU839",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU839",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU839",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU839",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU839",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU839",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU839",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU839",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU839",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU784",
+        "code_showroom": 0,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTAU784",
+        "code_showroom": 1,
+        "quantity": 5
+    },
+    {
+        "product_code": "LTAU784",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU784",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU784",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU784",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU784",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU784",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU784",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU784",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU784",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU784",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU784",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU784",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU784",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTAU784",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL480",
+        "code_showroom": 0,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL480",
+        "code_showroom": 1,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTDL480",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL480",
+        "code_showroom": 3,
+        "quantity": 4
+    },
+    {
+        "product_code": "LTDL480",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL480",
+        "code_showroom": 5,
+        "quantity": 2
+    },
+    {
+        "product_code": "LTDL480",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL480",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL480",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL480",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL480",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL480",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL480",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL480",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL480",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL480",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL477",
+        "code_showroom": 0,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL477",
+        "code_showroom": 1,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL477",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL477",
+        "code_showroom": 3,
+        "quantity": 2
+    },
+    {
+        "product_code": "LTDL477",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL477",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL477",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL477",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL477",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL477",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL477",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL477",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL477",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL477",
+        "code_showroom": 13,
+        "quantity": 2
+    },
+    {
+        "product_code": "LTDL477",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL477",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL524",
+        "code_showroom": 0,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTDL524",
+        "code_showroom": 1,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL524",
+        "code_showroom": 2,
+        "quantity": 2
+    },
+    {
+        "product_code": "LTDL524",
+        "code_showroom": 3,
+        "quantity": 4
+    },
+    {
+        "product_code": "LTDL524",
+        "code_showroom": 4,
+        "quantity": 2
+    },
+    {
+        "product_code": "LTDL524",
+        "code_showroom": 5,
+        "quantity": 1
+    },
+    {
+        "product_code": "LTDL524",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL524",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL524",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL524",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL524",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL524",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL524",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL524",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL524",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL524",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL510",
+        "code_showroom": 0,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL510",
+        "code_showroom": 1,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL510",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL510",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL510",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL510",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL510",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL510",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL510",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL510",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL510",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL510",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL510",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL510",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL510",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL510",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL496",
+        "code_showroom": 0,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTDL496",
+        "code_showroom": 1,
+        "quantity": 4
+    },
+    {
+        "product_code": "LTDL496",
+        "code_showroom": 2,
+        "quantity": 2
+    },
+    {
+        "product_code": "LTDL496",
+        "code_showroom": 3,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTDL496",
+        "code_showroom": 4,
+        "quantity": 5
+    },
+    {
+        "product_code": "LTDL496",
+        "code_showroom": 5,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTDL496",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL496",
+        "code_showroom": 7,
+        "quantity": 2
+    },
+    {
+        "product_code": "LTDL496",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL496",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL496",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL496",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL496",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL496",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL496",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL496",
+        "code_showroom": 15,
+        "quantity": 5
+    },
+    {
+        "product_code": "LTDL433",
+        "code_showroom": 0,
+        "quantity": 4
+    },
+    {
+        "product_code": "LTDL433",
+        "code_showroom": 1,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTDL433",
+        "code_showroom": 2,
+        "quantity": 6
+    },
+    {
+        "product_code": "LTDL433",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL433",
+        "code_showroom": 4,
+        "quantity": 5
+    },
+    {
+        "product_code": "LTDL433",
+        "code_showroom": 5,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTDL433",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL433",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL433",
+        "code_showroom": 8,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTDL433",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL433",
+        "code_showroom": 10,
+        "quantity": 2
+    },
+    {
+        "product_code": "LTDL433",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL433",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL433",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL433",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL433",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL466",
+        "code_showroom": 0,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL466",
+        "code_showroom": 1,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL466",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL466",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL466",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL466",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL466",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL466",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL466",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL466",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL466",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL466",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL466",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL466",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL466",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL466",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL467",
+        "code_showroom": 0,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL467",
+        "code_showroom": 1,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL467",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL467",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL467",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL467",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL467",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL467",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL467",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL467",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL467",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL467",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL467",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL467",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL467",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTDL467",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP190",
+        "code_showroom": 0,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP190",
+        "code_showroom": 1,
+        "quantity": 1
+    },
+    {
+        "product_code": "LAHP190",
+        "code_showroom": 2,
+        "quantity": 2
+    },
+    {
+        "product_code": "LAHP190",
+        "code_showroom": 3,
+        "quantity": 2
+    },
+    {
+        "product_code": "LAHP190",
+        "code_showroom": 4,
+        "quantity": 3
+    },
+    {
+        "product_code": "LAHP190",
+        "code_showroom": 5,
+        "quantity": 5
+    },
+    {
+        "product_code": "LAHP190",
+        "code_showroom": 6,
+        "quantity": 5
+    },
+    {
+        "product_code": "LAHP190",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP190",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP190",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP190",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP190",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP190",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP190",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP190",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP190",
+        "code_showroom": 15,
+        "quantity": 4
+    },
+    {
+        "product_code": "LAHP194",
+        "code_showroom": 0,
+        "quantity": 2
+    },
+    {
+        "product_code": "LAHP194",
+        "code_showroom": 1,
+        "quantity": 2
+    },
+    {
+        "product_code": "LAHP194",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP194",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP194",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP194",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP194",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP194",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP194",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP194",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP194",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP194",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP194",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP194",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP194",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP194",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP095",
+        "code_showroom": 0,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP095",
+        "code_showroom": 1,
+        "quantity": 1
+    },
+    {
+        "product_code": "LAHP095",
+        "code_showroom": 2,
+        "quantity": 3
+    },
+    {
+        "product_code": "LAHP095",
+        "code_showroom": 3,
+        "quantity": 2
+    },
+    {
+        "product_code": "LAHP095",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP095",
+        "code_showroom": 5,
+        "quantity": 4
+    },
+    {
+        "product_code": "LAHP095",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP095",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP095",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP095",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP095",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP095",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP095",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP095",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP095",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP095",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP196",
+        "code_showroom": 0,
+        "quantity": 3
+    },
+    {
+        "product_code": "LAHP196",
+        "code_showroom": 1,
+        "quantity": 2
+    },
+    {
+        "product_code": "LAHP196",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP196",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP196",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP196",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP196",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP196",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP196",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP196",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP196",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP196",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP196",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP196",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP196",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP196",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP203",
+        "code_showroom": 0,
+        "quantity": 2
+    },
+    {
+        "product_code": "LAHP203",
+        "code_showroom": 1,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP203",
+        "code_showroom": 2,
+        "quantity": 4
+    },
+    {
+        "product_code": "LAHP203",
+        "code_showroom": 3,
+        "quantity": 2
+    },
+    {
+        "product_code": "LAHP203",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP203",
+        "code_showroom": 5,
+        "quantity": 5
+    },
+    {
+        "product_code": "LAHP203",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP203",
+        "code_showroom": 7,
+        "quantity": 4
+    },
+    {
+        "product_code": "LAHP203",
+        "code_showroom": 8,
+        "quantity": 3
+    },
+    {
+        "product_code": "LAHP203",
+        "code_showroom": 9,
+        "quantity": 1
+    },
+    {
+        "product_code": "LAHP203",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP203",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP203",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP203",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP203",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP203",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP130",
+        "code_showroom": 0,
+        "quantity": 2
+    },
+    {
+        "product_code": "LAHP130",
+        "code_showroom": 1,
+        "quantity": 1
+    },
+    {
+        "product_code": "LAHP130",
+        "code_showroom": 2,
+        "quantity": 1
+    },
+    {
+        "product_code": "LAHP130",
+        "code_showroom": 3,
+        "quantity": 4
+    },
+    {
+        "product_code": "LAHP130",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP130",
+        "code_showroom": 5,
+        "quantity": 2
+    },
+    {
+        "product_code": "LAHP130",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP130",
+        "code_showroom": 7,
+        "quantity": 3
+    },
+    {
+        "product_code": "LAHP130",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP130",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP130",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP130",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP130",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP130",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP130",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP130",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP173",
+        "code_showroom": 0,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP173",
+        "code_showroom": 1,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP173",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP173",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP173",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP173",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP173",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP173",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP173",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP173",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP173",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP173",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP173",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP173",
+        "code_showroom": 13,
+        "quantity": 2
+    },
+    {
+        "product_code": "LAHP173",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP173",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP096",
+        "code_showroom": 0,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP096",
+        "code_showroom": 1,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP096",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP096",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP096",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP096",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP096",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP096",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP096",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP096",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP096",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP096",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP096",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP096",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP096",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP096",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP199",
+        "code_showroom": 0,
+        "quantity": 3
+    },
+    {
+        "product_code": "LAHP199",
+        "code_showroom": 1,
+        "quantity": 2
+    },
+    {
+        "product_code": "LAHP199",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP199",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP199",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP199",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP199",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP199",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP199",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP199",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP199",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP199",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP199",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP199",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP199",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP199",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP180",
+        "code_showroom": 0,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP180",
+        "code_showroom": 1,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP180",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP180",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP180",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP180",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP180",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP180",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP180",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP180",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP180",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP180",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP180",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP180",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP180",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LAHP180",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV066",
+        "code_showroom": 0,
+        "quantity": 5
+    },
+    {
+        "product_code": "LTLV066",
+        "code_showroom": 1,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTLV066",
+        "code_showroom": 2,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTLV066",
+        "code_showroom": 3,
+        "quantity": 4
+    },
+    {
+        "product_code": "LTLV066",
+        "code_showroom": 4,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTLV066",
+        "code_showroom": 5,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTLV066",
+        "code_showroom": 6,
+        "quantity": 4
+    },
+    {
+        "product_code": "LTLV066",
+        "code_showroom": 7,
+        "quantity": 6
+    },
+    {
+        "product_code": "LTLV066",
+        "code_showroom": 8,
+        "quantity": 4
+    },
+    {
+        "product_code": "LTLV066",
+        "code_showroom": 9,
+        "quantity": 6
+    },
+    {
+        "product_code": "LTLV066",
+        "code_showroom": 10,
+        "quantity": 1
+    },
+    {
+        "product_code": "LTLV066",
+        "code_showroom": 11,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTLV066",
+        "code_showroom": 12,
+        "quantity": 5
+    },
+    {
+        "product_code": "LTLV066",
+        "code_showroom": 13,
+        "quantity": 4
+    },
+    {
+        "product_code": "LTLV066",
+        "code_showroom": 14,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTLV066",
+        "code_showroom": 15,
+        "quantity": 2
+    },
+    {
+        "product_code": "LTLV062",
+        "code_showroom": 0,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTLV062",
+        "code_showroom": 1,
+        "quantity": 4
+    },
+    {
+        "product_code": "LTLV062",
+        "code_showroom": 2,
+        "quantity": 4
+    },
+    {
+        "product_code": "LTLV062",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV062",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV062",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV062",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV062",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV062",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV062",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV062",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV062",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV062",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV062",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV062",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV062",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV057",
+        "code_showroom": 0,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV057",
+        "code_showroom": 1,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV057",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV057",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV057",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV057",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV057",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV057",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV057",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV057",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV057",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV057",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV057",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV057",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV057",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV057",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV043",
+        "code_showroom": 0,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV043",
+        "code_showroom": 1,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV043",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV043",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV043",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV043",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV043",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV043",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV043",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV043",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV043",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV043",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV043",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV043",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV043",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV043",
+        "code_showroom": 15,
+        "quantity": 3
+    },
+    {
+        "product_code": "LALV095",
+        "code_showroom": 0,
+        "quantity": 0
+    },
+    {
+        "product_code": "LALV095",
+        "code_showroom": 1,
+        "quantity": 0
+    },
+    {
+        "product_code": "LALV095",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LALV095",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LALV095",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LALV095",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LALV095",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LALV095",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LALV095",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LALV095",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LALV095",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LALV095",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LALV095",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LALV095",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LALV095",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LALV095",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV032",
+        "code_showroom": 0,
+        "quantity": 2
+    },
+    {
+        "product_code": "LTLV032",
+        "code_showroom": 1,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV032",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV032",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV032",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV032",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV032",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV032",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV032",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV032",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV032",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV032",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV032",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV032",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV032",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV032",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV059",
+        "code_showroom": 0,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV059",
+        "code_showroom": 1,
+        "quantity": 2
+    },
+    {
+        "product_code": "LTLV059",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV059",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV059",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV059",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV059",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV059",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV059",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV059",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV059",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV059",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV059",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV059",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV059",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV059",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV002",
+        "code_showroom": 0,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTLV002",
+        "code_showroom": 1,
+        "quantity": 4
+    },
+    {
+        "product_code": "LTLV002",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV002",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV002",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV002",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV002",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV002",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV002",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV002",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV002",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV002",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV002",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV002",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV002",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLV002",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS504",
+        "code_showroom": 0,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS504",
+        "code_showroom": 1,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTMS504",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS504",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS504",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS504",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS504",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS504",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS504",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS504",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS504",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS504",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS504",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS504",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS504",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS504",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS520",
+        "code_showroom": 0,
+        "quantity": 5
+    },
+    {
+        "product_code": "LTMS520",
+        "code_showroom": 1,
+        "quantity": 2
+    },
+    {
+        "product_code": "LTMS520",
+        "code_showroom": 2,
+        "quantity": 2
+    },
+    {
+        "product_code": "LTMS520",
+        "code_showroom": 3,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTMS520",
+        "code_showroom": 4,
+        "quantity": 4
+    },
+    {
+        "product_code": "LTMS520",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS520",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS520",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS520",
+        "code_showroom": 8,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTMS520",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS520",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS520",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS520",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS520",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS520",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS520",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS531",
+        "code_showroom": 0,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTMS531",
+        "code_showroom": 1,
+        "quantity": 4
+    },
+    {
+        "product_code": "LTMS531",
+        "code_showroom": 2,
+        "quantity": 4
+    },
+    {
+        "product_code": "LTMS531",
+        "code_showroom": 3,
+        "quantity": 2
+    },
+    {
+        "product_code": "LTMS531",
+        "code_showroom": 4,
+        "quantity": 1
+    },
+    {
+        "product_code": "LTMS531",
+        "code_showroom": 5,
+        "quantity": 2
+    },
+    {
+        "product_code": "LTMS531",
+        "code_showroom": 6,
+        "quantity": 5
+    },
+    {
+        "product_code": "LTMS531",
+        "code_showroom": 7,
+        "quantity": 4
+    },
+    {
+        "product_code": "LTMS531",
+        "code_showroom": 8,
+        "quantity": 2
+    },
+    {
+        "product_code": "LTMS531",
+        "code_showroom": 9,
+        "quantity": 2
+    },
+    {
+        "product_code": "LTMS531",
+        "code_showroom": 10,
+        "quantity": 4
+    },
+    {
+        "product_code": "LTMS531",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMS531",
+        "code_showroom": 12,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTMS531",
+        "code_showroom": 13,
+        "quantity": 5
+    },
+    {
+        "product_code": "LTMS531",
+        "code_showroom": 14,
+        "quantity": 4
+    },
+    {
+        "product_code": "LTMS531",
+        "code_showroom": 15,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTMA185",
+        "code_showroom": 0,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA185",
+        "code_showroom": 1,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA185",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA185",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA185",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA185",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA185",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA185",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA185",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA185",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA185",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA185",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA185",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA185",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA185",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA185",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA168",
+        "code_showroom": 0,
+        "quantity": 4
+    },
+    {
+        "product_code": "LTMA168",
+        "code_showroom": 1,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA168",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA168",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA168",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA168",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA168",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA168",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA168",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA168",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA168",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA168",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA168",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA168",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA168",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTMA168",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG043",
+        "code_showroom": 0,
+        "quantity": 5
+    },
+    {
+        "product_code": "LTLG043",
+        "code_showroom": 1,
+        "quantity": 5
+    },
+    {
+        "product_code": "LTLG043",
+        "code_showroom": 2,
+        "quantity": 3
+    },
+    {
+        "product_code": "LTLG043",
+        "code_showroom": 3,
+        "quantity": 4
+    },
+    {
+        "product_code": "LTLG043",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG043",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG043",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG043",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG043",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG043",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG043",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG043",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG043",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG043",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG043",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG043",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG049",
+        "code_showroom": 0,
+        "quantity": 5
+    },
+    {
+        "product_code": "LTLG049",
+        "code_showroom": 1,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG049",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG049",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG049",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG049",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG049",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG049",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG049",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG049",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG049",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG049",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG049",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG049",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG049",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG049",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG050",
+        "code_showroom": 0,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG050",
+        "code_showroom": 1,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG050",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG050",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG050",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG050",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG050",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG050",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG050",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG050",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG050",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG050",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG050",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG050",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG050",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG050",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG045",
+        "code_showroom": 0,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG045",
+        "code_showroom": 1,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG045",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG045",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG045",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG045",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG045",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG045",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG045",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG045",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG045",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG045",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG045",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG045",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG045",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG045",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG047",
+        "code_showroom": 0,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG047",
+        "code_showroom": 1,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG047",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG047",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG047",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG047",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG047",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG047",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG047",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG047",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG047",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG047",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG047",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG047",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG047",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTLG047",
+        "code_showroom": 15,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTVA002",
+        "code_showroom": 0,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTVA002",
+        "code_showroom": 1,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTVA002",
+        "code_showroom": 2,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTVA002",
+        "code_showroom": 3,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTVA002",
+        "code_showroom": 4,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTVA002",
+        "code_showroom": 5,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTVA002",
+        "code_showroom": 6,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTVA002",
+        "code_showroom": 7,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTVA002",
+        "code_showroom": 8,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTVA002",
+        "code_showroom": 9,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTVA002",
+        "code_showroom": 10,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTVA002",
+        "code_showroom": 11,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTVA002",
+        "code_showroom": 12,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTVA002",
+        "code_showroom": 13,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTVA002",
+        "code_showroom": 14,
+        "quantity": 0
+    },
+    {
+        "product_code": "LTVA002",
+        "code_showroom": 15,
+        "quantity": 0
     }
 ]

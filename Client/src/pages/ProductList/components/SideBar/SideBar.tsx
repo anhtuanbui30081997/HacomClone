@@ -49,7 +49,7 @@ export default function SideBar(props: { category: CategoryType; queryConfig: Qu
   })
   const nestedCategories = dataNestedCategorisList?.data.data
   const { data: dataQuantity } = useQuery({
-    queryKey: ['quantity'],
+    queryKey: ['quantity', props.queryConfig],
     queryFn: productApi.getQuantity
   })
   const quantities = dataQuantity?.data.data

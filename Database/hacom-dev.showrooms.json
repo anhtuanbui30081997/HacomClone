@@ -2,6 +2,7 @@
     {
         "name": "hai bà trưng",
         "region": 0,
+        "code_showroom": 0,
         "address": "Số 131 Lê Thanh Nghị - Hai Bà Trưng - Hà Nội",
         "phone": "Tel: 1900 1903 (máy lẻ 25398) - (0243) 6285551",
         "email": "Email: kdbl.haibatrung@hacom.vn",
@@ -11,6 +12,7 @@
     {
         "name": "Đống Đa",
         "region": 0,
+        "code_showroom": 1,
         "address": "Số 43 Thái Hà - Đống Đa - Hà Nội",
         "phone": "Tel: 1900 1903 (máy lẻ 25375) - (0243) 5380088",
         "email": "Email: kdbl.dongda@hacom.vn",
@@ -20,6 +22,7 @@
     {
         "name": "Cầu Giấy",
         "region": 0,
+        "code_showroom": 2,
         "address": "Số 79 Nguyễn Văn Huyên - Cầu Giấy - Hà Nội",
         "phone": "Tel: 1900 1903 (máy lẻ 25378) - (024) 38610088",
         "email": "Email: kdbl.caugiay@hacom.vn",
@@ -29,6 +32,7 @@
     {
         "name": "Hà Đông 1",
         "region": 0,
+        "code_showroom": 3,
         "address": "Số 511 Quang Trung - Hà Đông - Hà Nội",
         "phone": "Tel: 1900 1903 (máy lẻ 25381) - (024) 38580088",
         "email": "Email: kdbl.hadong1@hacom.vn",
@@ -38,6 +42,7 @@
     {
         "name": "Long Biên",
         "region": 0,
+        "code_showroom": 4,
         "address": "Số 398 Nguyễn Văn Cừ - Long Biên - Hà Nội",
         "phone": "Tel: 1900 1903 (máy lẻ 25384) - (024) 73088877",
         "email": "Email: kdbl.longbien@hacom.vn",
@@ -47,6 +52,7 @@
     {
         "name": "Thanh Trì",
         "region": 0,
+        "code_showroom": 5,
         "address": "CT4A Bắc Linh Đàm - Hoàng Mai - Hà Nội",
         "phone": "Tel: 1900 1903 (máy lẻ 25370) - (024) 32030188",
         "email": "Email: kdbl.thanhtri@hacom.vn",
@@ -56,6 +62,7 @@
     {
         "name": "Đông Anh",
         "region": 0,
+        "code_showroom": 6,
         "address": "Số 77 Cao Lỗ - Đông Anh - Hà Nội",
         "phone": "Tel: 1900 1903 (máy lẻ 30481) - (024) 32001088",
         "email": "Email: kdbl.donganh@hacom.vn",
@@ -65,6 +72,7 @@
     {
         "name": "Hà Đông 2",
         "region": 0,
+        "code_showroom": 7,
         "address": "Số 57 Trần Phú - Hà Đông - Hà Nội",
         "phone": "Tel: 1900 1903 (máy lẻ 31860) - (024) 73062868",
         "email": "Email: kdbl.hadong2@hacom.vn",
@@ -74,6 +82,7 @@
     {
         "name": "Hải Phòng",
         "region": 1,
+        "code_showroom": 8,
         "address": "Số 406 Tô Hiệu - Lê Chân - Hải Phòng",
         "phone": "Tel: 1900 1903 (máy lẻ 25387) - (022) 58830013",
         "email": "Email: kdbl.haiphong@hacom.vn",
@@ -83,6 +92,7 @@
     {
         "name": "Từ Sơn",
         "region": 1,
+        "code_showroom": 9,
         "address": "Số 299 Minh Khai - Từ Sơn - Bắc Ninh",
         "phone": "Tel: 1900 1903 (máy lẻ 25390) - (022) 23636088",
         "email": "Email: kdbl.tuson@hacom.vn",
@@ -92,6 +102,7 @@
     {
         "name": "Bắc Giang",
         "region": 1,
+        "code_showroom": 10,
         "address": "Số 356 Nguyễn Thị Minh Khai – Dĩnh Kế - Bắc Giang",
         "phone": "Tel: 1900 1903 (máy lẻ 31866) - (020) 47303668",
         "email": "Email: kdbl.bacgiang@hacom.vn",
@@ -101,6 +112,7 @@
     {
         "name": "Phủ Lý",
         "region": 1,
+        "code_showroom": 11,
         "address": "Số 145B Trường Chinh - Phủ Lý - Hà Nam",
         "phone": "Tel: 1900 1903 (máy lẻ 30496) – (022) 67302868",
         "email": "Email: baohanhphuly@hacom.vn",
@@ -110,6 +122,7 @@
     {
         "name": "Thái Nguyên",
         "region": 1,
+        "code_showroom": 12,
         "address": "Số 118 Lương Ngọc Quyến - Quang Trung - Thái Nguyên",
         "phone": "Tel: 1900 1903 (máy lẻ 31863) – (020) 87302868",
         "email": "Email: baohanhthainguyen@hacom.vn",
@@ -119,6 +132,7 @@
     {
         "name": "Thanh Hóa",
         "region": 2,
+        "code_showroom": 13,
         "address": "Số 164 Lạc Long Quân - Đông Vệ - Thanh Hóa",
         "phone": "Tel: 1900 1903 (máy lẻ 25429) – (023) 77308868",
         "email": "Email: kdbl.thanhhoa@hacom.vn",
@@ -128,6 +142,7 @@
     {
         "name": "Vinh",
         "region": 2,
+        "code_showroom": 14,
         "address": "Số 156 Nguyễn Sỹ Sách - Thành Phố Vinh - Nghệ An",
         "phone": "Tel: 1900 1903 (máy lẻ 30499) – (023) 87302868",
         "email": "Email: baohanhvinh@hacom.vn",
@@ -137,6 +152,7 @@
     {
         "name": "Q3, TP. HỒ CHÍ MINH",
         "region": 3,
+        "code_showroom": 15,
         "address": "Số 520 Cách Mạng Tháng Tám - Quận 3 - TP. Hồ Chí Minh",
         "phone": "Tel: 1900 1903 (máy lẻ 25400) - (028) 73000322",
         "email": "Email: kdbl.quan3@hacom.vn",

@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom'
 import { ProductType } from 'src/types/product.type'
 import product1 from 'src/assets/images/product1.png'
 import ProductRating from '../ProductRating'
-import { rateSale } from 'src/utils/utils'
+import { formatCurrency, rateSale } from 'src/utils/utils'
+import { PhoneIcon } from 'src/assets/icons'
 
 const ProductItem = (props: ProductType) => {
-  const originalPrice = Number(props.old_price.replace(/[.]/g, ''))
-  const salePrice = Number(props.new_price.replace(/[.]/g, ''))
+  const showrooms = props.showrooms || []
   return (
     <Link to={'/'}>
       <div
@@ -39,24 +39,35 @@ const ProductItem = (props: ProductType) => {
             ))}
           </ul>
           <div className='flex items-center justify-between'>
-            <span className='font-helvetica text-[15px] text-[#666] line-through'>{props.old_price}₫</span>
-            <span className='text-red-500'>(Tiết kiệm: {rateSale(originalPrice, salePrice)} )</span>
+            <span className='font-helvetica text-[15px] text-[#666] line-through'>
+              {formatCurrency(props.old_price)}₫
+            </span>
+            <span className='text-red-500'>(Tiết kiệm: {rateSale(props.old_price, props.new_price)} )</span>
           </div>
-          <div className='mt-2 font-helvetica text-[22px] font-semibold text-black'>{props.new_price}₫</div>
+          <div className='mt-2 font-helvetica text-[22px] font-semibold text-black'>
+            {formatCurrency(props.new_price)}₫
+          </div>
           <div className='mt-2 flex items-center justify-between'>
-            <div className='flex items-center text-green-500'>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                strokeWidth={2.5}
-                stroke='currentColor'
-                className='h-5 w-5'
-              >
-                <path strokeLinecap='round' strokeLinejoin='round' d='m4.5 12.75 6 6 9-13.5' />
-              </svg>
-              <span className='text-[13px]'>Sẵn hàng</span>
-            </div>
+            {showrooms.length > 0 ? (
+              <div className='flex items-center text-green-500'>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  strokeWidth={2.5}
+                  stroke='currentColor'
+                  className='h-5 w-5'
+                >
+                  <path strokeLinecap='round' strokeLinejoin='round' d='m4.5 12.75 6 6 9-13.5' />
+                </svg>
+                <span className='text-[13px]'>Sẵn hàng</span>
+              </div>
+            ) : (
+              <div className='flex items-center gap-1 text-[#0074da]'>
+                <PhoneIcon className='h-4 w-4' fill='#0074da' />
+                <span className='text-[13px]'>Đặt hàng</span>
+              </div>
+            )}
             <div className='rounded-full bg-red-500 p-1 text-white'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'

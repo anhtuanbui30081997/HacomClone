@@ -1,4 +1,5 @@
 import { CategoryType } from 'src/constants/category.enum'
+import { CodeShowroom, ShowroomType } from './showroom.type'
 
 export type Brand = 'asus' | 'acer' | 'dell' | 'hp' | 'lenovo' | 'msi' | 'macbook' | 'lg' | 'microsoft' | 'vaio'
 export type Style = 'fashion' | 'gaming' | 'technology' | 'common'
@@ -62,12 +63,16 @@ export interface ProductType {
   rating_count?: number
   comments?: number
   views?: number
-  old_price: string
-  new_price: string
+  old_price: number
+  new_price: number
+  price_off: number
   images?: string[]
   guarantee: string
   categories: number[]
-  showrooms?: string[]
+  showrooms?: {
+    code_showroom: ShowroomType
+    quantity: number
+  }[]
 }
 
 export interface ProductList {
@@ -77,6 +82,8 @@ export interface ProductList {
   total: number
   page_size: number
 }
+
+export type SortType = 'new' | 'views' | 'price_off' | 'price_inc' | 'price_dec' | 'rating' | 'name'
 
 export interface ProductListConfig {
   page?: number | string
@@ -94,6 +101,9 @@ export interface ProductListConfig {
   screen_resolution?: ScreenResolution
   size_screen?: SizeScreen
   touch_screen?: TouchScreen
+  sort?: SortType
+  stock?: CodeShowroom
+  other_filter?: 'stocking' | 'all'
 }
 
 export interface Quantity {

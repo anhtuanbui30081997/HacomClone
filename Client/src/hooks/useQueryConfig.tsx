@@ -24,7 +24,10 @@ export default function useQueryConfig() {
       screen_frequency: queryParams.screen_frequency,
       screen_resolution: queryParams.screen_resolution,
       size_screen: queryParams.size_screen,
-      touch_screen: queryParams.touch_screen
+      touch_screen: queryParams.touch_screen,
+      sort: queryParams.sort,
+      stock: queryParams.stock,
+      other_filter: queryParams.other_filter
     },
     isUndefined
   )

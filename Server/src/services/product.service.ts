@@ -74,9 +74,15 @@ class ProductService {
       screen_resolution,
       size_screen,
       style,
-      touch_screen
+      touch_screen,
+      sort,
+      stock,
+      other_filter
     } = queryParam
     const filter = []
+    const sort_type: {
+      [key in string]: number
+    } = { new: 1 }
 
     filter.push({ categories: Number(category) })
     if (brand) {
@@ -115,6 +121,50 @@ class ProductService {
     if (touch_screen) {
       filter.push({ 'laptop.touch_screen': touch_screen })
     }
+    if (stock && stock !== 'all') {
+      console.log(stock)
+      filter.push({
+        showrooms: {
+          $elemMatch: {
+            code_showroom: Number(stock)
+          }
+        }
+      })
+    }
+    if (other_filter === 'stocking') {
+      filter.push({
+        showrooms: {
+          $exists: true,
+          $ne: []
+        }
+      })
+    }
+
+    if (sort) {
+      switch (sort) {
+        case 'new':
+          sort_type.new = 1
+          break
+        case 'price_dec':
+          sort_type.new_price = -1
+          break
+        case 'price_inc':
+          sort_type.new_price = 1
+          break
+        case 'name':
+          sort_type.name = 1
+          break
+        case 'rating':
+          sort_type.rating = -1
+          break
+        case 'views':
+          sort_type.views = -1
+          break
+        case 'price_off':
+          sort_type.price_off = -1
+          break
+      }
+    }
 
     const [productList, productListSize, total] = await Promise.all([
       databaseService.products
@@ -125,6 +175,13 @@ class ProductService {
               localField: 'product_code',
               foreignField: 'product_code',
               as: 'laptop'
+            }
+          },
+          {
+            $addFields: {
+              price_off: {
+                $subtract: ['$old_price', '$new_price']
+              }
             }
           },
           {
@@ -139,12 +196,46 @@ class ProductService {
             }
           },
           {
+            $unset: 'group'
+          },
+          {
+            $lookup: {
+              from: 'quantities',
+              let: {
+                product_code: '$product_code'
+              },
+              pipeline: [
+                {
+                  $match: {
+                    $expr: {
+                      $and: [
+                        {
+                          $eq: ['$product_code', '$$product_code']
+                        },
+                        {
+                          $gt: ['$quantity', 0]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  $project: {
+                    _id: 0,
+                    product_code: 0
+                  }
+                }
+              ],
+              as: 'showrooms'
+            }
+          },
+          {
             $match: {
               $and: filter
             }
           },
           {
-            $unset: 'group'
+            $sort: sort_type
           },
           {
             $skip: Number(limit) * (Number(page) - 1)
