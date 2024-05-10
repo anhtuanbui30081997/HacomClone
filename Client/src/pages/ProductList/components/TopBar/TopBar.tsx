@@ -4,7 +4,8 @@ import { createSearchParams, useNavigate } from 'react-router-dom'
 import showroomApi from 'src/apis/showroom.api'
 import { QueryConfig } from 'src/hooks/useQueryConfig'
 import { SortType } from 'src/types/product.type'
-import { CodeShowroom } from 'src/types/showroom.type'
+import { formatCurrency } from 'src/utils/utils'
+import Pagination from '../Pagination'
 
 interface Props {
   queryConfig: QueryConfig
@@ -13,9 +14,12 @@ interface Props {
 
 export default function TopBar({ pageSize, queryConfig }: Props) {
   const navigate = useNavigate()
+
   const [sort, setSort] = useState<SortType | null>(null)
   const [statusStock, setStatusStock] = useState<'all' | 'stocking' | null>('all')
   const [stockId, setStockId] = useState<string>('all')
+  const [lowPrice, setLowPrice] = useState<number>(649000)
+  const [highPrice, setHighPrice] = useState<number>(37999000)
 
   const { data: dataShowrooms } = useQuery({
     queryKey: ['showrooms'],
@@ -34,6 +38,23 @@ export default function TopBar({ pageSize, queryConfig }: Props) {
     if (e.target.value) {
       setStockId(e.target.value)
     }
+  }
+  const handleLowPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLowPrice(Number(e.target.value.replace(/\./g, '')))
+  }
+  const handleHighPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setHighPrice(Number(e.target.value.replace(/\./g, '')))
+  }
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    navigate({
+      pathname: undefined,
+      search: createSearchParams({
+        ...queryConfig,
+        price_max: String(highPrice) || '',
+        price_min: String(lowPrice) || ''
+      }).toString()
+    })
   }
 
   useEffect(() => {
@@ -81,18 +102,30 @@ export default function TopBar({ pageSize, queryConfig }: Props) {
         </select>
         {/* Lọc the giá tiền */}
         <div>
-          <form action='' className='flex items-center gap-1'>
+          <form action='' className='flex items-center gap-1' onSubmit={handleSubmit}>
             <div className='text-[13px] xl:w-16 2xl:w-32'>Lọc theo sản phẩm:</div>
             <div className=' flex items-center rounded-sm border border-[#ccc] bg-white p-[6px] text-[13px]'>
-              <input type='text' value='649.000' className='mr-1 text-end outline-none xl:w-[76px]' />
+              <input
+                onChange={handleLowPriceChange}
+                value={formatCurrency(lowPrice)}
+                type='text'
+                className='mr-1 text-end outline-none xl:w-[76px]'
+              />
               <div className='text-[13px]'>₫</div>
             </div>
             <div> - </div>
             <div className='flex items-center rounded-sm border border-[#ccc] bg-white p-[6px] text-[13px]'>
-              <input type='text' value='37.999.000' className='mr-1 text-end outline-none xl:w-[76px]' />
+              <input
+                onChange={handleHighPriceChange}
+                value={formatCurrency(highPrice)}
+                type='text'
+                className='mr-1 text-end outline-none xl:w-[76px]'
+              />
               <div className='text-[13px]'>₫</div>
             </div>
-            <button className=' rounded bg-[#243a76] px-5 py-[6px] text-sm text-white'>Lọc</button>
+            <button type='submit' className=' rounded bg-[#243a76] px-5 py-[6px] text-sm text-white'>
+              Lọc
+            </button>
           </form>
         </div>
       </div>
@@ -150,22 +183,8 @@ export default function TopBar({ pageSize, queryConfig }: Props) {
           </select>
         </div>
         {/* Phân trang */}
-        <div className='flex items-center gap-1'>
-          <button className='rounded bg-white font-semibold text-[#243a76] hover:bg-[#243a76] hover:text-white xl:px-[7px] xl:py-[3px] xl:text-xs 2xl:px-3 2xl:py-2 2xl:text-sm'>
-            prev
-          </button>
-          <button className='rounded bg-white font-semibold text-[#243a76] hover:bg-[#243a76] hover:text-white xl:px-[7px] xl:py-[3px] xl:text-xs 2xl:px-3 2xl:py-2 2xl:text-sm'>
-            1
-          </button>
-          <button className='rounded bg-white font-semibold text-[#243a76] hover:bg-[#243a76] hover:text-white xl:px-[7px] xl:py-[3px] xl:text-xs 2xl:px-3 2xl:py-2 2xl:text-sm'>
-            2
-          </button>
-          <button className='rounded bg-white font-semibold text-[#243a76] hover:bg-[#243a76] hover:text-white xl:px-[7px] xl:py-[3px] xl:text-xs 2xl:px-3 2xl:py-2 2xl:text-sm'>
-            3
-          </button>
-          <button className='rounded bg-white font-semibold text-[#243a76] hover:bg-[#243a76] hover:text-white xl:px-[7px] xl:py-[3px] xl:text-xs 2xl:px-3 2xl:py-2 2xl:text-sm'>
-            next
-          </button>
+        <div className=''>
+          <Pagination pageSize={pageSize} queryConfig={queryConfig} />
         </div>
       </div>
     </div>

@@ -11,7 +11,7 @@ export default function useQueryConfig() {
   const queryConfig: QueryConfig = omitBy(
     {
       page: queryParams.page || '1',
-      limit: queryParams.limit || 20,
+      limit: queryParams.limit || 12,
       category: queryParams.category || 1,
       brand: queryParams.brand,
       style: queryParams.style,
@@ -27,7 +27,9 @@ export default function useQueryConfig() {
       touch_screen: queryParams.touch_screen,
       sort: queryParams.sort,
       stock: queryParams.stock,
-      other_filter: queryParams.other_filter
+      other_filter: queryParams.other_filter,
+      price_max: queryParams.price_max,
+      price_min: queryParams.price_min
     },
     isUndefined
   )

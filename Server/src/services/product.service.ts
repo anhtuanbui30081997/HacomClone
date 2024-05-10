@@ -77,6 +77,8 @@ class ProductService {
       touch_screen,
       sort,
       stock,
+      price_min,
+      price_max,
       other_filter
     } = queryParam
     const filter = []
@@ -128,6 +130,14 @@ class ProductService {
           $elemMatch: {
             code_showroom: Number(stock)
           }
+        }
+      })
+    }
+    if (price_min && price_max) {
+      filter.push({
+        new_price: {
+          $gte: Number(price_min),
+          $lte: Number(price_max)
         }
       })
     }

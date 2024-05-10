@@ -103,6 +103,8 @@ export interface ProductListConfig {
   touch_screen?: TouchScreen
   sort?: SortType
   stock?: CodeShowroom
+  price_max?: number | string
+  price_min?: number | string
   other_filter?: 'stocking' | 'all'
 }
 
