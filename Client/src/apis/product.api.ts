@@ -17,7 +17,10 @@ const productApi = {
     })
   },
   getQuantity() {
-    return http.get<SuccessResponse<Quantity>>(`${URL}/laptop`)
+    return http.get<SuccessResponse<Quantity>>(`${URL}/laptop/`)
+  },
+  getProductDetail(id: string) {
+    return http.get<SuccessResponse<ProductType>>(`${URL}/${id}`)
   }
 }
 

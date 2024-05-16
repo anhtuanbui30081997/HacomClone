@@ -154,7 +154,7 @@ const UserManagement = () => {
   const deleteOneUserMutation = useMutation({
     mutationFn: (email: string) => authApi.deleteOneUser({ email })
   })
-  const { data, error, isPending, isSuccess, isError } = useQuery({
+  const { data } = useQuery({
     queryKey: ['users'],
     queryFn: authApi.getAllUsers
   })
@@ -329,11 +329,14 @@ const initProduct: ProductType = {
   categories: [],
   guarantee: '',
   name: '',
-  new_price: '',
-  old_price: '',
+  new_price: 0,
+  old_price: 0,
   showrooms: [],
   specifications: [],
-  product_code: ''
+  product_code: '',
+  images: [],
+  _id: '',
+  price_off: 0
 }
 
 const ProductManagement = () => {
@@ -373,10 +376,10 @@ const ProductManagement = () => {
     setProduct((prev) => ({ ...prev, specifications: specifications }))
   }
   const handleOldPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setProduct((prev) => ({ ...prev, old_price: e.target.value }))
+    setProduct((prev) => ({ ...prev, old_price: Number(e.target.value) }))
   }
   const handleNewPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setProduct((prev) => ({ ...prev, new_price: e.target.value }))
+    setProduct((prev) => ({ ...prev, new_price: Number(e.target.value) }))
   }
   const handleGuaranteeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setProduct((prev) => ({ ...prev, guarantee: e.target.value }))

@@ -4,6 +4,7 @@ const path = {
   check_oder: '/check-order',
   cart: '/cart',
   admin: '/admin',
+  producDetail: ':nameId',
   laptop_macbook_surface: '/laptop-macbook-surface',
   laptop_acer: '/laptop-acer',
   laptop_acer_asprire: '/laptop-acer-aspire',

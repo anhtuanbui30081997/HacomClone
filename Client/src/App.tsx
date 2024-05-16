@@ -9,6 +9,7 @@ import path from './constants/path'
 import Admin from './pages/Admin/Admin'
 import ProductList from './pages/ProductList'
 import { CategoryType } from './constants/category.enum'
+import ProductDetail from './pages/ProductDetail'
 
 function App() {
   return (
@@ -120,6 +121,7 @@ function App() {
           <Route path={path.microsoft_surface} element={<ProductList category={CategoryType.MicrosoftSurface} />} />
           <Route path={path.laptop_vaio} element={<ProductList category={CategoryType.LaptopVaio} />} />
           <Route path={path.laptop_vaio_fe} element={<ProductList category={CategoryType.LaptopVaioFe} />} />
+          <Route path={path.producDetail} element={<ProductDetail />} />
           <Route path={path.build_pc} element={<BuildPc />} />
           <Route path={path.check_oder} element={<CheckOrder />} />
           <Route path={path.cart} element={<Cart />} />

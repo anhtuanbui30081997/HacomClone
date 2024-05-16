@@ -58,3 +58,16 @@ export function formatNumberToSocialStyle(value: number) {
     .replace('.', ',')
     .toLocaleLowerCase()
 }
+
+export const removeSpecialCharacter = (str: string) =>
+  // eslint-disable-next-line no-useless-escape
+  str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|{|}|\||\\/g, '')
+
+export function generateNameId({ id, name }: { name: string; id: string }) {
+  return removeSpecialCharacter(name).replace(/\s/g, '-').toLocaleLowerCase() + `-i,${id}`
+}
+
+export const getIdFromNameId = (nameId: string) => {
+  const arr = nameId.split('-i,')
+  return arr[arr.length - 1]
+}

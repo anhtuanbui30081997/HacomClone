@@ -2,24 +2,31 @@ import { Link } from 'react-router-dom'
 import { ProductType } from 'src/types/product.type'
 import product1 from 'src/assets/images/product1.png'
 import ProductRating from '../ProductRating'
-import { formatCurrency, rateSale } from 'src/utils/utils'
+import { formatCurrency, generateNameId, rateSale } from 'src/utils/utils'
 import { PhoneIcon } from 'src/assets/icons'
+import Popover from 'src/components/Popover'
+import ProductHoverInfo from '../ProductHoverInfo'
+import path from 'src/constants/path'
 
 const ProductItem = (props: ProductType) => {
   const showrooms = props.showrooms || []
   return (
-    <Link to={'/'}>
+    <Link to={`${path.home}${generateNameId({ id: props._id, name: props.name })}`}>
       <div
         className='shadow-custom overflow-hidden rounded-lg bg-white transition-transform duration-100 
       hover:translate-y-[-0.04rem]'
       >
-        <div className='relative w-full pt-[100%]'>
+        <Popover
+          className='relative w-full pt-[100%]'
+          renderPopover={<ProductHoverInfo {...props} />}
+          placement='right-end'
+        >
           <img
             src={props.images ? props.images[0] : product1}
             alt=''
             className='absolute left-0 top-0 h-full w-full bg-white object-cover'
           />
-        </div>
+        </Popover>
         <div className='p-3 text-xs'>
           <div className='flex items-center justify-between'>
             <div className='flex items-center'>

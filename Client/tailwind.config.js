@@ -28,6 +28,14 @@ export default {
       screens: {
         xl: '1200px',
         '2xl': '1650px'
+      },
+      listStyleType: {
+        none: 'none',
+        disc: 'disc',
+        circle: 'circle',
+        decimal: 'decimal',
+        square: 'square',
+        roman: 'upper-roman'
       }
     }
   },

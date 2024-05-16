@@ -6,7 +6,6 @@ import SlideShow from './components/SlideShow'
 import SideBar from './components/SideBar'
 import TopBar from './components/TopBar'
 import YouAreHere from './components/YouAreHere'
-import TopSearch from './components/TopSearch'
 import useQueryConfig from 'src/hooks/useQueryConfig'
 import { ProductListConfig } from 'src/types/product.type'
 
@@ -29,10 +28,9 @@ export default function ProductList(props: { category: CategoryType }) {
   }
 
   return (
-    <div className='bg-white py-6'>
+    <div className='bg-white pb-6'>
       {dataProductList && (
         <div className='container mx-auto'>
-          <TopSearch />
           <YouAreHere category={props.category} />
           <div className='mt-8 w-max border-b-2 border-[#243a76]'>
             <span className='text-2xl font-bold uppercase text-[#243a76]'>

@@ -9,9 +9,11 @@ productRouter.post('/', wrapRequestHandler(productController.addProduct))
 
 productRouter.get('', wrapRequestHandler(productController.getProductList))
 
-productRouter.post('/upload-images', wrapRequestHandler(productController.uploadImagesProduct))
+productRouter.get('/laptop/', wrapRequestHandler(productController.getQuantity))
 
-productRouter.get('/laptop', wrapRequestHandler(productController.getQuantity))
+productRouter.get('/:id', wrapRequestHandler(productController.getProductDetail))
+
+productRouter.post('/upload-images', wrapRequestHandler(productController.uploadImagesProduct))
 
 const productRoute: Route = {
   path: '/products',

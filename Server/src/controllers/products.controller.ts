@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express'
 import { ParamsDictionary } from 'express-serve-static-core'
 import { CategoryType } from '~/constants/enums'
 import { PRODUCT_MESSAGES } from '~/constants/messages'
-import { GetProductListQuery, ProductRequestBody } from '~/models/requests/Product.requests'
+import { GetProductDetailReqParams, GetProductListQuery, ProductRequestBody } from '~/models/requests/Product.requests'
 import productService from '~/services/product.service'
 
 class ProductController {
@@ -39,6 +39,15 @@ class ProductController {
         total: total,
         page_size: Math.ceil(productListSize / Number(limit))
       }
+    })
+  }
+
+  async getProductDetail(req: Request<GetProductDetailReqParams, any, any, any>, res: Response, next: NextFunction) {
+    const { id } = req.params
+    const product = await await productService.getProductDetail(id)
+    return res.json({
+      message: PRODUCT_MESSAGES.GET_PRODUCT_DETAIL_SUCCESSFULLY,
+      data: product
     })
   }
 

@@ -10,6 +10,7 @@ import fsPromise from 'fs/promises'
 import { isProduction } from '~/constants/config'
 import { MediaType } from '~/constants/enums'
 import sharp from 'sharp'
+import { ObjectId } from 'mongodb'
 
 class ProductService {
   private async uploadImageService(req: Request) {
@@ -124,7 +125,6 @@ class ProductService {
       filter.push({ 'laptop.touch_screen': touch_screen })
     }
     if (stock && stock !== 'all') {
-      console.log(stock)
       filter.push({
         showrooms: {
           $elemMatch: {
@@ -2739,6 +2739,50 @@ class ProductService {
         ram_gt_32GB: ram_gt_32GB[0] ? ram_gt_32GB[0].total : 0
       }
     }
+  }
+
+  async getProductDetail(id: string) {
+    const product = await databaseService.products
+      .aggregate([
+        {
+          $match: {
+            _id: new ObjectId(id)
+          }
+        },
+        {
+          $lookup: {
+            from: 'quantities',
+            let: {
+              product_code: '$product_code'
+            },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $and: [
+                      {
+                        $eq: ['$product_code', '$$product_code']
+                      },
+                      {
+                        $gt: ['$quantity', 0]
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                $project: {
+                  _id: 0,
+                  product_code: 0
+                }
+              }
+            ],
+            as: 'showrooms'
+          }
+        }
+      ])
+      .toArray()
+    return product[0]
   }
 }
 

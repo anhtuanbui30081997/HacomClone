@@ -1,12 +1,14 @@
+import { Link } from 'react-router-dom'
 import { CartIcon, SearchIcon, SettingIcon, TruckIcon } from 'src/assets/icons'
 import logo from 'src/assets/images/logo-hacom-since-2001.png'
+import path from 'src/constants/path'
 
 export default function TopSearch() {
   return (
-    <div className='grid grid-cols-12 items-center'>
-      <div className='col-span-2'>
+    <div className='container mx-auto my-5 grid grid-cols-12 items-center'>
+      <Link className='col-span-2' to={path.home}>
         <img src={logo} alt='logo-hacom' />
-      </div>
+      </Link>
       <div className='col-span-10'>
         <div className='grid grid-cols-3 items-center'>
           <div className='col-span-2'>

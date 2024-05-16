@@ -1,5 +1,5 @@
 import { CategoryType } from 'src/constants/category.enum'
-import { CodeShowroom, ShowroomType } from './showroom.type'
+import { CodeShowroom } from './showroom.type'
 
 export type Brand = 'asus' | 'acer' | 'dell' | 'hp' | 'lenovo' | 'msi' | 'macbook' | 'lg' | 'microsoft' | 'vaio'
 export type Style = 'fashion' | 'gaming' | 'technology' | 'common'
@@ -55,7 +55,7 @@ export type ScreenFrequency = '60Hz' | '90Hz' | '120Hz' | '165Hz'
 export type OperationSystem = 'Windows' | 'Linux' | 'Dos' | 'MacOS' | 'Ubuntu'
 
 export interface ProductType {
-  _id?: string
+  _id: string
   name: string
   product_code: string
   specifications: string[]
@@ -66,11 +66,12 @@ export interface ProductType {
   old_price: number
   new_price: number
   price_off: number
-  images?: string[]
+  images: string[]
   guarantee: string
   categories: number[]
   showrooms?: {
-    code_showroom: ShowroomType
+    code_showroom: number
+    address: string
     quantity: number
   }[]
 }

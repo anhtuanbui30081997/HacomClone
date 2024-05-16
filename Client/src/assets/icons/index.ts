@@ -25,8 +25,16 @@ import TruckIcon from './TruckIcon'
 import CartIcon from './CartIcon'
 import ChevronRightIcon from './ChevronRightIcon'
 import ChevronDoubleRightIcon from './ChevronDoubleRightIcon'
+import CheckCircle from './CheckCircle'
+import Square3Stack from './Square3Stack'
+import ChevronUpIcon from './ChevronUpIcon'
+import ChevronDownIcon from './ChevronDownIcon'
 
 export {
+  ChevronUpIcon,
+  ChevronDownIcon,
+  Square3Stack,
+  CheckCircle,
   ChevronDoubleRightIcon,
   ChevronRightIcon,
   CartIcon,

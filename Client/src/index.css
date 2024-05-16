@@ -39,6 +39,12 @@ html {
     0 1px 2px 0 rgba(60, 64, 67, 0.1),
     0 2px 6px 2px rgba(60, 64, 67, 0.15);
 }
+.bg-header-linear {
+  background: linear-gradient(to right, #243a76, #ed1b24);
+}
+.bg-price_linear-gradient {
+  background: linear-gradient(100deg, #ff424e, #fd820a);
+}
 @keyframes gradient {
   0% {
     background-position: 0 0;

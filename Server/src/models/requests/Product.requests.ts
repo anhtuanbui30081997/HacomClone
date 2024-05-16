@@ -1,4 +1,5 @@
 import { Query } from 'express-serve-static-core'
+import { ParamsDictionary } from 'express-serve-static-core'
 
 export type Brand = 'asus' | 'acer' | 'dell' | 'hp' | 'lenovo' | 'msi' | 'macbook' | 'lg' | 'microsoft' | 'vaio'
 export type Style = 'fashion' | 'gaming' | 'technology' | 'common'
@@ -90,4 +91,8 @@ export interface GetProductListQuery extends PanigationQuery {
   stock: '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12' | '13' | '14' | '15' | 'all'
   price_min?: string
   price_max?: string
+}
+
+export interface GetProductDetailReqParams extends ParamsDictionary {
+  id: string
 }
