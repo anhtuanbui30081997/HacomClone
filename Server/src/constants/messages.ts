@@ -50,5 +50,12 @@ export const PRODUCT_MESSAGES = {
   UPLOAD_PRODUCT_IMAGES_SUCCESSFULLY: 'Upload product images successfully',
   GET_PRODUCT_LIST_SUCCESSFULLY: 'Get product list successfully',
   GET_PRODUCT_DETAIL_SUCCESSFULLY: 'Get product detail successfully',
-  GET_QUANTITY_SUCCESSFULLY: 'Get quantity successfully'
+  GET_QUANTITY_SUCCESSFULLY: 'Get quantity successfully',
+  PRODUCT_ID_MUST_BE_A_STRING: 'Product Id must be a string',
+  PRODUCT_NOT_EXISTED: 'Product not existed',
+  UPDATE_VIEWS_SUCCESSFULLY: 'Update views successfully'
 } as const
+
+export const PURCHASE_MESSAGES = {
+  ADD_TO_CART_SUCCESSFULLY: 'Add to cart successfully'
+}

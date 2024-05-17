@@ -3,6 +3,7 @@ import { Category } from '~/models/schemas/Category.schema'
 import { Laptop } from '~/models/schemas/Laptop.schema'
 import { OnlineSeller } from '~/models/schemas/OnlineSeller.schema'
 import { Product } from '~/models/schemas/Product.schema'
+import { Purchase } from '~/models/schemas/Purchase.schema'
 import { RefreshToken } from '~/models/schemas/RefreshToken.schema'
 import { Showroom } from '~/models/schemas/Showroom.schema'
 import { User } from '~/models/schemas/User.schema'
@@ -51,6 +52,9 @@ class DatabaseService {
   }
   get laptops() {
     return this.db.collection<Laptop>(process.env.DB_LAPTOP_COLLECTION as string)
+  }
+  get purchases() {
+    return this.db.collection<Purchase>(process.env.DB_PURCHASE_COLLECTION as string)
   }
 }
 

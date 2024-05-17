@@ -1,11 +1,18 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import YouAreHere from '../ProductList/components/YouAreHere'
 import { useQuery } from '@tanstack/react-query'
 import productApi from 'src/apis/product.api'
 import { formatCurrency, getIdFromNameId } from 'src/utils/utils'
 import { useParams } from 'react-router-dom'
 import ProductRating from '../ProductList/components/ProductRating'
-import { ChevronDownIcon, ChevronRightIcon, ChevronUpIcon, GiftIcon, PhoneIcon } from 'src/assets/icons'
+import {
+  ChevronDownIcon,
+  ChevronRightIcon,
+  ChevronUpIcon,
+  GiftIcon,
+  PhoneIcon,
+  ShoppingCartIcon
+} from 'src/assets/icons'
 import classNames from 'classnames'
 
 export default function ProductDetail() {
@@ -28,7 +35,7 @@ export default function ProductDetail() {
       quantity: number
     }[]
   >([])
-  const imageRef = useRef<HTMLImageElement>(null)
+  const [orderQuantity, setOrderQuantity] = useState<number>(1)
 
   // get 5 images out of all images of product by index
   const currentImages = useMemo(() => (product ? product?.images : []), [product])
@@ -72,11 +79,11 @@ export default function ProductDetail() {
   if (!product) return null
   return (
     <div className='container mx-auto mb-8'>
-      <YouAreHere category={3} />
+      <YouAreHere category={Math.max(...product.categories)} />
       <div className='mt-6 border-b border-b-[#e8e8e8] py-3 text-xl font-medium'>
         LAPTOP ACER ASPIRE 7 A715-76-53PJ (NH.QGESV.007) (I5 12450H/16GB RAM/512GB SSD/15.6 INCH FHD/WIN11/ĐEN)
       </div>
-      <div className='mt-2 grid grid-cols-8'>
+      <div className='relative mt-2 grid grid-cols-8'>
         <div className='col-span-3'>
           <div className='relative w-full border border-[#ccc] pt-[100%] shadow'>
             <button
@@ -98,7 +105,6 @@ export default function ProductDetail() {
               src={activeImage}
               alt={product.name}
               className='pointer-events-none absolute left-0 top-0 h-full w-full bg-white object-cover'
-              ref={imageRef}
             />
             <button
               className='absolute right-[-40px] top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center'
@@ -156,7 +162,7 @@ export default function ProductDetail() {
             <div className='text-sm font-medium'>Thông số sản phẩm</div>
             <ul
               className={classNames(
-                'list-circle mb-[10px] mt-2 list-inside overflow-hidden p-1 leading-[22px] 2xl:text-sm 2xl:leading-7',
+                'mb-[10px] mt-2 list-inside list-circle overflow-hidden p-1 leading-[22px] 2xl:text-sm 2xl:leading-7',
                 {
                   'h-[134px]': viewMore === false,
                   'h-[189px': viewMore === true
@@ -244,15 +250,45 @@ export default function ProductDetail() {
             </div>
           </div>
           {/* Order Quantity */}
-          <div className='mt-5 flex'>
-            <span>Số lượng:</span>
-            <div>
-              <button>-</button>
-              <input type='text' />
-              <button>+</button>
+          <div className='mt-5 flex items-center justify-between'>
+            <div className='flex items-center'>
+              <span className='text-[13px] font-semibold'>Số lượng:</span>
+              <div className='ml-3 flex items-center'>
+                <button
+                  className='h-8 w-8 border border-[#dfdfdf] text-[19px] font-semibold leading-[27px]'
+                  onClick={() => {
+                    if (orderQuantity > 1) {
+                      setOrderQuantity((prev) => prev - 1)
+                    }
+                  }}
+                >
+                  -
+                </button>
+                <input
+                  type='text'
+                  value={orderQuantity}
+                  className='block h-8 w-12 border border-[#dfdfdf] text-center font-semibold'
+                  onChange={(e) => setOrderQuantity(Number(e.target.value))}
+                />
+                <button
+                  className='h-8 w-8 border border-[#dfdfdf] text-[19px] font-semibold leading-[27px]'
+                  onClick={() => {
+                    setOrderQuantity((prev) => prev + 1)
+                  }}
+                >
+                  +
+                </button>
+              </div>
             </div>
-            <button>Thêm vào giỏ hàng</button>
+            <button className='bg-price_linear-gradient flex items-center gap-1 rounded border border-[#ddd] px-[15px] py-[8px] text-[13px] font-semibold text-white'>
+              <ShoppingCartIcon className='h-5 w-5' />
+              Thêm vào giỏ hàng
+            </button>
           </div>
+          <button className='mt-4 w-full rounded bg-[#ed1b24] py-4 text-white'>
+            <div className='text-base font-semibold uppercase'>Đặt mua ngay</div>
+            <div>Giao nhanh tận nơi, miễn phí toàn quốc</div>
+          </button>
         </div>
         <div className='col-span-2 ml-3'>
           <div>
@@ -299,7 +335,7 @@ export default function ProductDetail() {
             <div className='rounded-b border border-t-0 border-[#ccc]'>
               <ul
                 className={
-                  'list-circle list-inside overflow-hidden p-1 text-xs leading-[22px] 2xl:text-sm 2xl:leading-8'
+                  'list-inside list-circle overflow-hidden p-1 text-xs leading-[22px] 2xl:text-sm 2xl:leading-8'
                 }
               >
                 {[
@@ -324,7 +360,7 @@ export default function ProductDetail() {
             <div className='rounded-b border border-t-0 border-[#ccc]'>
               <ul
                 className={
-                  'list-circle list-inside overflow-hidden p-1 text-xs leading-[22px] 2xl:text-sm 2xl:leading-8'
+                  'list-inside list-circle overflow-hidden p-1 text-xs leading-[22px] 2xl:text-sm 2xl:leading-8'
                 }
               >
                 {['Giao hàng miễn phí toàn quốc', 'Nhận hàng và thanh toán tại nhà (ship COD)'].map((item) => (

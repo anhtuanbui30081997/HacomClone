@@ -29,8 +29,10 @@ import CheckCircle from './CheckCircle'
 import Square3Stack from './Square3Stack'
 import ChevronUpIcon from './ChevronUpIcon'
 import ChevronDownIcon from './ChevronDownIcon'
+import ShoppingCartIcon from './ShoppingCartIcon'
 
 export {
+  ShoppingCartIcon,
   ChevronUpIcon,
   ChevronDownIcon,
   Square3Stack,

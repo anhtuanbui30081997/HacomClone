@@ -8,6 +8,7 @@ import categoriesRoute from './routes/categories.routes'
 import productRoute from './routes/products.routes'
 import { initFolder } from './utils/file'
 import staticRoute from './routes/static.routes'
+import purchaseRoute from './routes/purchases.routes'
 
 // console.log('Start')
 
@@ -30,6 +31,14 @@ import staticRoute from './routes/static.routes'
 // console.log('End')
 initFolder()
 
-const routes: Route[] = [userRoute, showroomRoute, onlineSellerRoute, categoriesRoute, productRoute, staticRoute]
+const routes: Route[] = [
+  userRoute,
+  showroomRoute,
+  onlineSellerRoute,
+  categoriesRoute,
+  productRoute,
+  staticRoute,
+  purchaseRoute
+]
 const app = new App(routes)
 app.listen()

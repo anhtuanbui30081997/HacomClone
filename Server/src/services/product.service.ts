@@ -2742,11 +2742,28 @@ class ProductService {
   }
 
   async getProductDetail(id: string) {
+    await databaseService.products.updateOne(
+      {
+        _id: new ObjectId(id)
+      },
+      {
+        $inc: {
+          views: 1
+        }
+      }
+    )
     const product = await databaseService.products
       .aggregate([
         {
           $match: {
             _id: new ObjectId(id)
+          }
+        },
+        {
+          $set: {
+            views: {
+              $add: ['$views', 1]
+            }
           }
         },
         {
