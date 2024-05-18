@@ -38,7 +38,7 @@ const ProductItem = (props: ProductType) => {
             </span>
           </div>
           <div className='line-clamp-3 pt-[10px] font-semibold text-[#333e48] 2xl:text-sm'>{props.name}</div>
-          <ul className='mb-[10px] mt-3 list-inside list-disc overflow-hidden leading-[18px] xl:h-[108px] 2xl:h-[204px] 2xl:text-sm'>
+          <ul className='mb-[10px] mt-3 list-inside list-circle pl-1 overflow-hidden leading-[18px] xl:h-[108px] 2xl:h-[204px] 2xl:text-sm'>
             {props.specifications.map((item) => (
               <li key={`${item}`} className='list-item'>
                 {item}

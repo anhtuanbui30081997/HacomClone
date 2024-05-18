@@ -7,3 +7,11 @@ export const purchaseStatus = {
   delivered: 4,
   cancelled: 5
 } as const
+
+export interface PurchaseType {
+  _id: string
+  user_id: string
+  product_id: string;
+  buy_count: number;
+  purchase_status: number
+}

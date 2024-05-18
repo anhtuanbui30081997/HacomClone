@@ -1,13 +1,31 @@
+import { useQuery } from '@tanstack/react-query'
+import classNames from 'classnames'
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import purchaseApi from 'src/apis/purchase.api'
 import { CartIcon, SearchIcon, SettingIcon, TruckIcon } from 'src/assets/icons'
 import logo from 'src/assets/images/logo-hacom-since-2001.png'
 import path from 'src/constants/path'
+import { AppContext, AppContextInterface } from 'src/contexts/app.context'
+import { purchaseStatus } from 'src/types/purchase.type'
 
 export default function TopSearch() {
+  const {profile, cartNumber}  = useContext<AppContextInterface>(AppContext)
+
+  const { data: dataPurchasesList } = useQuery({
+    queryKey: ['purchases', purchaseStatus.inCart, profile, cartNumber],
+    queryFn: () => purchaseApi.getPurchase(purchaseStatus.inCart),
+    staleTime: 3 * 60 * 1000,
+    enabled: !!profile
+  })
+  const numberProduct:string = dataPurchasesList?.data.data.length.toString() || '0'
+
   return (
     <div className='container mx-auto my-5 grid grid-cols-12 items-center'>
       <Link className='col-span-2' to={path.home}>
-        <img src={logo} alt='logo-hacom' />
+        <div className='w-1/2'>
+          <img src={logo} alt='logo-hacom' className='w-full object-cover'/>
+        </div>
       </Link>
       <div className='col-span-10'>
         <div className='grid grid-cols-3 items-center'>
@@ -45,7 +63,11 @@ export default function TopSearch() {
                   <span className='text-xs text-[#333e48]'>đơn hàng</span>
                 </div>
               </div>
-              <div className='flex items-center gap-1'>
+              <div className='flex items-center gap-1 relative'>
+              <span className={classNames('text-[9px] absolute top-[3px] left-[23px] text-white', {
+                "left-[26px]": numberProduct.length === 1 ,
+                "left-[23px]": numberProduct.length > 1
+              })}>{numberProduct}</span>
                 <CartIcon />
                 <span className='text-xs text-[#333e48]'>Giỏ hàng</span>
               </div>

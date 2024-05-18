@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import YouAreHere from '../ProductList/components/YouAreHere'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import productApi from 'src/apis/product.api'
 import { formatCurrency, getIdFromNameId } from 'src/utils/utils'
 import { useParams } from 'react-router-dom'
@@ -14,8 +14,12 @@ import {
   ShoppingCartIcon
 } from 'src/assets/icons'
 import classNames from 'classnames'
+import { AppContext, AppContextInterface } from 'src/contexts/app.context'
+import purchaseApi from 'src/apis/purchase.api'
+import { toast } from 'react-toastify'
 
 export default function ProductDetail() {
+  const {profile, setIsOpenLoginDialog, setCartNumber} = useContext<AppContextInterface>(AppContext)
   const { nameId } = useParams()
   // Convert to get id of product
   const id = getIdFromNameId(nameId as string)
@@ -36,9 +40,14 @@ export default function ProductDetail() {
     }[]
   >([])
   const [orderQuantity, setOrderQuantity] = useState<number>(1)
-
-  // get 5 images out of all images of product by index
   const currentImages = useMemo(() => (product ? product?.images : []), [product])
+  const addToCartMutation = useMutation({
+    mutationFn: () => purchaseApi.addToCart({buy_count: orderQuantity, product_id: product?._id as string}),
+    onSuccess: () => {
+      setCartNumber(prev => prev + 1)
+      toast.success('Thêm sản phẩm thành công.')
+    }
+  })
 
   useEffect(() => {
     if (product && product.images.length > 0) {
@@ -76,6 +85,15 @@ export default function ProductDetail() {
     }
   }
 
+  const handleAddToCart = () => {
+    if(profile) {
+      // Call API add to cart
+      addToCartMutation.mutate()
+    } else {
+      setIsOpenLoginDialog(true)
+    }
+  }
+
   if (!product) return null
   return (
     <div className='container mx-auto mb-8'>
@@ -107,7 +125,7 @@ export default function ProductDetail() {
               className='pointer-events-none absolute left-0 top-0 h-full w-full bg-white object-cover'
             />
             <button
-              className='absolute right-[-40px] top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center'
+              className='absolute right-[-40px] top-1/2 z-1 flex h-12 w-12 -translate-y-1/2 items-center justify-center'
               onClick={next}
             >
               <svg
@@ -280,7 +298,7 @@ export default function ProductDetail() {
                 </button>
               </div>
             </div>
-            <button className='bg-price_linear-gradient flex items-center gap-1 rounded border border-[#ddd] px-[15px] py-[8px] text-[13px] font-semibold text-white'>
+            <button onClick={handleAddToCart} className='bg-price_linear-gradient flex items-center gap-1 rounded border border-[#ddd] px-[15px] py-[8px] text-[13px] font-semibold text-white'>
               <ShoppingCartIcon className='h-5 w-5' />
               Thêm vào giỏ hàng
             </button>
@@ -321,7 +339,9 @@ export default function ProductDetail() {
                     key={showroom.address}
                     className='flex items-center gap-1 px-2 text-xs odd:bg-[#f2f2f2] even:bg-white 2xl:text-sm'
                   >
-                    <ChevronRightIcon stroke_width={3} />
+                    <div className='w-3'>
+                      <ChevronRightIcon stroke_width={3} />
+                    </div>
                     <span className='text-nowrap text-xs leading-8 2xl:text-sm 2xl:leading-9'>{showroom.address}</span>
                   </div>
                 ))}

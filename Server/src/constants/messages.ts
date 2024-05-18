@@ -57,5 +57,9 @@ export const PRODUCT_MESSAGES = {
 } as const
 
 export const PURCHASE_MESSAGES = {
-  ADD_TO_CART_SUCCESSFULLY: 'Add to cart successfully'
+  ADD_TO_CART_SUCCESSFULLY: 'Add to cart successfully',
+  PRODUCT_ID_MUST_BE_A_STRING: 'Product Id must be a string',
+  PRODUCT_NOT_EXISTED: 'Product not existed',
+  BUY_COUNT_MUST_BE_A_NUMBER: 'Buy count must be a number',
+  GET_PURCHASES_SUCESSFULLY: 'Get purchases successfully'
 }
