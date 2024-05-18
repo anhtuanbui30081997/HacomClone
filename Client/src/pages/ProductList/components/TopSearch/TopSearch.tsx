@@ -63,14 +63,14 @@ export default function TopSearch() {
                   <span className='text-xs text-[#333e48]'>đơn hàng</span>
                 </div>
               </div>
-              <div className='flex items-center gap-1 relative'>
-              <span className={classNames('text-[9px] absolute top-[3px] left-[23px] text-white', {
-                "left-[26px]": numberProduct.length === 1 ,
-                "left-[23px]": numberProduct.length > 1
-              })}>{numberProduct}</span>
-                <CartIcon />
+              <Link to={path.cart} className='flex items-center gap-1 relative'>
+                <span className={classNames('text-[9px] absolute top-[3px] left-[23px] text-white', {
+                  "left-[26px]": numberProduct.length === 1 ,
+                  "left-[23px]": numberProduct.length > 1
+                })}>{numberProduct}</span>
+                  <CartIcon />
                 <span className='text-xs text-[#333e48]'>Giỏ hàng</span>
-              </div>
+              </Link>
             </div>
           </div>
         </div>

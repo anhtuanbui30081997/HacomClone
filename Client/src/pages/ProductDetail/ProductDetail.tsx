@@ -3,7 +3,7 @@ import YouAreHere from '../ProductList/components/YouAreHere'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import productApi from 'src/apis/product.api'
 import { formatCurrency, getIdFromNameId } from 'src/utils/utils'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import ProductRating from '../ProductList/components/ProductRating'
 import {
   ChevronDownIcon,
@@ -17,8 +17,10 @@ import classNames from 'classnames'
 import { AppContext, AppContextInterface } from 'src/contexts/app.context'
 import purchaseApi from 'src/apis/purchase.api'
 import { toast } from 'react-toastify'
+import path from 'src/constants/path'
 
 export default function ProductDetail() {
+  const navigate = useNavigate()
   const {profile, setIsOpenLoginDialog, setCartNumber} = useContext<AppContextInterface>(AppContext)
   const { nameId } = useParams()
   // Convert to get id of product
@@ -92,6 +94,11 @@ export default function ProductDetail() {
     } else {
       setIsOpenLoginDialog(true)
     }
+  }
+  const handleBuyNow = () => {
+    navigate({
+      pathname: path.cart
+    })
   }
 
   if (!product) return null
@@ -303,7 +310,7 @@ export default function ProductDetail() {
               Thêm vào giỏ hàng
             </button>
           </div>
-          <button className='mt-4 w-full rounded bg-[#ed1b24] py-4 text-white'>
+          <button onClick={handleBuyNow} className='mt-4 w-full rounded bg-[#ed1b24] py-4 text-white'>
             <div className='text-base font-semibold uppercase'>Đặt mua ngay</div>
             <div>Giao nhanh tận nơi, miễn phí toàn quốc</div>
           </button>
