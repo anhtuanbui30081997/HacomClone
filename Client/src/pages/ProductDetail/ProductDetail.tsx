@@ -1,6 +1,6 @@
 import { useContext, useEffect, useMemo, useState } from 'react'
 import YouAreHere from '../ProductList/components/YouAreHere'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import productApi from 'src/apis/product.api'
 import { formatCurrency, getIdFromNameId } from 'src/utils/utils'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -18,11 +18,13 @@ import { AppContext, AppContextInterface } from 'src/contexts/app.context'
 import purchaseApi from 'src/apis/purchase.api'
 import { toast } from 'react-toastify'
 import path from 'src/constants/path'
+import { purchaseStatus } from 'src/types/purchase.type'
 
 export default function ProductDetail() {
   const navigate = useNavigate()
-  const {profile, setIsOpenLoginDialog, setCartNumber} = useContext<AppContextInterface>(AppContext)
+  const { profile, setIsOpenLoginDialog } = useContext<AppContextInterface>(AppContext)
   const { nameId } = useParams()
+  const queryClient = useQueryClient()
   // Convert to get id of product
   const id = getIdFromNameId(nameId as string)
   // Call Api to get current product infomation
@@ -44,10 +46,12 @@ export default function ProductDetail() {
   const [orderQuantity, setOrderQuantity] = useState<number>(1)
   const currentImages = useMemo(() => (product ? product?.images : []), [product])
   const addToCartMutation = useMutation({
-    mutationFn: () => purchaseApi.addToCart({buy_count: orderQuantity, product_id: product?._id as string}),
-    onSuccess: () => {
-      setCartNumber(prev => prev + 1)
-      toast.success('Thêm sản phẩm thành công.')
+    mutationFn: () => purchaseApi.addToCart({ buy_count: orderQuantity, product_id: product?._id as string }),
+    onSuccess: (data) => {
+      toast.success(data.data.message, { autoClose: 1000 })
+      queryClient.invalidateQueries({
+        queryKey: ['purchases', purchaseStatus.inCart]
+      })
     }
   })
 
@@ -88,16 +92,20 @@ export default function ProductDetail() {
   }
 
   const handleAddToCart = () => {
-    if(profile) {
+    if (profile) {
       // Call API add to cart
       addToCartMutation.mutate()
     } else {
       setIsOpenLoginDialog(true)
     }
   }
-  const handleBuyNow = () => {
-    navigate({
-      pathname: path.cart
+  const handleBuyNow = async () => {
+    const res = await addToCartMutation.mutateAsync()
+    const purchase = res.data.data
+    navigate(path.cart, {
+      state: {
+        purchaseId: purchase._id
+      }
     })
   }
 
@@ -132,7 +140,7 @@ export default function ProductDetail() {
               className='pointer-events-none absolute left-0 top-0 h-full w-full bg-white object-cover'
             />
             <button
-              className='absolute right-[-40px] top-1/2 z-1 flex h-12 w-12 -translate-y-1/2 items-center justify-center'
+              className='z-1 absolute right-[-40px] top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center'
               onClick={next}
             >
               <svg
@@ -305,7 +313,10 @@ export default function ProductDetail() {
                 </button>
               </div>
             </div>
-            <button onClick={handleAddToCart} className='bg-price_linear-gradient flex items-center gap-1 rounded border border-[#ddd] px-[15px] py-[8px] text-[13px] font-semibold text-white'>
+            <button
+              onClick={handleAddToCart}
+              className='bg-price_linear-gradient flex items-center gap-1 rounded border border-[#ddd] px-[15px] py-[8px] text-[13px] font-semibold text-white'
+            >
               <ShoppingCartIcon className='h-5 w-5' />
               Thêm vào giỏ hàng
             </button>

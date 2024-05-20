@@ -11,8 +11,6 @@ export interface AppContextInterface {
   setProfile: React.Dispatch<React.SetStateAction<User | null>>
   isAuthenticated: boolean
   setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
-  cartNumber: number
-  setCartNumber: React.Dispatch<React.SetStateAction<number>>
 }
 
 const initialAppContext: AppContextInterface = {
@@ -23,9 +21,7 @@ const initialAppContext: AppContextInterface = {
   profile: getProfileFromLS(),
   setProfile: () => null,
   isAuthenticated: Boolean(getAccessTokenFromLS()),
-  setIsAuthenticated: () => null,
-  cartNumber: 0,
-  setCartNumber: () => null
+  setIsAuthenticated: () => null
 }
 
 export const AppContext = createContext<AppContextInterface>(initialAppContext)
@@ -34,7 +30,6 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [isOpenRegisterDialog, setIsOpenRegisterDialog] = useState<boolean>(initialAppContext.isOpenRegisterDialog)
   const [profile, setProfile] = useState<User | null>(initialAppContext.profile)
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(initialAppContext.isAuthenticated)
-  const [cartNumber, setCartNumber] = useState<number>(initialAppContext.cartNumber)
   return (
     <AppContext.Provider
       value={{
@@ -45,9 +40,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         profile,
         setProfile,
         isAuthenticated,
-        setIsAuthenticated,
-        cartNumber,
-        setCartNumber
+        setIsAuthenticated
       }}
     >
       {children}

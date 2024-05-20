@@ -30,8 +30,10 @@ import Square3Stack from './Square3Stack'
 import ChevronUpIcon from './ChevronUpIcon'
 import ChevronDownIcon from './ChevronDownIcon'
 import ShoppingCartIcon from './ShoppingCartIcon'
+import TrashIcon from './TrashIcon'
 
 export {
+  TrashIcon,
   ShoppingCartIcon,
   ChevronUpIcon,
   ChevronDownIcon,

@@ -10,21 +10,21 @@ import { AppContext, AppContextInterface } from 'src/contexts/app.context'
 import { purchaseStatus } from 'src/types/purchase.type'
 
 export default function TopSearch() {
-  const {profile, cartNumber}  = useContext<AppContextInterface>(AppContext)
+  const { isAuthenticated } = useContext<AppContextInterface>(AppContext)
 
   const { data: dataPurchasesList } = useQuery({
-    queryKey: ['purchases', purchaseStatus.inCart, profile, cartNumber],
+    queryKey: ['purchases', purchaseStatus.inCart],
     queryFn: () => purchaseApi.getPurchase(purchaseStatus.inCart),
     staleTime: 3 * 60 * 1000,
-    enabled: !!profile
+    enabled: isAuthenticated
   })
-  const numberProduct:string = dataPurchasesList?.data.data.length.toString() || '0'
+  const numberProduct: string = dataPurchasesList?.data.data.length.toString() || '0'
 
   return (
     <div className='container mx-auto my-5 grid grid-cols-12 items-center'>
       <Link className='col-span-2' to={path.home}>
         <div className='w-1/2'>
-          <img src={logo} alt='logo-hacom' className='w-full object-cover'/>
+          <img src={logo} alt='logo-hacom' className='w-full object-cover' />
         </div>
       </Link>
       <div className='col-span-10'>
@@ -63,12 +63,16 @@ export default function TopSearch() {
                   <span className='text-xs text-[#333e48]'>đơn hàng</span>
                 </div>
               </div>
-              <Link to={path.cart} className='flex items-center gap-1 relative'>
-                <span className={classNames('text-[9px] absolute top-[3px] left-[23px] text-white', {
-                  "left-[26px]": numberProduct.length === 1 ,
-                  "left-[23px]": numberProduct.length > 1
-                })}>{numberProduct}</span>
-                  <CartIcon />
+              <Link to={path.cart} className='relative flex items-center gap-1'>
+                <span
+                  className={classNames('absolute left-[23px] top-[3px] text-[9px] text-white', {
+                    'left-[26px]': numberProduct.length === 1,
+                    'left-[23px]': numberProduct.length > 1
+                  })}
+                >
+                  {numberProduct}
+                </span>
+                <CartIcon />
                 <span className='text-xs text-[#333e48]'>Giỏ hàng</span>
               </Link>
             </div>
