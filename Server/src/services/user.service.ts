@@ -111,6 +111,7 @@ class UserService {
       user_id: new ObjectId(user_id)
     })
     if (old_refresh_token) {
+      console.log(old_refresh_token)
       const { exp, iat } = await this.decodeRefreshToken(old_refresh_token.token)
       const [access_token, refresh_token] = await this.signAccessTokenAndRefreshToken({
         user_id,

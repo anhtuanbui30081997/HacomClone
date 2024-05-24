@@ -29,7 +29,7 @@ class ProductController {
     next: NextFunction
   ) {
     const { limit, page } = req.query
-    const { productList, total, productListSize } = await await productService.getProductList(req.query)
+    const { productList, total, productListSize } = await productService.getProductList(req.query)
     return res.json({
       message: PRODUCT_MESSAGES.GET_PRODUCT_LIST_SUCCESSFULLY,
       data: {
