@@ -3,7 +3,7 @@ import { ChevronRightIcon, GiftIcon, TrashIcon } from 'src/assets/icons'
 import Popover from 'src/components/Popover'
 import path from 'src/constants/path'
 import QuantityController from 'src/components/QuantityController'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { PurchaseType, purchaseStatus } from 'src/types/purchase.type'
 import purchaseApi from 'src/apis/purchase.api'
 import { useContext, useEffect, useState } from 'react'
@@ -11,6 +11,7 @@ import { AppContext, AppContextInterface } from 'src/contexts/app.context'
 import { keyBy } from 'lodash'
 import { formatCurrency } from 'src/utils/utils'
 import { produce } from 'immer'
+import { toast } from 'react-toastify'
 
 interface ExtendedPurchase extends PurchaseType {
   checked: boolean
@@ -19,6 +20,9 @@ interface ExtendedPurchase extends PurchaseType {
 
 export default function Cart() {
   const { isAuthenticated } = useContext<AppContextInterface>(AppContext)
+  const [isCheckedAll, setIsCheckedAll] = useState<boolean>(false)
+  const [tempPrice, setTempPrice] = useState<number>(0)
+  const [discount, setDiscount] = useState<number>(0)
   const [extendedPurchases, setExtendedPurchases] = useState<ExtendedPurchase[]>([])
   const { data: purchasesInCartData, refetch } = useQuery({
     queryKey: ['purchases', purchaseStatus.inCart],
@@ -27,6 +31,61 @@ export default function Cart() {
     enabled: isAuthenticated
   })
   const purchasesInCart = purchasesInCartData?.data.data
+
+  const updatePurchaseMutation = useMutation({
+    mutationFn: purchaseApi.updatePurchase,
+    onSuccess: () => {
+      toast.success("Update purchase successfully")
+    }
+  })
+  const deletePurchaseMutation = useMutation({
+    mutationFn: purchaseApi.deletePurchase,
+    onSuccess: () => {
+      toast.success("Delete purchase successfully")
+    }
+  })
+  const deleteAllPurchaseMutation = useMutation({
+    mutationFn: purchaseApi.deleteAllPurchase,
+    onSuccess: (data) => {
+      toast.success(data.data.message)
+    }
+  })
+
+  const handleCheckedAllChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsCheckedAll(e.target.checked)
+    setExtendedPurchases(
+      produce((draft) => {
+        draft.forEach((item) => item.checked = e.target.checked)
+      })
+    )
+  }
+
+  const handleCheckedChange = (e: React.ChangeEvent<HTMLInputElement>, purchaseIndex: number) => {
+    setExtendedPurchases(
+      produce((draft) => {
+        draft[purchaseIndex].checked = e.target.checked
+      })
+    )
+    const remainingPurchase = extendedPurchases.filter((purchase, index) => index != purchaseIndex)
+    const checkedAll = remainingPurchase.reduce((checked, purchase)=> {
+      return checked && purchase.checked
+    }, true) && e.target.checked
+    setIsCheckedAll(checkedAll)
+  }
+
+  const calculateTotalPrice = () => {
+    const checkedList = extendedPurchases.filter(purchase => purchase.checked === true)
+    const tempPrice = checkedList.reduce((sum, purchase) => {
+      return sum + (purchase.buy_count * purchase.product_info.new_price)
+    }, 0)
+    return tempPrice
+  }
+
+  useEffect(() => {
+    const tempPrice = calculateTotalPrice()
+    setTempPrice(tempPrice)
+  }, [extendedPurchases])
+
   useEffect(() => {
     setExtendedPurchases((prev) => {
       const extendedPurchaseObject = keyBy(prev, '_id')
@@ -47,11 +106,21 @@ export default function Cart() {
       const purchase = extendedPurchases[purchaseIndex]
       setExtendedPurchases(
         produce((draft) => {
-          draft[purchaseIndex].disable = true
+          draft[purchaseIndex].disable = enable
+          draft[purchaseIndex].buy_count = value
         })
       )
-      // updatePurchaseMutation.mutate({ product_id: purchase.product._id, buy_count: value })
+      updatePurchaseMutation.mutate({ product_id: purchase.product_id, buy_count: value })
     }
+  }
+
+  const handleDeletePurchase = (purchaseIndex: number) => {
+    const purchase = extendedPurchases[purchaseIndex]
+    setExtendedPurchases(
+      produce((draft) => draft.filter(item => item.product_id !== purchase.product_id))
+    )
+    deletePurchaseMutation.mutate(purchase.product_id)
+    refetch()
   }
 
   return (
@@ -73,7 +142,7 @@ export default function Cart() {
           <div className='grid grid-cols-11 py-[10px] text-start text-sm'>
             <div className='col-span-5'>
               <div className='flex items-center gap-2'>
-                <input type='checkbox' className='accent-orange h-5 w-5' checked={true} />
+                <input type='checkbox' className='accent-orange h-5 w-5' checked={isCheckedAll} onChange={handleCheckedAllChange} />
                 <div className='flex-grow'>Tất cả sản phẩm ({extendedPurchases.length} sản phẩm)</div>
               </div>
             </div>
@@ -91,7 +160,10 @@ export default function Cart() {
                   }
                   placement='bottom-start'
                 >
-                  <button>
+                  <button onClick={() => {
+                    deleteAllPurchaseMutation.mutate()
+                    refetch()
+                  }}>
                     <TrashIcon className='h-5 w-5 text-[#999]' />
                   </button>
                 </Popover>
@@ -101,11 +173,11 @@ export default function Cart() {
           {extendedPurchases.length > 0 &&
             extendedPurchases.map((purchase, index) => {
               return (
-                <div className='mt-[10px] grid grid-cols-11 rounded-sm p-[15px] text-start text-sm shadow-sm'>
+                <div key={purchase._id} className='mt-[10px] grid grid-cols-11 rounded-sm p-[15px] text-start text-sm shadow-sm'>
                   <div className='col-span-5'>
                     <div className='flex items-center gap-[10px]'>
                       <div>
-                        <input type='checkbox' className='accent-orange h-5 w-5' checked={true} />
+                        <input type='checkbox' className='accent-orange h-5 w-5' checked={purchase.checked} onChange={(e:React.ChangeEvent<HTMLInputElement>) => handleCheckedChange(e, index)}/>
                       </div>
                       <Link to={'/'} className='h-[90px] w-[90px] flex-shrink-0'>
                         <img src={purchase.product_info.images[0]} alt='' className='h-full w-full object-cover' />
@@ -146,8 +218,8 @@ export default function Cart() {
                   </div>
                   <div className='col-span-2 pl-[15px]'>
                     <QuantityController
-                      onChange={(value: number) => {
-                        console.log(value)
+                      onChange={(value: number, enable: boolean) => {
+                        handleQuantity(index, value, enable)
                       }}
                       initOder={purchase.buy_count}
                     />
@@ -166,7 +238,7 @@ export default function Cart() {
                         }
                         placement='bottom-start'
                       >
-                        <button>
+                        <button onClick={() => handleDeletePurchase(index)}>
                           <TrashIcon className='h-5 w-5 text-[#999]' />
                         </button>
                       </Popover>
@@ -190,15 +262,15 @@ export default function Cart() {
             </div>
             <div className='flex justify-between border-b border-[#e1e1e1] p-[10px] text-sm'>
               <span>Tạm tính</span>
-              <span className='font-helvetica font-semibold'>52.297.000₫</span>
+              <span className='font-helvetica font-semibold'>{formatCurrency(tempPrice)}₫</span>
             </div>
             <div className='flex justify-between border-b border-[#e1e1e1] p-[10px] text-sm'>
               <span>Giảm giá</span>
-              <span className='font-helvetica font-semibold'>0₫</span>
+              <span className='font-helvetica font-semibold'>{formatCurrency(discount)}₫</span>
             </div>
             <div className='flex justify-between p-[10px] text-sm'>
               <span>Thành tiền</span>
-              <span className='font-helvetica text-base font-semibold text-[#ee2724]'>52.297.000₫</span>
+              <span className='font-helvetica text-base font-semibold text-[#ee2724]'>{formatCurrency(tempPrice - discount)}₫</span>
             </div>
             <div className='text-end text-sm'>(Đã bao gồm VAT nếu có)</div>
             <button className='h-10 rounded bg-[#243a76] text-sm font-medium text-white'>Tiến hành đặt hàng</button>

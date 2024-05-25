@@ -16,6 +16,12 @@ purchaseRouter.post(
 
 purchaseRouter.get('/:purchase_status', accessTokenValidator, wrapRequestHandler(purchaseController.getPurchases))
 
+purchaseRouter.put('/', accessTokenValidator, wrapRequestHandler(purchaseController.updatePurchase))
+
+purchaseRouter.delete('/:product_id', accessTokenValidator, wrapRequestHandler(purchaseController.deletePurchase))
+
+purchaseRouter.delete('/', accessTokenValidator, purchaseController.deleteAllPurchaseInCart)
+
 const purchaseRoute: Route = {
   path: '/purchases',
   router: purchaseRouter
