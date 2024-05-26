@@ -16,6 +16,8 @@ import { toast } from 'react-toastify'
 interface ExtendedPurchase extends PurchaseType {
   checked: boolean
   disable: boolean
+  paymentPrice: number
+  subGuarantee?: boolean
 }
 
 export default function Cart() {
@@ -76,9 +78,55 @@ export default function Cart() {
   const calculateTotalPrice = () => {
     const checkedList = extendedPurchases.filter(purchase => purchase.checked === true)
     const tempPrice = checkedList.reduce((sum, purchase) => {
-      return sum + (purchase.buy_count * purchase.product_info.new_price)
+      return sum + (purchase.paymentPrice)
     }, 0)
     return tempPrice
+  }
+
+  const handleQuantity = (purchaseIndex: number, value: number, enable: boolean) => {
+    if (enable) {
+      const purchase = extendedPurchases[purchaseIndex]
+      setExtendedPurchases(
+        produce((draft) => {
+          draft[purchaseIndex].disable = enable
+          draft[purchaseIndex].buy_count = value
+          if(draft[purchaseIndex].subGuarantee) {
+            draft[purchaseIndex].paymentPrice = value * (purchase.product_info.new_price + 799000)
+          } else {
+            draft[purchaseIndex].paymentPrice = value * purchase.product_info.new_price
+          }
+        })
+      )
+      updatePurchaseMutation.mutate({ product_id: purchase.product_id, buy_count: value })
+    }
+  }
+
+  const handleSubCheckedChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const purchase = extendedPurchases[index]
+    if(e.target.checked) {
+      setExtendedPurchases(
+        produce((draft) => {
+          draft[index].paymentPrice = purchase.buy_count * (799000 + purchase.product_info.new_price)
+          draft[index].subGuarantee = true
+        })
+      )
+    } else {
+      setExtendedPurchases(
+        produce((draft) => {
+          draft[index].paymentPrice = purchase.buy_count * purchase.product_info.new_price
+          draft[index].subGuarantee = false
+        })
+      )
+    }
+  }
+
+  const handleDeletePurchase = (purchaseIndex: number) => {
+    const purchase = extendedPurchases[purchaseIndex]
+    setExtendedPurchases(
+      produce((draft) => draft.filter(item => item.product_id !== purchase.product_id))
+    )
+    deletePurchaseMutation.mutate(purchase.product_id)
+    refetch()
   }
 
   useEffect(() => {
@@ -94,34 +142,13 @@ export default function Cart() {
           return {
             ...purchase,
             disable: false,
-            checked: Boolean(extendedPurchaseObject[purchase._id]?.checked)
+            checked: Boolean(extendedPurchaseObject[purchase._id]?.checked),
+            paymentPrice: purchase.buy_count * purchase.product_info.new_price
           }
         }) || []
       )
     })
   }, [purchasesInCart])
-
-  const handleQuantity = (purchaseIndex: number, value: number, enable: boolean) => {
-    if (enable) {
-      const purchase = extendedPurchases[purchaseIndex]
-      setExtendedPurchases(
-        produce((draft) => {
-          draft[purchaseIndex].disable = enable
-          draft[purchaseIndex].buy_count = value
-        })
-      )
-      updatePurchaseMutation.mutate({ product_id: purchase.product_id, buy_count: value })
-    }
-  }
-
-  const handleDeletePurchase = (purchaseIndex: number) => {
-    const purchase = extendedPurchases[purchaseIndex]
-    setExtendedPurchases(
-      produce((draft) => draft.filter(item => item.product_id !== purchase.product_id))
-    )
-    deletePurchaseMutation.mutate(purchase.product_id)
-    refetch()
-  }
 
   return (
     <div className='container mx-auto mb-28'>
@@ -190,7 +217,10 @@ export default function Cart() {
                           <fieldset className='mb-[10px] border border-[#ccc] p-[5px] text-[13px]'>
                             <legend>Dịch vụ mua kèm (tùy chọn)</legend>
                             <label>
-                              <input type='checkbox' name='mycheckbox' className=' mr-1' />
+                              <input type='checkbox' name='mycheckbox' className=' mr-1' 
+                              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                handleSubCheckedChange(e, index)
+                              }}/>
                               Gói Bảo Hành Mở Rộng 12 Tháng Tại Hacom Cho Laptop Từ 10 Triệu Đến Dưới 20 Triệu (799.000
                               ₫)
                             </label>
@@ -227,7 +257,7 @@ export default function Cart() {
                   <div className='col-span-2'>
                     <div className='flex h-full items-center justify-between'>
                       <span className='font-helvetica text-base font-semibold text-[#ee2724]'>
-                        {formatCurrency(purchase.buy_count * purchase.product_info.new_price)}₫
+                        {formatCurrency(purchase.paymentPrice)}₫
                       </span>
                       <Popover
                         className='relative px-5'
