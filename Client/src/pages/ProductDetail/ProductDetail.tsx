@@ -314,14 +314,22 @@ export default function ProductDetail() {
               </div>
             </div>
             <button
+              disabled={showrooms.length===0}
               onClick={handleAddToCart}
-              className='bg-price_linear-gradient flex items-center gap-1 rounded border border-[#ddd] px-[15px] py-[8px] text-[13px] font-semibold text-white'
+              className={classNames('bg-price_linear-gradient flex items-center gap-1 rounded border border-[#ddd] px-[15px] py-[8px] text-[13px] font-semibold text-white', {
+                'cursor-not-allowed opacity-80': showrooms.length===0,
+                'cursor-pointer': showrooms.length > 0
+              })}
             >
               <ShoppingCartIcon className='h-5 w-5' />
               Thêm vào giỏ hàng
             </button>
           </div>
-          <button onClick={handleBuyNow} className='mt-4 w-full rounded bg-[#ed1b24] py-4 text-white'>
+          <button onClick={handleBuyNow} className={classNames('mt-4 w-full rounded bg-[#ed1b24] py-4 text-white',
+            {
+              'cursor-not-allowed opacity-80': showrooms.length===0,
+              'cursor-pointer': showrooms.length > 0
+            })} disabled={showrooms.length===0}>
             <div className='text-base font-semibold uppercase'>Đặt mua ngay</div>
             <div>Giao nhanh tận nơi, miễn phí toàn quốc</div>
           </button>

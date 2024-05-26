@@ -8,6 +8,7 @@ import TopBar from './components/TopBar'
 import YouAreHere from './components/YouAreHere'
 import useQueryConfig from 'src/hooks/useQueryConfig'
 import { ProductListConfig } from 'src/types/product.type'
+import Pagination from './components/Pagination'
 
 // Export Component
 export default function ProductList(props: { category: CategoryType }) {
@@ -53,6 +54,9 @@ export default function ProductList(props: { category: CategoryType }) {
                     </div>
                   ))}
                 </div>
+              </div>
+              <div className='flex justify-center'>
+                <Pagination pageSize={dataProductList.data.data.page_size || 1} queryConfig={queryConfig} />
               </div>
             </div>
           </div>
