@@ -75,22 +75,25 @@ class PurchaseService {
     return purchases
   }
 
-  async updatePurchase({buy_count, product_id, user_id}:{product_id: string, user_id: string; buy_count: number}) {
-    const purchase = await databaseService.purchases.findOneAndUpdate({
-      user_id: new ObjectId(user_id),
-      product_id: new ObjectId(product_id),
-    }, {
-      $set: {
-        buy_count: buy_count
+  async updatePurchase({ buy_count, product_id, user_id }: { product_id: string; user_id: string; buy_count: number }) {
+    const purchase = await databaseService.purchases.findOneAndUpdate(
+      {
+        user_id: new ObjectId(user_id),
+        product_id: new ObjectId(product_id)
+      },
+      {
+        $set: {
+          buy_count: buy_count
+        }
+      },
+      {
+        returnDocument: 'after'
       }
-    },
-  {
-    returnDocument: 'after'
-  })
+    )
     return purchase
   }
 
-  async deletePurchase({ product_id, user_id}:{product_id: string, user_id: string}) {
+  async deletePurchase({ product_id, user_id }: { product_id: string; user_id: string }) {
     const purchase = await databaseService.purchases.findOneAndDelete({
       user_id: new ObjectId(user_id),
       product_id: new ObjectId(product_id)

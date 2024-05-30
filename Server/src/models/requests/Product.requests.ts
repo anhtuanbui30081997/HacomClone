@@ -75,6 +75,7 @@ export interface PanigationQuery extends Query {
 }
 
 export interface GetProductListQuery extends PanigationQuery {
+  name?: string
   category?: string
   brand?: Brand
   style?: Style

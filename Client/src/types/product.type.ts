@@ -87,6 +87,7 @@ export interface ProductList {
 export type SortType = 'new' | 'views' | 'price_off' | 'price_inc' | 'price_dec' | 'rating' | 'name'
 
 export interface ProductListConfig {
+  name?: string
   page?: number | string
   limit?: number | string
   category?: CategoryType

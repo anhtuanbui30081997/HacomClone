@@ -41,6 +41,11 @@ export const priceSchema = yup.object({
   })
 })
 
+export const searchProductSchema = yup.object({
+  name: yup.string().trim().required('Tên hoặc mã sản phẩm là bắt buộc')
+})
+
 export type UserSchema = yup.InferType<typeof userSchema>
 export type LoginFormData = Pick<UserSchema, 'email' | 'password'>
 export type PriceSchema = yup.InferType<typeof priceSchema>
+export type SeacrhProductSchema = yup.InferType<typeof searchProductSchema>

@@ -1,4 +1,4 @@
-import { Request } from 'express'
+import { Request, query } from 'express'
 import { GetProductListQuery, ProductRequestBody } from '~/models/requests/Product.requests'
 import databaseService from './database.service'
 import { Product } from '~/models/schemas/Product.schema'
@@ -61,6 +61,7 @@ class ProductService {
 
   async getProductList(queryParam: GetProductListQuery) {
     const {
+      name,
       brand,
       category,
       limit,
@@ -88,43 +89,20 @@ class ProductService {
     } = { new: 1 }
 
     filter.push({ categories: Number(category) })
-    if (brand) {
-      filter.push({ 'laptop.brand': brand })
-    }
-    if (color) {
-      filter.push({ 'laptop.color': color })
-    }
-    if (cpu) {
-      filter.push({ 'laptop.cpu': cpu })
-    }
-    if (ram) {
-      filter.push({ 'laptop.ram': ram })
-    }
-    if (vga) {
-      filter.push({ 'laptop.vga': vga })
-    }
-    if (laptop_category) {
-      filter.push({ 'laptop.laptop_category': laptop_category })
-    }
-    if (operation_system) {
-      filter.push({ 'laptop.operation_system': operation_system })
-    }
-    if (screen_frequency) {
-      filter.push({ 'laptop.screen_frequency': screen_frequency })
-    }
-    if (screen_resolution) {
-      filter.push({ 'laptop.screen_resolution': screen_resolution })
-    }
-    if (size_screen) {
-      filter.push({ 'laptop.size_screen': size_screen })
-    }
-    if (style) {
-      filter.push({ 'laptop.style': style })
-    }
-    if (touch_screen) {
-      filter.push({ 'laptop.touch_screen': touch_screen })
-    }
-    if (stock && stock !== 'all') {
+    brand && filter.push({ 'laptop.brand': brand })
+    color && filter.push({ 'laptop.color': color })
+    cpu && filter.push({ 'laptop.cpu': cpu })
+    ram && filter.push({ 'laptop.ram': ram })
+    vga && filter.push({ 'laptop.vga': vga })
+    laptop_category && filter.push({ 'laptop.laptop_category': laptop_category })
+    operation_system && filter.push({ 'laptop.operation_system': operation_system })
+    screen_frequency && filter.push({ 'laptop.screen_frequency': screen_frequency })
+    screen_resolution && filter.push({ 'laptop.screen_resolution': screen_resolution })
+    size_screen && filter.push({ 'laptop.size_screen': size_screen })
+    style && filter.push({ 'laptop.style': style })
+    touch_screen && filter.push({ 'laptop.touch_screen': touch_screen })
+    stock &&
+      stock !== 'all' &&
       filter.push({
         showrooms: {
           $elemMatch: {
@@ -132,23 +110,21 @@ class ProductService {
           }
         }
       })
-    }
-    if (price_min && price_max) {
+    price_min &&
+      price_max &&
       filter.push({
         new_price: {
           $gte: Number(price_min),
           $lte: Number(price_max)
         }
       })
-    }
-    if (other_filter === 'stocking') {
+    other_filter === 'stocking' &&
       filter.push({
         showrooms: {
           $exists: true,
           $ne: []
         }
       })
-    }
 
     if (sort) {
       switch (sort) {
@@ -179,6 +155,13 @@ class ProductService {
     const [productList, productListSize, total] = await Promise.all([
       databaseService.products
         .aggregate([
+          // {
+          //   $match: {
+          //     $text: {
+          //       $search: `'"${name}"'`
+          //     }
+          //   }
+          // },
           {
             $lookup: {
               from: 'laptops',

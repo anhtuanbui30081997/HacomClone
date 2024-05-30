@@ -31,6 +31,7 @@ class App {
 
   private async initializeDatabae() {
     await databaseServices.connect()
+    await databaseServices.indexProducts()
   }
   private initializeRoutes(routes: Route[]) {
     routes.forEach((route) => {

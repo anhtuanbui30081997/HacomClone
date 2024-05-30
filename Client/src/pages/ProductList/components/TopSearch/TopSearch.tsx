@@ -7,11 +7,12 @@ import { CartIcon, SearchIcon, SettingIcon, TruckIcon } from 'src/assets/icons'
 import logo from 'src/assets/images/logo-hacom-since-2001.png'
 import path from 'src/constants/path'
 import { AppContext, AppContextInterface } from 'src/contexts/app.context'
+import useSearchProducts from 'src/hooks/useSearchProducts'
 import { purchaseStatus } from 'src/types/purchase.type'
 
 export default function TopSearch() {
   const { isAuthenticated } = useContext<AppContextInterface>(AppContext)
-
+  const { onSubmitSearch, register } = useSearchProducts()
   const { data: dataPurchasesList } = useQuery({
     queryKey: ['purchases', purchaseStatus.inCart],
     queryFn: () => purchaseApi.getPurchase(purchaseStatus.inCart),
@@ -30,11 +31,12 @@ export default function TopSearch() {
       <div className='col-span-10'>
         <div className='grid grid-cols-3 items-center'>
           <div className='col-span-2'>
-            <form className='flex xl:h-8 2xl:h-10'>
+            <form className='flex xl:h-8 2xl:h-10' onSubmit={onSubmitSearch}>
               <input
                 type='text'
                 className='grow rounded-l-full border-2 border-red-500 px-5 py-1 text-xs text-[#000] outline-none'
                 placeholder='Nhập tên sản phẩm, từ khóa cần tìm'
+                {...register('name')}
               />
               <button className='rounded-r-full bg-red-500 px-5 py-1 text-white'>
                 <SearchIcon className='h-4 w-4' />

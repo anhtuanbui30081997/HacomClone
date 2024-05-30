@@ -24,7 +24,7 @@ export default function Cart() {
   const { isAuthenticated } = useContext<AppContextInterface>(AppContext)
   const [isCheckedAll, setIsCheckedAll] = useState<boolean>(false)
   const [tempPrice, setTempPrice] = useState<number>(0)
-  const [discount, setDiscount] = useState<number>(0)
+  // const [discount, setDiscount] = useState<number>(0)
   const [extendedPurchases, setExtendedPurchases] = useState<ExtendedPurchase[]>([])
   const { data: purchasesInCartData, refetch } = useQuery({
     queryKey: ['purchases', purchaseStatus.inCart],
@@ -37,13 +37,13 @@ export default function Cart() {
   const updatePurchaseMutation = useMutation({
     mutationFn: purchaseApi.updatePurchase,
     onSuccess: () => {
-      toast.success("Update purchase successfully")
+      toast.success('Update purchase successfully')
     }
   })
   const deletePurchaseMutation = useMutation({
     mutationFn: purchaseApi.deletePurchase,
     onSuccess: () => {
-      toast.success("Delete purchase successfully")
+      toast.success('Delete purchase successfully')
     }
   })
   const deleteAllPurchaseMutation = useMutation({
@@ -57,7 +57,7 @@ export default function Cart() {
     setIsCheckedAll(e.target.checked)
     setExtendedPurchases(
       produce((draft) => {
-        draft.forEach((item) => item.checked = e.target.checked)
+        draft.forEach((item) => (item.checked = e.target.checked))
       })
     )
   }
@@ -68,17 +68,18 @@ export default function Cart() {
         draft[purchaseIndex].checked = e.target.checked
       })
     )
-    const remainingPurchase = extendedPurchases.filter((purchase, index) => index != purchaseIndex)
-    const checkedAll = remainingPurchase.reduce((checked, purchase)=> {
-      return checked && purchase.checked
-    }, true) && e.target.checked
+    const remainingPurchase = extendedPurchases.filter((_, index) => index !== purchaseIndex)
+    const checkedAll =
+      remainingPurchase.reduce((checked, purchase) => {
+        return checked && purchase.checked
+      }, true) && e.target.checked
     setIsCheckedAll(checkedAll)
   }
 
   const calculateTotalPrice = () => {
-    const checkedList = extendedPurchases.filter(purchase => purchase.checked === true)
+    const checkedList = extendedPurchases.filter((purchase) => purchase.checked === true)
     const tempPrice = checkedList.reduce((sum, purchase) => {
-      return sum + (purchase.paymentPrice)
+      return sum + purchase.paymentPrice
     }, 0)
     return tempPrice
   }
@@ -90,7 +91,7 @@ export default function Cart() {
         produce((draft) => {
           draft[purchaseIndex].disable = enable
           draft[purchaseIndex].buy_count = value
-          if(draft[purchaseIndex].subGuarantee) {
+          if (draft[purchaseIndex].subGuarantee) {
             draft[purchaseIndex].paymentPrice = value * (purchase.product_info.new_price + 799000)
           } else {
             draft[purchaseIndex].paymentPrice = value * purchase.product_info.new_price
@@ -103,7 +104,7 @@ export default function Cart() {
 
   const handleSubCheckedChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const purchase = extendedPurchases[index]
-    if(e.target.checked) {
+    if (e.target.checked) {
       setExtendedPurchases(
         produce((draft) => {
           draft[index].paymentPrice = purchase.buy_count * (799000 + purchase.product_info.new_price)
@@ -122,9 +123,7 @@ export default function Cart() {
 
   const handleDeletePurchase = (purchaseIndex: number) => {
     const purchase = extendedPurchases[purchaseIndex]
-    setExtendedPurchases(
-      produce((draft) => draft.filter(item => item.product_id !== purchase.product_id))
-    )
+    setExtendedPurchases(produce((draft) => draft.filter((item) => item.product_id !== purchase.product_id)))
     deletePurchaseMutation.mutate(purchase.product_id)
     refetch()
   }
@@ -169,7 +168,12 @@ export default function Cart() {
           <div className='grid grid-cols-11 py-[10px] text-start text-sm'>
             <div className='col-span-5'>
               <div className='flex items-center gap-2'>
-                <input type='checkbox' className='accent-orange h-5 w-5' checked={isCheckedAll} onChange={handleCheckedAllChange} />
+                <input
+                  type='checkbox'
+                  className='accent-orange h-5 w-5'
+                  checked={isCheckedAll}
+                  onChange={handleCheckedAllChange}
+                />
                 <div className='flex-grow'>Tất cả sản phẩm ({extendedPurchases.length} sản phẩm)</div>
               </div>
             </div>
@@ -187,10 +191,12 @@ export default function Cart() {
                   }
                   placement='bottom-start'
                 >
-                  <button onClick={() => {
-                    deleteAllPurchaseMutation.mutate()
-                    refetch()
-                  }}>
+                  <button
+                    onClick={() => {
+                      deleteAllPurchaseMutation.mutate()
+                      refetch()
+                    }}
+                  >
                     <TrashIcon className='h-5 w-5 text-[#999]' />
                   </button>
                 </Popover>
@@ -200,11 +206,19 @@ export default function Cart() {
           {extendedPurchases.length > 0 &&
             extendedPurchases.map((purchase, index) => {
               return (
-                <div key={purchase._id} className='mt-[10px] grid grid-cols-11 rounded-sm p-[15px] text-start text-sm shadow-sm'>
+                <div
+                  key={purchase._id}
+                  className='mt-[10px] grid grid-cols-11 rounded-sm p-[15px] text-start text-sm shadow-sm'
+                >
                   <div className='col-span-5'>
                     <div className='flex items-center gap-[10px]'>
                       <div>
-                        <input type='checkbox' className='accent-orange h-5 w-5' checked={purchase.checked} onChange={(e:React.ChangeEvent<HTMLInputElement>) => handleCheckedChange(e, index)}/>
+                        <input
+                          type='checkbox'
+                          className='accent-orange h-5 w-5'
+                          checked={purchase.checked}
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCheckedChange(e, index)}
+                        />
                       </div>
                       <Link to={'/'} className='h-[90px] w-[90px] flex-shrink-0'>
                         <img src={purchase.product_info.images[0]} alt='' className='h-full w-full object-cover' />
@@ -217,10 +231,14 @@ export default function Cart() {
                           <fieldset className='mb-[10px] border border-[#ccc] p-[5px] text-[13px]'>
                             <legend>Dịch vụ mua kèm (tùy chọn)</legend>
                             <label>
-                              <input type='checkbox' name='mycheckbox' className=' mr-1' 
-                              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                handleSubCheckedChange(e, index)
-                              }}/>
+                              <input
+                                type='checkbox'
+                                name='mycheckbox'
+                                className=' mr-1'
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                  handleSubCheckedChange(e, index)
+                                }}
+                              />
                               Gói Bảo Hành Mở Rộng 12 Tháng Tại Hacom Cho Laptop Từ 10 Triệu Đến Dưới 20 Triệu (799.000
                               ₫)
                             </label>
@@ -296,11 +314,13 @@ export default function Cart() {
             </div>
             <div className='flex justify-between border-b border-[#e1e1e1] p-[10px] text-sm'>
               <span>Giảm giá</span>
-              <span className='font-helvetica font-semibold'>{formatCurrency(discount)}₫</span>
+              <span className='font-helvetica font-semibold'>{formatCurrency(0)}₫</span>
             </div>
             <div className='flex justify-between p-[10px] text-sm'>
               <span>Thành tiền</span>
-              <span className='font-helvetica text-base font-semibold text-[#ee2724]'>{formatCurrency(tempPrice - discount)}₫</span>
+              <span className='font-helvetica text-base font-semibold text-[#ee2724]'>
+                {formatCurrency(tempPrice - 0)}₫
+              </span>
             </div>
             <div className='text-end text-sm'>(Đã bao gồm VAT nếu có)</div>
             <button className='h-10 rounded bg-[#243a76] text-sm font-medium text-white'>Tiến hành đặt hàng</button>
