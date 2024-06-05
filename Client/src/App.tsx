@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import Home from './pages/Home/Home'
 import BuildPc from './pages/BuildPc/BuildPc'
 import MainLayout from './layouts/MainLayout'
@@ -10,8 +10,13 @@ import Admin from './pages/Admin/Admin'
 import ProductList from './pages/ProductList'
 import { CategoryType } from './constants/category.enum'
 import ProductDetail from './pages/ProductDetail'
+import { useEffect } from 'react'
 
 function App() {
+  const location = useLocation()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [location])
   return (
     <div>
       <Routes>
