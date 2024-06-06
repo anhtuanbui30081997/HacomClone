@@ -16,6 +16,8 @@ productRouter.get('/:id', productIdValidator, wrapRequestHandler(productControll
 
 productRouter.post('/upload-images', wrapRequestHandler(productController.uploadImagesProduct))
 
+productRouter.get('/search/:name', wrapRequestHandler(productController.searchProduct))
+
 const productRoute: Route = {
   path: '/products',
   router: productRouter

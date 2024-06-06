@@ -53,7 +53,8 @@ export const PRODUCT_MESSAGES = {
   GET_QUANTITY_SUCCESSFULLY: 'Get quantity successfully',
   PRODUCT_ID_MUST_BE_A_STRING: 'Product Id must be a string',
   PRODUCT_NOT_EXISTED: 'Product not existed',
-  UPDATE_VIEWS_SUCCESSFULLY: 'Update views successfully'
+  UPDATE_VIEWS_SUCCESSFULLY: 'Update views successfully',
+  SEARHC_PRODUCT_SUCCESSFULLY: 'Search product successfully'
 } as const
 
 export const PURCHASE_MESSAGES = {
@@ -62,7 +63,7 @@ export const PURCHASE_MESSAGES = {
   PRODUCT_NOT_EXISTED: 'Product not existed',
   BUY_COUNT_MUST_BE_A_NUMBER: 'Buy count must be a number',
   GET_PURCHASES_SUCESSFULLY: 'Get purchases successfully',
-  UPDATE_PURCHASE_SUCCESSFULLY: "Update purchase successfully",
-  DELETE_PURCHASE_SUCCESSFULLY: "Delete purchase successfully",
-  DELETE_ALL_PURCHASE_IN_CART_SUCCESSFULLY: "Delete all purchase in cart successfully",
+  UPDATE_PURCHASE_SUCCESSFULLY: 'Update purchase successfully',
+  DELETE_PURCHASE_SUCCESSFULLY: 'Delete purchase successfully',
+  DELETE_ALL_PURCHASE_IN_CART_SUCCESSFULLY: 'Delete all purchase in cart successfully'
 }

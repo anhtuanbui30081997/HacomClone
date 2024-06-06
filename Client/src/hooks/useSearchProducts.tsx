@@ -37,5 +37,5 @@ export default function useSearchProducts() {
     })
     reset()
   })
-  return { onSubmitSearch, register }
+  return { onSubmitSearch, register, reset }
 }

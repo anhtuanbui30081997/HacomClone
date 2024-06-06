@@ -23,6 +23,7 @@ import { toSlug } from 'src/utils/utils'
 import FilterGroupItem from '../FilterGroupItem'
 import FilterItem from '../FilterItem'
 import { QueryConfig } from 'src/hooks/useQueryConfig'
+import { omit } from 'lodash'
 
 const Title = (props: { children: React.ReactNode }) => {
   return <div className='border-b border-[#d9d9d9] py-3 text-sm font-bold uppercase'>{props.children}</div>
@@ -419,9 +420,12 @@ export default function SideBar(props: { category: CategoryType; queryConfig: Qu
   }
 
   useEffect(() => {
-    const queryConfig = {
-      ...props.queryConfig
-    }
+    const queryConfig = omit(
+      {
+        ...props.queryConfig
+      },
+      ['name']
+    )
     brand ? (queryConfig.brand = brand) : delete queryConfig.brand
     style ? (queryConfig.style = style) : delete queryConfig.style
     color ? (queryConfig.color = color) : delete queryConfig.color

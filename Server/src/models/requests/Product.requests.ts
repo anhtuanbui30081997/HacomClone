@@ -97,3 +97,7 @@ export interface GetProductListQuery extends PanigationQuery {
 export interface GetProductDetailReqParams extends ParamsDictionary {
   id: string
 }
+
+export interface SearchProductReqParams extends ParamsDictionary {
+  name: string
+}

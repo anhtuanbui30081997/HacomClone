@@ -152,134 +152,277 @@ class ProductService {
       }
     }
 
-    const [productList, productListSize, total] = await Promise.all([
-      databaseService.products
-        .aggregate([
-          // {
-          //   $match: {
-          //     $text: {
-          //       $search: `'"${name}"'`
-          //     }
-          //   }
-          // },
-          {
-            $lookup: {
-              from: 'laptops',
-              localField: 'product_code',
-              foreignField: 'product_code',
-              as: 'laptop'
-            }
-          },
-          {
-            $addFields: {
-              price_off: {
-                $subtract: ['$old_price', '$new_price']
-              }
-            }
-          },
-          {
-            $unwind: {
-              path: '$laptop'
-            }
-          },
-          {
-            $project: {
-              'laptop._id': 0,
-              'laptop.product_code': 0
-            }
-          },
-          {
-            $unset: 'group'
-          },
-          {
-            $lookup: {
-              from: 'quantities',
-              let: {
-                product_code: '$product_code'
-              },
-              pipeline: [
-                {
-                  $match: {
-                    $expr: {
-                      $and: [
-                        {
-                          $eq: ['$product_code', '$$product_code']
-                        },
-                        {
-                          $gt: ['$quantity', 0]
-                        }
-                      ]
-                    }
-                  }
-                },
-                {
-                  $project: {
-                    _id: 0,
-                    product_code: 0
+    const [productList, productListSize, total] = name
+      ? await Promise.all([
+          databaseService.products
+            .aggregate([
+              {
+                $match: {
+                  $text: {
+                    $search: `'"${name}"'`
                   }
                 }
-              ],
-              as: 'showrooms'
-            }
-          },
-          {
-            $match: {
-              $and: filter
-            }
-          },
-          {
-            $sort: sort_type
-          },
-          {
-            $skip: Number(limit) * (Number(page) - 1)
-          },
-          {
-            $limit: Number(limit)
-          }
+              },
+              {
+                $lookup: {
+                  from: 'laptops',
+                  localField: 'product_code',
+                  foreignField: 'product_code',
+                  as: 'laptop'
+                }
+              },
+              {
+                $addFields: {
+                  price_off: {
+                    $subtract: ['$old_price', '$new_price']
+                  }
+                }
+              },
+              {
+                $unwind: {
+                  path: '$laptop'
+                }
+              },
+              {
+                $project: {
+                  'laptop._id': 0,
+                  'laptop.product_code': 0
+                }
+              },
+              {
+                $unset: 'group'
+              },
+              {
+                $lookup: {
+                  from: 'quantities',
+                  let: {
+                    product_code: '$product_code'
+                  },
+                  pipeline: [
+                    {
+                      $match: {
+                        $expr: {
+                          $and: [
+                            {
+                              $eq: ['$product_code', '$$product_code']
+                            },
+                            {
+                              $gt: ['$quantity', 0]
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      $project: {
+                        _id: 0,
+                        product_code: 0
+                      }
+                    }
+                  ],
+                  as: 'showrooms'
+                }
+              },
+              {
+                $match: {
+                  $and: filter
+                }
+              },
+              {
+                $sort: sort_type
+              },
+              {
+                $skip: Number(limit) * (Number(page) - 1)
+              },
+              {
+                $limit: Number(limit)
+              }
+            ])
+            .toArray(),
+          databaseService.products
+            .aggregate([
+              {
+                $match: {
+                  $text: {
+                    $search: `'"${name}"'`
+                  }
+                }
+              },
+              {
+                $lookup: {
+                  from: 'laptops',
+                  localField: 'product_code',
+                  foreignField: 'product_code',
+                  as: 'laptop'
+                }
+              },
+              {
+                $unwind: {
+                  path: '$laptop'
+                }
+              },
+              {
+                $project: {
+                  'laptop._id': 0,
+                  'laptop.product_code': 0
+                }
+              },
+              {
+                $match: {
+                  $and: filter
+                }
+              },
+              {
+                $unset: 'group'
+              },
+              {
+                $count: 'count'
+              }
+            ])
+            .toArray(),
+          databaseService.products
+            .aggregate([
+              {
+                $match: {
+                  $text: {
+                    $search: `'"${name}"'`
+                  }
+                }
+              },
+              {
+                $count: 'count'
+              }
+            ])
+            .toArray()
         ])
-        .toArray(),
-      databaseService.products
-        .aggregate([
-          {
-            $lookup: {
-              from: 'laptops',
-              localField: 'product_code',
-              foreignField: 'product_code',
-              as: 'laptop'
-            }
-          },
-          {
-            $unwind: {
-              path: '$laptop'
-            }
-          },
-          {
-            $project: {
-              'laptop._id': 0,
-              'laptop.product_code': 0
-            }
-          },
-          {
-            $match: {
-              $and: filter
-            }
-          },
-          {
-            $unset: 'group'
-          },
-          {
-            $count: 'count'
-          }
+      : await Promise.all([
+          databaseService.products
+            .aggregate([
+              // {
+              //   $match: {
+              //     $text: {
+              //       $search: `'"${name}"'`
+              //     }
+              //   }
+              // },
+              {
+                $lookup: {
+                  from: 'laptops',
+                  localField: 'product_code',
+                  foreignField: 'product_code',
+                  as: 'laptop'
+                }
+              },
+              {
+                $addFields: {
+                  price_off: {
+                    $subtract: ['$old_price', '$new_price']
+                  }
+                }
+              },
+              {
+                $unwind: {
+                  path: '$laptop'
+                }
+              },
+              {
+                $project: {
+                  'laptop._id': 0,
+                  'laptop.product_code': 0
+                }
+              },
+              {
+                $unset: 'group'
+              },
+              {
+                $lookup: {
+                  from: 'quantities',
+                  let: {
+                    product_code: '$product_code'
+                  },
+                  pipeline: [
+                    {
+                      $match: {
+                        $expr: {
+                          $and: [
+                            {
+                              $eq: ['$product_code', '$$product_code']
+                            },
+                            {
+                              $gt: ['$quantity', 0]
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      $project: {
+                        _id: 0,
+                        product_code: 0
+                      }
+                    }
+                  ],
+                  as: 'showrooms'
+                }
+              },
+              {
+                $match: {
+                  $and: filter
+                }
+              },
+              {
+                $sort: sort_type
+              },
+              {
+                $skip: Number(limit) * (Number(page) - 1)
+              },
+              {
+                $limit: Number(limit)
+              }
+            ])
+            .toArray(),
+          databaseService.products
+            .aggregate([
+              {
+                $lookup: {
+                  from: 'laptops',
+                  localField: 'product_code',
+                  foreignField: 'product_code',
+                  as: 'laptop'
+                }
+              },
+              {
+                $unwind: {
+                  path: '$laptop'
+                }
+              },
+              {
+                $project: {
+                  'laptop._id': 0,
+                  'laptop.product_code': 0
+                }
+              },
+              {
+                $match: {
+                  $and: filter
+                }
+              },
+              {
+                $unset: 'group'
+              },
+              {
+                $count: 'count'
+              }
+            ])
+            .toArray(),
+          databaseService.products
+            .aggregate([
+              {
+                $count: 'count'
+              }
+            ])
+            .toArray()
         ])
-        .toArray(),
-      databaseService.products
-        .aggregate([
-          {
-            $count: 'count'
-          }
-        ])
-        .toArray()
-    ])
 
     return {
       productList,
@@ -2783,6 +2926,26 @@ class ProductService {
       ])
       .toArray()
     return product[0]
+  }
+
+  async searchProduct(name: string) {
+    const productList = await databaseService.products
+      .find(
+        {
+          $text: {
+            $search: `'"${name}"'`
+          }
+        },
+        {
+          projection: {
+            name: 1,
+            images: 1,
+            new_price: 1
+          }
+        }
+      )
+      .toArray()
+    return productList
   }
 }
 

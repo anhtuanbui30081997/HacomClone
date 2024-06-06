@@ -34,7 +34,7 @@ export default function ProductHoverInfo(props: ProductType) {
               <ul>
                 {props.showrooms &&
                   props.showrooms.map((showroom) => (
-                    <li className='flex items-center gap-1 text-xs font-semibold text-red-500'>
+                    <li className='flex items-center gap-1 text-xs font-semibold text-red-500' key={showroom.address}>
                       <CheckCircle className='h-[14px] w-[14px] text-green-600' />
                       <span>{showroom.address}</span>
                     </li>

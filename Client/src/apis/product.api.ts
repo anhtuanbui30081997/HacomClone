@@ -4,6 +4,7 @@ import http, { Http } from 'src/utils/http'
 
 const URL = 'products'
 const httpForMultipart = new Http('multipar/form-data').instance
+export type SearchProductType = { _id: string; name: string; new_price: number; images: string[] }
 const productApi = {
   addProduct(body: ProductType) {
     return http.post<SuccessResponse<string>>(URL, body)
@@ -21,6 +22,9 @@ const productApi = {
   },
   getProductDetail(id: string) {
     return http.get<SuccessResponse<ProductType>>(`${URL}/${id}`)
+  },
+  searchProduct(name: string) {
+    return http.get<SuccessResponse<SearchProductType[]>>(`${URL}/search/${name}`)
   }
 }
 
