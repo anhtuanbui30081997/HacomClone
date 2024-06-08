@@ -39,8 +39,8 @@ class PurchaseService {
       .aggregate([
         {
           $match: {
-            user_id: new ObjectId('65d75e19da102e02bd2cec80'),
-            purchase_status: -1
+            user_id: new ObjectId(user_id),
+            purchase_status: purchase_status
           }
         },
         {

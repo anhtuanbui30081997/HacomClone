@@ -18,7 +18,7 @@ import { useLocation } from 'react-router-dom'
 export default function TopSearch() {
   const { isAuthenticated } = useContext<AppContextInterface>(AppContext)
   const [searchProducts, setSearchProducts] = useState<SearchProductType[] | null>(null)
-  let location = useLocation()
+  const location = useLocation()
   const { onSubmitSearch, register, reset } = useSearchProducts()
   const { data: dataPurchasesList } = useQuery({
     queryKey: ['purchases', purchaseStatus.inCart],
@@ -58,7 +58,6 @@ export default function TopSearch() {
                 {...register('name')}
                 onChange={debounce((e: React.ChangeEvent<HTMLInputElement>) => {
                   if (e.target.value) {
-                    console.log(e.target.value)
                     getSearchProductsMutaion.mutate(e.target.value)
                   } else {
                     setSearchProducts(null)

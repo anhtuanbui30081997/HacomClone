@@ -5,7 +5,6 @@ import { ChevronLeftIcon, CloseIcon } from 'src/assets/icons'
 import loginImage from 'src/assets/images/loginImage.png'
 import fbImagin from 'src/assets/images/fb-login.png'
 import ggImagin from 'src/assets/images/gg-login.png'
-import recapcha from 'src/assets/images/recaptcha-logo.png'
 import { Link } from 'react-router-dom'
 import Input from '../Input'
 import Button from '../Button'
@@ -24,7 +23,6 @@ export default function LoginDialog() {
   const { isOpenLoginDialog, setIsOpenLoginDialog, setProfile, setIsAuthenticated } =
     useContext<AppContextInterface>(AppContext)
   const [isLoginByEmail, setIsLoginByEmail] = useState<boolean>(true)
-  const [isNotRobot, setIsNotRobot] = useState<boolean>(false)
 
   const {
     register,
@@ -48,7 +46,6 @@ export default function LoginDialog() {
         toast.success('Đăng nhập thành công')
         reset()
         setIsOpenLoginDialog(false)
-        setIsNotRobot(false)
       },
       onError: (error) => {
         if (isAxiosUnprocessableEntityError<ErrorResponse<LoginFormData>>(error)) {
@@ -83,7 +80,6 @@ export default function LoginDialog() {
               <div
                 onClick={() => {
                   setIsLoginByEmail(false)
-                  setIsNotRobot(false)
                 }}
                 className='pb-2 pr-2'
               >
@@ -108,42 +104,7 @@ export default function LoginDialog() {
                   errorMessage={errors.password?.message}
                   register={register}
                 />
-                <div className='mt-7 flex w-3/4 items-center justify-between rounded border-[1px] border-slate-300 bg-[#f9f9f9] px-3 py-2 shadow-sm'>
-                  <div className='flex items-center'>
-                    <Input
-                      type='checkbox'
-                      onChange={() => console.log('checked')}
-                      classNameInput='hidden h-7 w-7'
-                      checked={isNotRobot}
-                    />
-                    {isNotRobot ? (
-                      <div className='mr-2 h-7 w-4 translate-x-1 translate-y-[-8px] rotate-45 select-none border-[3px] border-b-green-600 border-l-transparent border-r-green-600 border-t-transparent'></div>
-                    ) : (
-                      <div
-                        onClick={() => setIsNotRobot(true)}
-                        className='block h-7 w-7 rounded border-2 border-gray-300'
-                      />
-                    )}
-                    <span
-                      onClick={() => setIsNotRobot(true)}
-                      className='ml-3 cursor-pointer select-none text-sm font-normal text-black'
-                    >
-                      I'm not a robot
-                    </span>
-                  </div>
-                  <div
-                    onClick={() => setIsNotRobot(true)}
-                    className='flex cursor-pointer select-none flex-col items-center'
-                  >
-                    <div className='h-9 w-9'>
-                      <img className='h-full w-full object-contain' src={recapcha} alt='' />
-                    </div>
-                    <span className='text-[10px] font-light'>reCAPTCHA</span>
-                    <span className='text-[8px]'>Private - Terms</span>
-                  </div>
-                </div>
                 <Button
-                  disabled={isNotRobot === false}
                   type='submit'
                   className='mt-7 w-full rounded-[4px] border-none text-center text-lg font-medium leading-[44px] text-white'
                 >

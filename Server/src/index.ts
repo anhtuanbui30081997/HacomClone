@@ -10,25 +10,6 @@ import { initFolder } from './utils/file'
 import staticRoute from './routes/static.routes'
 import purchaseRoute from './routes/purchases.routes'
 
-// console.log('Start')
-
-// setImmediate(() => {
-//   console.log('setImmediate callback')
-// })
-
-// process.nextTick(() => {
-//   console.log('process.nextTick callback')
-// })
-
-// setTimeout(() => {
-//   console.log('Inside setTimeout (0ms)')
-// }, 0)
-
-// setTimeout(() => {
-//   console.log('Inside setTimeout (1ms)')
-// }, 100)
-
-// console.log('End')
 initFolder()
 
 const routes: Route[] = [

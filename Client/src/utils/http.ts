@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosInstance, InternalAxiosRequestConfig } from 'axios'
+import axios, { AxiosInstance, AxiosError, InternalAxiosRequestConfig } from 'axios'
 import { toast } from 'react-toastify'
 import { URL_ADMIN_LOGIN, URL_LOGIN, URL_LOGOUT, URL_REFRESH_TOKEN, URL_REGISTER } from 'src/apis/auth.api'
 import config from 'src/constants/config'
@@ -80,7 +80,7 @@ export class Http {
         }
 
         // Neu loi 401 Unauthorized
-        if (isAxiosUnauthorizedError<ErrorResponse<{}>>(error)) {
+        if (isAxiosUnauthorizedError<ErrorResponse<unknown>>(error)) {
           const config = error.response?.config || ({ headers: {} } as InternalAxiosRequestConfig)
           // Nếu token hết hạn và đó không phải là request refresh_token thì tiến hành refresh token
           if (error.response?.data.message === 'Jwt expired' && config.url !== URL_REFRESH_TOKEN) {

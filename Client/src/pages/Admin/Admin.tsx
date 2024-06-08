@@ -109,7 +109,7 @@ const LoginAdmin = (props: { onLogin: () => void }) => {
                 />
               </div>
               <div className='flex items-center justify-between'>
-                <div className='flex items-start'>
+                {/* <div className='flex items-start'>
                   <div className='flex h-5 items-center'>
                     <input
                       id='remember'
@@ -124,10 +124,10 @@ const LoginAdmin = (props: { onLogin: () => void }) => {
                       Remember me
                     </label>
                   </div>
-                </div>
-                <a href='#' className='text-sm font-medium text-primary-600 hover:underline dark:text-primary-500'>
+                </div> */}
+                {/* <Link to='/' className='text-sm font-medium text-primary-600 hover:underline dark:text-primary-500'>
                   Forgot password?
-                </a>
+                </Link> */}
               </div>
               <Button
                 type='submit'
@@ -135,12 +135,6 @@ const LoginAdmin = (props: { onLogin: () => void }) => {
               >
                 Login
               </Button>
-              <p className='text-sm font-light text-gray-500 dark:text-gray-400'>
-                Don’t have an account yet?{' '}
-                <a href='#' className='font-medium text-primary-600 hover:underline dark:text-primary-500'>
-                  Sign up
-                </a>
-              </p>
             </form>
           </div>
         </div>
@@ -406,7 +400,6 @@ const ProductManagement = () => {
         setProduct((prev) => ({ ...prev, images: imageArr }))
       },
       onError: (error) => {
-        console.log(error)
         toast.error(`${error}`)
       }
     })
@@ -415,8 +408,7 @@ const ProductManagement = () => {
   const handleAddProduct = () => {
     productMutation.mutate(product, {
       onSuccess: (res) => {
-        toast.success('Add sản phẩm thành công')
-        console.log(res.data.data)
+        toast.success(res.data.message)
       },
       onError: (error) => {
         toast.error(`${error}`)

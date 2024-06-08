@@ -22,7 +22,7 @@ export const SlideShow = () => {
   const imagesSlide = [slide1, slide2, slide3, slide4, slide5, slide6, slide7, slide8]
 
   useEffect(() => {
-    let id = setInterval(() => {
+    const id = setInterval(() => {
       setActive((prevActive) => (prevActive === imagesSlide.length - 1 ? 0 : prevActive + 1))
     }, 4000)
 

@@ -81,13 +81,15 @@ export default function ProductDetail() {
   }
 
   const handleFilterShowroom = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (e.target.value === 'All' && product?.showrooms) {
-      setShowrooms([...product?.showrooms])
-    } else {
-      const showroomsTemp = product?.showrooms
-        ? product.showrooms.filter((showroom) => showroom.address.includes(e.target.value))
-        : []
-      setShowrooms([...showroomsTemp])
+    if (product) {
+      if (e.target.value === 'All' && product.showrooms) {
+        setShowrooms([...product.showrooms])
+      } else {
+        const showroomsTemp = product?.showrooms
+          ? product.showrooms.filter((showroom) => showroom.address.includes(e.target.value))
+          : []
+        setShowrooms([...showroomsTemp])
+      }
     }
   }
 

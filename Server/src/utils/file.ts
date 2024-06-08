@@ -35,12 +35,10 @@ export const handleUploadImage = async (req: Request) => {
   return new Promise<File[]>((resolve, reject) => {
     form.parse(req, (err, fields, files) => {
       if (err) {
-        console.log('err:', err)
         return reject(err)
       }
       // eslint-disable-next-line no-extra-boolean-cast
       if (!Boolean(files.image)) {
-        console.log('File is empty')
         return reject(new Error('File is empty'))
       }
       resolve(files.image as File[])

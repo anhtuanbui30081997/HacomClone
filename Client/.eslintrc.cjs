@@ -10,7 +10,7 @@ module.exports = {
     'plugin:jsx-a11y/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:import/typescript',
-    'plugin:import/recommended',
+    // 'plugin:import/recommended',
     // Disable các rule mà eslint xung đột với prettier.
     // Để cái này ở dưới để nó override các rule phía trên!.
     'eslint-config-prettier',
@@ -39,10 +39,13 @@ module.exports = {
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     // Tắt rule yêu cầu import React trong file jsx
     'react/react-in-jsx-scope': 'off',
+    'jsx-a11y/no-autofocus': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/no-static-element-interactions': 'off',
     // Cảnh báo khi thẻ <a target='_blank'> mà không có rel="noreferrer"
     'react/jsx-no-target-blank': 'warn',
     '@typescript-eslint/no-unused-vars': 'warn',
-    '@typescript-eslint/no-explicit-any': 'warn',
+    '@typescript-eslint/no-explicit-any': 'off',
     // Tăng cường một số rule prettier (copy từ file .prettierrc qua)
     'prettier/prettier': [
       'warn',
