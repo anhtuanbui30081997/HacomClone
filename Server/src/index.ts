@@ -23,3 +23,5 @@ const routes: Route[] = [
 ]
 const app = new App(routes)
 app.listen()
+
+export default app
