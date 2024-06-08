@@ -1,4 +1,4 @@
-import { Request, query } from 'express'
+import { Request } from 'express'
 import { GetProductListQuery, ProductRequestBody } from '~/models/requests/Product.requests'
 import databaseService from './database.service'
 import { Product } from '~/models/schemas/Product.schema'
@@ -9,7 +9,6 @@ import path from 'path'
 import fsPromise from 'fs/promises'
 import { isProduction } from '~/constants/config'
 import { MediaType } from '~/constants/enums'
-import sharp from 'sharp'
 import { ObjectId } from 'mongodb'
 
 class ProductService {
@@ -19,8 +18,8 @@ class ProductService {
       files.map(async (file) => {
         const newName = getNameFromFullname(file.newFilename)
         const newPath = path.resolve(UPLOAD_IMAGE_DIR, `${newName}.jpg`)
-        const buffer = await sharp(file.filepath).jpeg().toBuffer()
-        await fsPromise.writeFile(newPath, buffer)
+        // const buffer = await sharp(file.filepath).jpeg().toBuffer()
+        // await fsPromise.writeFile(newPath, buffer)
         try {
           await fsPromise.unlink(file.filepath)
         } catch (error) {
