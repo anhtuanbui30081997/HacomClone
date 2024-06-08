@@ -11,7 +11,7 @@
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
-    "vercel-build": "tsc && tsc-alias && node dist/index.js"
+    "vercel-build": "tsc && tsc-alias"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
