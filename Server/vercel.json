@@ -7,7 +7,7 @@
   "outputDirectory": "dist",
   "env": {
     "NODE_ENV":"development",
-    "PORT":4000,
+    "PORT":"4000",
     "DB_NAME":"hacom-dev",
     "DB_USERNAME":"buituananh30081997",
     "DB_PASSWORD":"buituananh30081997",
