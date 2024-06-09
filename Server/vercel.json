@@ -1,4 +1,30 @@
 {
   "version": 2,
-  "rewrites": [{ "source": "/(.*)", "destination": "/api" }]
+  "rewrites": [{ "source": "/(.*)", "destination": "/dist" }],
+  "builds": [
+      { "src": "index.js", "use": "@vercel/node" }
+    ],
+  "outputDirectory": "dist",
+  "env": {
+    "NODE_ENV":"development",
+    "PORT":4000,
+    "DB_NAME":"hacom-dev",
+    "DB_USERNAME":"buituananh30081997",
+    "DB_PASSWORD":"buituananh30081997",
+    "DB_USER_COLLECTION":"users",
+    "DB_REFRESH_TOKEN_COLLECTION":"refresh-tokens",
+    "DB_SHOWROOM_COLLECTION":"showrooms",
+    "DB_ONLINE_SELLER_COLLECTION":"online-sellers",
+    "DB_CATEGORY_COLLECTION":"categories",
+    "DB_PRODUCT_COLLECTION":"products",
+    "DB_LAPTOP_COLLECTION":"laptops",
+    "DB_PURCHASE_COLLECTION":"purchases",
+    "PASSWORD_SECRET":"@hacom-dev-by-Anh@",
+    "JWT_SECRET_ACCESS_TOKEN":"hacom-dev-by-Anh@308-access-token",
+    "JWT_SECRET_REFRESH_TOKEN":"hacom-dev-by-Anh@308-refresh-token",
+    "JWT_SECRET_FORGOT_PASSWORD_TOKEN":"hacom-dev-by-Anh@308-forgot-token",
+    "ACCESS_TOKEN_EXPIRES_IN":"5m",
+    "REFRESH_TOKEN_EXPIRES_IN":"100d",
+    "FORGOT_PASSWORD_TOKEN_EXPIRES_IN":"7d"
+  }
 }
