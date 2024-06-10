@@ -1,3 +1,4 @@
+"use strict";
 // import 'dotenv/config'
 // import { Route } from './models/Route'
 // import App from './app'
@@ -9,9 +10,11 @@
 // import { initFolder } from './utils/file'
 // import staticRoute from './routes/static.routes'
 // import purchaseRoute from './routes/purchases.routes'
-
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 // initFolder()
-
 // const routes: Route[] = [
 //   userRoute,
 //   showroomRoute,
@@ -23,22 +26,16 @@
 // ]
 // const app = new App(routes)
 // app.listen()
-
 // export default app
-
-import express, { Request, Response } from 'express'
-
-const app = express()
-const port = process.env.PORT || 8080
-
-app.get('/', (_req: Request, res: Response) => {
-  return res.send('Express Typescript on Vercel')
-})
-
-app.get('/ping', (_req: Request, res: Response) => {
-  return res.send('pong 🏓')
-})
-
+const express_1 = __importDefault(require("express"));
+const app = (0, express_1.default)();
+const port = process.env.PORT || 8080;
+app.get('/', (_req, res) => {
+    return res.send('Express Typescript on Vercel');
+});
+app.get('/ping', (_req, res) => {
+    return res.send('pong 🏓');
+});
 app.listen(port, () => {
-  return console.log(`Server is listening on ${port}`)
-})
+    return console.log(`Server is listening on ${port}`);
+});
