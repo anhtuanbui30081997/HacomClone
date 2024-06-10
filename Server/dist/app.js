@@ -11,7 +11,6 @@ const errors_middleware_1 = require("./middlewares/errors.middleware");
 const cors_1 = __importDefault(require("cors"));
 const hpp_1 = __importDefault(require("hpp"));
 const helmet_1 = __importDefault(require("helmet"));
-const logger_1 = __importDefault(require("./utils/logger"));
 class App {
     constructor(routes) {
         this.app = (0, express_1.default)();
@@ -52,7 +51,8 @@ class App {
     }
     listen() {
         this.httpServer.listen(this.port, () => {
-            logger_1.default.info(`Example app listening on port ${this.port}`);
+            // Logger.info(`Example app listening on port ${this.port}`)
+            console.log(`Example app listening on port ${this.port}`);
         });
     }
 }

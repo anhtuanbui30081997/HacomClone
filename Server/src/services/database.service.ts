@@ -7,7 +7,6 @@ import { Purchase } from '~/models/schemas/Purchase.schema'
 import { RefreshToken } from '~/models/schemas/RefreshToken.schema'
 import { Showroom } from '~/models/schemas/Showroom.schema'
 import { User } from '~/models/schemas/User.schema'
-import Logger from '~/utils/logger'
 const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@hacom.m3onxez.mongodb.net/?retryWrites=true&w=majority`
 
 class DatabaseService {
@@ -24,11 +23,14 @@ class DatabaseService {
     try {
       // Connect the client to the server	(optional starting in v4.7)
       this.client.connect().then(() => {
-        Logger.info('You successfully connected to MongoDB!')
+        // Logger.info('You successfully connected to MongoDB!')
+        console.log('You successfully connected to MongoDB!')
       })
-      Logger.info('Database is connecting...')
+      // Logger.info('Database is connecting...')
+      console.log('Database is connecting...')
     } catch (error) {
-      Logger.error(error)
+      // Logger.error(error)
+      console.log(error)
     }
   }
 

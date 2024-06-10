@@ -5,7 +5,6 @@ import HTTP_STATUS from '~/constants/httpStatus'
 import { CATEGORY_MESSAGES } from '~/constants/messages'
 import { CategoryRequestBody, GetCategoriesReqParams } from '~/models/requests/Category.requests'
 import categoryService from '~/services/category.service'
-import Logger from '~/utils/logger'
 
 class CategoryController {
   async createCategory(req: Request<ParamsDictionary, any, CategoryRequestBody>, res: Response, next: NextFunction) {
