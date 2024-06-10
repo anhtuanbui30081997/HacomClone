@@ -4,13 +4,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_service_1 = __importDefault(require("./database.service"));
-const Product_schema_1 = require("~/models/schemas/Product.schema");
-const file_1 = require("~/utils/file");
-const direction_1 = require("~/constants/direction");
+const Product_schema_1 = require("../models/schemas/Product.schema");
+const file_1 = require("../utils/file");
+const direction_1 = require("../constants/direction");
 const path_1 = __importDefault(require("path"));
 const promises_1 = __importDefault(require("fs/promises"));
-const config_1 = require("~/constants/config");
-const enums_1 = require("~/constants/enums");
+const config_1 = require("../constants/config");
+const enums_1 = require("../constants/enums");
 const mongodb_1 = require("mongodb");
 class ProductService {
     async uploadImageService(req) {

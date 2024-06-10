@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "npx nodemon --development",
-    "build": "rimraf dist && tsc",
+    "build": "rimraf dist && tsc && tsc-alias",
     "ts.check": "tsc --project tsconfig.json",
     "start": "node dist/index.js",
     "lint": "eslint .",

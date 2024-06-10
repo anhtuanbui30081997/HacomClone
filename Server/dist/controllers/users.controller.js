@@ -3,8 +3,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const messages_1 = require("~/constants/messages");
-const user_service_1 = __importDefault(require("~/services/user.service"));
+const messages_1 = require("../constants/messages");
+const user_service_1 = __importDefault(require("../services/user.service"));
 class UserController {
     async register(req, res, next) {
         const result = await user_service_1.default.register(req.body);

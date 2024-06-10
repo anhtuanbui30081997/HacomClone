@@ -3,9 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const httpStatus_1 = __importDefault(require("~/constants/httpStatus"));
-const messages_1 = require("~/constants/messages");
-const category_service_1 = __importDefault(require("~/services/category.service"));
+const httpStatus_1 = __importDefault(require("../constants/httpStatus"));
+const messages_1 = require("../constants/messages");
+const category_service_1 = __importDefault(require("../services/category.service"));
 class CategoryController {
     async createCategory(req, res, next) {
         const data = await category_service_1.default.createCategory(req.body);

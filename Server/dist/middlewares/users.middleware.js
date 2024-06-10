@@ -5,16 +5,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.accessTokenAdminValidator = exports.updatePasswordValidator = exports.forgotPasswordRequestValidator = exports.refreshTokenValidator = exports.accessTokenValidator = exports.LoginAdminValidator = exports.LoginValidator = exports.RegisterValidator = void 0;
 const express_validator_1 = require("express-validator");
-const httpStatus_1 = __importDefault(require("~/constants/httpStatus"));
-const messages_1 = require("~/constants/messages");
-const Errors_1 = require("~/models/Errors");
-const database_service_1 = __importDefault(require("~/services/database.service"));
-const user_service_1 = __importDefault(require("~/services/user.service"));
-const validation_1 = require("~/utils/validation");
-const crypto_1 = require("~/utils/crypto");
-const jwt_1 = require("~/utils/jwt");
+const httpStatus_1 = __importDefault(require("../constants/httpStatus"));
+const messages_1 = require("../constants/messages");
+const Errors_1 = require("../models/Errors");
+const database_service_1 = __importDefault(require("../services/database.service"));
+const user_service_1 = __importDefault(require("../services/user.service"));
+const validation_1 = require("../utils/validation");
+const crypto_1 = require("../utils/crypto");
+const jwt_1 = require("../utils/jwt");
 const lodash_1 = require("lodash");
-const enums_1 = require("~/constants/enums");
+const enums_1 = require("../constants/enums");
 const passwordSchema = {
     isString: {
         errorMessage: messages_1.USER_MESSAGES.PASSWORD_MUST_BE_A_STRING

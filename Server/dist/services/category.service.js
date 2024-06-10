@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_service_1 = __importDefault(require("./database.service"));
-const Category_schema_1 = require("~/models/schemas/Category.schema");
+const Category_schema_1 = require("../models/schemas/Category.schema");
 class CategoryService {
     async createCategory(categoryBody) {
         const { category, name, parent_category } = categoryBody;

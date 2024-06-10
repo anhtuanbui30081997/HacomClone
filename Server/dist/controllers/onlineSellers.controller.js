@@ -3,9 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const httpStatus_1 = __importDefault(require("~/constants/httpStatus"));
-const messages_1 = require("~/constants/messages");
-const onlineSeller_service_1 = __importDefault(require("~/services/onlineSeller.service"));
+const httpStatus_1 = __importDefault(require("../constants/httpStatus"));
+const messages_1 = require("../constants/messages");
+const onlineSeller_service_1 = __importDefault(require("../services/onlineSeller.service"));
 class OnlineSellersController {
     async getAllOnlineSellers(req, res, next) {
         const onlineSellers = await onlineSeller_service_1.default.getAllOnlineSeller();

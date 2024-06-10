@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongodb_1 = require("mongodb");
-const logger_1 = __importDefault(require("~/utils/logger"));
+const logger_1 = __importDefault(require("../utils/logger"));
 const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@hacom.m3onxez.mongodb.net/?retryWrites=true&w=majority`;
 class DatabaseService {
     constructor() {

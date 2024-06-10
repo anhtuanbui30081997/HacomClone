@@ -3,8 +3,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const messages_1 = require("~/constants/messages");
-const purchase_service_1 = __importDefault(require("~/services/purchase.service"));
+const messages_1 = require("../constants/messages");
+const purchase_service_1 = __importDefault(require("../services/purchase.service"));
 class PurchaseController {
     async addToCart(req, res, next) {
         const { buy_count, product_id } = req.body;

@@ -4,15 +4,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_service_1 = __importDefault(require("./database.service"));
-const User_schema_1 = require("~/models/schemas/User.schema");
-const crypto_1 = require("~/utils/crypto");
-const enums_1 = require("~/constants/enums");
-const jwt_1 = require("~/utils/jwt");
+const User_schema_1 = require("../models/schemas/User.schema");
+const crypto_1 = require("../utils/crypto");
+const enums_1 = require("../constants/enums");
+const jwt_1 = require("../utils/jwt");
 const mongodb_1 = require("mongodb");
-const RefreshToken_schema_1 = require("~/models/schemas/RefreshToken.schema");
-const Errors_1 = require("~/models/Errors");
-const messages_1 = require("~/constants/messages");
-const httpStatus_1 = __importDefault(require("~/constants/httpStatus"));
+const RefreshToken_schema_1 = require("../models/schemas/RefreshToken.schema");
+const Errors_1 = require("../models/Errors");
+const messages_1 = require("../constants/messages");
+const httpStatus_1 = __importDefault(require("../constants/httpStatus"));
 class UserService {
     signAccessToken({ user_id, role }) {
         return (0, jwt_1.signToken)({

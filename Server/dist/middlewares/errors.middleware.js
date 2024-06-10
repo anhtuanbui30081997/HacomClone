@@ -5,9 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.defaultErrorHandler = void 0;
 const lodash_1 = require("lodash");
-const httpStatus_1 = __importDefault(require("~/constants/httpStatus"));
-const Errors_1 = require("~/models/Errors");
-const logger_1 = __importDefault(require("~/utils/logger"));
+const httpStatus_1 = __importDefault(require("../constants/httpStatus"));
+const Errors_1 = require("../models/Errors");
+const logger_1 = __importDefault(require("../utils/logger"));
 const defaultErrorHandler = (err, req, res, next) => {
     try {
         if (err instanceof Errors_1.ErrorWithStatus) {

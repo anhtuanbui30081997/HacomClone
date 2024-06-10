@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getExtension = exports.getNameFromFullname = exports.handleUploadImage = exports.initFolder = void 0;
 const fs_1 = __importDefault(require("fs"));
-const direction_1 = require("~/constants/direction");
+const direction_1 = require("../constants/direction");
 const formidable_1 = require("formidable");
 const initFolder = () => {
     ;

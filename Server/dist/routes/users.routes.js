@@ -4,9 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const users_controller_1 = __importDefault(require("~/controllers/users.controller"));
-const users_middleware_1 = require("~/middlewares/users.middleware");
-const handlers_1 = require("~/utils/handlers");
+const users_controller_1 = __importDefault(require("../controllers/users.controller"));
+const users_middleware_1 = require("../middlewares/users.middleware");
+const handlers_1 = require("../utils/handlers");
 const usersRouter = (0, express_1.Router)();
 /**
  * Description. Register account
