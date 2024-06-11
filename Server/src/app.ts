@@ -7,6 +7,7 @@ import { defaultErrorHandler } from './middlewares/errors.middleware'
 import cors from 'cors'
 import hpp from 'hpp'
 import helmet from 'helmet'
+import Logger from './utils/logger'
 
 class App {
   public app: express.Application
@@ -55,8 +56,7 @@ class App {
 
   public listen() {
     this.httpServer.listen(this.port, () => {
-      // Logger.info(`Example app listening on port ${this.port}`)
-      console.log(`Example app listening on port ${this.port}`)
+      Logger.info(`Example app listening on port ${this.port}`)
     })
   }
 }
